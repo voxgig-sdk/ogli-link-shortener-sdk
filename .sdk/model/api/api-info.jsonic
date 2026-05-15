@@ -1,0 +1,23 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        url: "https://app.ogli.sh"
+      }
+      description: "The Ogli API allows users to create and manage short links with customizable Open Graph meta tags for optimal social media previews. It provides endpoints for creating, retrieving, updating, and deleting links, as well as accessing link statistics for performance tracking."
+      servers: [
+        {
+          description: "Production server"
+          url: "https://app.ogli.sh/api"
+        }
+      ]
+      title: "Ogli Link Shortener"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

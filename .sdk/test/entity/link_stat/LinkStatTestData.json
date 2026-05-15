@@ -1,0 +1,46 @@
+{
+  "existing": {
+    "link_stat": {
+      "LINK_STAT00": {
+        "clicks_by_country": [],
+        "clicks_by_date": [],
+        "clicks_by_device": [],
+        "clicks_by_referrer": [],
+        "link_id": "LINK01",
+        "total_click": "s4b",
+        "unique_click": "s4c"
+      },
+      "LINK_STAT01": {
+        "clicks_by_country": [],
+        "clicks_by_date": [],
+        "clicks_by_device": [],
+        "clicks_by_referrer": [],
+        "link_id": "LINK01",
+        "total_click": "s91",
+        "unique_click": "s92"
+      },
+      "LINK_STAT02": {
+        "clicks_by_country": [],
+        "clicks_by_date": [],
+        "clicks_by_device": [],
+        "clicks_by_referrer": [],
+        "link_id": "LINK01",
+        "total_click": "sd7",
+        "unique_click": "sd8"
+      }
+    }
+  },
+  "new": {
+    "link_stat": {
+      "link_stat_ref01": {
+        "clicks_by_country": [],
+        "clicks_by_date": [],
+        "clicks_by_device": [],
+        "clicks_by_referrer": [],
+        "link_id": "LINK01",
+        "total_click": "s11d",
+        "unique_click": "s11e"
+      }
+    }
+  }
+}

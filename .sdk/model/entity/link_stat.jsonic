@@ -1,0 +1,108 @@
+# Entity: link_stat
+
+main: kit: entity: link_stat: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "clicks_by_country"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "clicks_by_date"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "clicks_by_device"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "clicks_by_referrer"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "link_id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "total_click"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "unique_click"
+      req: false
+      type: "`$INTEGER`"
+    }
+  ]
+
+  name: "link_stat"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "link_id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "end_date"
+                orig: "end_date"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "start_date"
+                orig: "start_date"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/links/{linkId}/stats"
+          parts: [
+            "links"
+            "{id}"
+            "stats"
+          ]
+          rename: {
+            param: {
+              linkId: "id"
+            }
+          }
+          select: {
+            exist: [
+              "end_date"
+              "id"
+              "start_date"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

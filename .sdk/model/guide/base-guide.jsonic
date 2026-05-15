@@ -1,0 +1,28 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 2
+  metrics: count: path: 3
+  metrics: count: method: 6
+
+  entity: link: {
+    path: "/links": {
+      op: create: method: *POST
+      op: list: method: *GET
+    }
+    path: "/links/{linkId}": {
+      rename: param: "linkId": *"id"
+      op: load: method: *GET
+      op: remove: method: *DELETE
+      op: update: method: *PUT
+    }
+  }
+
+  entity: link_stat: {
+    path: "/links/{linkId}/stats": {
+      rename: param: "linkId": *"id"
+      op: list: method: *GET
+    }
+  }
+
+}

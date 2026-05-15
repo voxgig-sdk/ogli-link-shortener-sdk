@@ -1,0 +1,644 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Ogli Link Shortener",
+    "description": "The Ogli API allows users to create and manage short links with customizable Open Graph meta tags for optimal social media previews. It provides endpoints for creating, retrieving, updating, and deleting links, as well as accessing link statistics for performance tracking.",
+    "version": "1.0.0",
+    "contact": {
+      "url": "https://app.ogli.sh"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://app.ogli.sh/api",
+      "description": "Production server"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/links": {
+      "post": {
+        "summary": "Create a short link",
+        "description": "Creates a new short link with optional Open Graph meta tags for social media previews",
+        "operationId": "createLink",
+        "tags": [
+          "Links"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLinkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Link created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Link"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List all links",
+        "description": "Retrieves a list of all short links for the authenticated user",
+        "operationId": "listLinks",
+        "tags": [
+          "Links"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of links to return",
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Number of links to skip for pagination",
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of links retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkList"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/links/{linkId}": {
+      "get": {
+        "summary": "Get a specific link",
+        "description": "Retrieves details of a specific short link by ID",
+        "operationId": "getLink",
+        "tags": [
+          "Links"
+        ],
+        "parameters": [
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the link",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Link retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Link"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Link not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Update a link",
+        "description": "Updates an existing short link and its Open Graph meta tags",
+        "operationId": "updateLink",
+        "tags": [
+          "Links"
+        ],
+        "parameters": [
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the link",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLinkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Link updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Link"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Link not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a link",
+        "description": "Deletes a short link permanently",
+        "operationId": "deleteLink",
+        "tags": [
+          "Links"
+        ],
+        "parameters": [
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the link",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Link deleted successfully"
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Link not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/links/{linkId}/stats": {
+      "get": {
+        "summary": "Get link statistics",
+        "description": "Retrieves performance statistics and analytics for a specific short link",
+        "operationId": "getLinkStats",
+        "tags": [
+          "Statistics"
+        ],
+        "parameters": [
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "description": "The unique identifier of the link",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date for statistics (ISO 8601 format)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date for statistics (ISO 8601 format)",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Statistics retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LinkStats"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - Invalid or missing authentication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Link not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "JWT token for API authentication"
+      }
+    },
+    "schemas": {
+      "CreateLinkRequest": {
+        "type": "object",
+        "required": [
+          "url"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The destination URL to shorten",
+            "example": "https://example.com/long-url-path"
+          },
+          "slug": {
+            "type": "string",
+            "description": "Custom short code for the link (optional, auto-generated if not provided)",
+            "pattern": "^[a-zA-Z0-9-_]+$",
+            "example": "my-custom-link"
+          },
+          "title": {
+            "type": "string",
+            "description": "Open Graph title for social media previews",
+            "example": "My Amazing Page"
+          },
+          "description": {
+            "type": "string",
+            "description": "Open Graph description for social media previews",
+            "example": "Check out this amazing content"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri",
+            "description": "Open Graph image URL for social media previews",
+            "example": "https://example.com/image.jpg"
+          }
+        }
+      },
+      "UpdateLinkRequest": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The destination URL",
+            "example": "https://example.com/updated-url"
+          },
+          "title": {
+            "type": "string",
+            "description": "Open Graph title for social media previews",
+            "example": "Updated Title"
+          },
+          "description": {
+            "type": "string",
+            "description": "Open Graph description for social media previews",
+            "example": "Updated description"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri",
+            "description": "Open Graph image URL for social media previews",
+            "example": "https://example.com/new-image.jpg"
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the link",
+            "example": "abc123xyz"
+          },
+          "shortUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "The shortened URL",
+            "example": "https://ogli.sh/abc123"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The destination URL",
+            "example": "https://example.com/long-url-path"
+          },
+          "slug": {
+            "type": "string",
+            "description": "The short code used in the URL",
+            "example": "abc123"
+          },
+          "title": {
+            "type": "string",
+            "description": "Open Graph title",
+            "example": "My Amazing Page"
+          },
+          "description": {
+            "type": "string",
+            "description": "Open Graph description",
+            "example": "Check out this amazing content"
+          },
+          "image": {
+            "type": "string",
+            "format": "uri",
+            "description": "Open Graph image URL",
+            "example": "https://example.com/image.jpg"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the link was created",
+            "example": "2023-10-15T10:30:00Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the link was last updated",
+            "example": "2023-10-20T14:45:00Z"
+          },
+          "clickCount": {
+            "type": "integer",
+            "description": "Total number of clicks on the link",
+            "example": 125
+          }
+        }
+      },
+      "LinkList": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of links available",
+            "example": 50
+          },
+          "limit": {
+            "type": "integer",
+            "description": "Maximum number of links returned",
+            "example": 20
+          },
+          "offset": {
+            "type": "integer",
+            "description": "Number of links skipped",
+            "example": 0
+          }
+        }
+      },
+      "LinkStats": {
+        "type": "object",
+        "properties": {
+          "linkId": {
+            "type": "string",
+            "description": "The link identifier",
+            "example": "abc123xyz"
+          },
+          "totalClicks": {
+            "type": "integer",
+            "description": "Total number of clicks",
+            "example": 1250
+          },
+          "uniqueClicks": {
+            "type": "integer",
+            "description": "Number of unique visitors",
+            "example": 890
+          },
+          "clicksByDate": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {
+                  "type": "string",
+                  "format": "date",
+                  "example": "2023-10-15"
+                },
+                "clicks": {
+                  "type": "integer",
+                  "example": 45
+                }
+              }
+            }
+          },
+          "clicksByCountry": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "country": {
+                  "type": "string",
+                  "example": "US"
+                },
+                "clicks": {
+                  "type": "integer",
+                  "example": 320
+                }
+              }
+            }
+          },
+          "clicksByReferrer": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "referrer": {
+                  "type": "string",
+                  "example": "twitter.com"
+                },
+                "clicks": {
+                  "type": "integer",
+                  "example": 180
+                }
+              }
+            }
+          },
+          "clicksByDevice": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "device": {
+                  "type": "string",
+                  "example": "mobile"
+                },
+                "clicks": {
+                  "type": "integer",
+                  "example": 750
+                }
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error message",
+            "example": "Invalid request parameters"
+          },
+          "code": {
+            "type": "string",
+            "description": "Error code",
+            "example": "INVALID_INPUT"
+          },
+          "details": {
+            "type": "object",
+            "description": "Additional error details",
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Links",
+      "description": "Operations for creating, retrieving, updating, and deleting short links"
+    },
+    {
+      "name": "Statistics",
+      "description": "Operations for accessing link performance statistics and analytics"
+    }
+  ]
+}
