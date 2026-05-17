@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk"
-	"github.com/voxgig-sdk/ogli-link-shortener-sdk/core"
+	sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk/go"
+	"github.com/voxgig-sdk/ogli-link-shortener-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/ogli-link-shortener-sdk/go/utility/struct"
 )
 
 func TestLinkEntity(t *testing.T) {

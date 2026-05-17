@@ -4,9 +4,9 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk"
+	sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk/go"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/ogli-link-shortener-sdk/go/utility/struct"
 )
 
 func TestPrimaryUtility(t *testing.T) {

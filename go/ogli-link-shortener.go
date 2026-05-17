@@ -1,10 +1,10 @@
 package voxgigoglilinkshortenersdk
 
 import (
-	"github.com/voxgig-sdk/ogli-link-shortener-sdk/core"
-	"github.com/voxgig-sdk/ogli-link-shortener-sdk/entity"
-	"github.com/voxgig-sdk/ogli-link-shortener-sdk/feature"
-	_ "github.com/voxgig-sdk/ogli-link-shortener-sdk/utility"
+	"github.com/voxgig-sdk/ogli-link-shortener-sdk/go/core"
+	"github.com/voxgig-sdk/ogli-link-shortener-sdk/go/entity"
+	"github.com/voxgig-sdk/ogli-link-shortener-sdk/go/feature"
+	_ "github.com/voxgig-sdk/ogli-link-shortener-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

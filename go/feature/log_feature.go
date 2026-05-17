@@ -4,7 +4,7 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/voxgig-sdk/ogli-link-shortener-sdk/core"
+	"github.com/voxgig-sdk/ogli-link-shortener-sdk/go/core"
 )
 
 type LogFeature struct {

@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk"
-	"github.com/voxgig-sdk/ogli-link-shortener-sdk/core"
+	sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk/go"
+	"github.com/voxgig-sdk/ogli-link-shortener-sdk/go/core"
 )
 
 func TestLinkStatDirect(t *testing.T) {

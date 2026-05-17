@@ -1,7 +1,7 @@
 package feature
 
 import (
-	"github.com/voxgig-sdk/ogli-link-shortener-sdk/core"
+	"github.com/voxgig-sdk/ogli-link-shortener-sdk/go/core"
 )
 
 type BaseFeature struct {

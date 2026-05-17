@@ -29,7 +29,7 @@ class Config {
 
 
   options = {
-    base: 'https://app.ogli.sh/api',
+    base: '$$main.kit.info.servers.0.url$$',
 
     'AUTHBLOCK'headers: 'HEADERS',
 
