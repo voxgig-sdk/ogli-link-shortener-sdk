@@ -145,7 +145,6 @@ def _link_basic_setup(extra):
         "OGLILINKSHORTENER_TEST_LINK_ENTID": idmap,
         "OGLILINKSHORTENER_TEST_LIVE": "FALSE",
         "OGLILINKSHORTENER_TEST_EXPLAIN": "FALSE",
-        "OGLILINKSHORTENER_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -156,7 +155,6 @@ def _link_basic_setup(extra):
     if env.get("OGLILINKSHORTENER_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("OGLILINKSHORTENER_APIKEY"),
             },
             extra or {},
         ])

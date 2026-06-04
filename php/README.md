@@ -20,9 +20,7 @@ loading a specific record.
 <?php
 require_once 'oglilinkshortener_sdk.php';
 
-$client = new OgliLinkShortenerSDK([
-    "apikey" => getenv("OGLI-LINK-SHORTENER_APIKEY"),
-]);
+$client = new OgliLinkShortenerSDK([]);
 ```
 
 ### 2. List links
@@ -140,7 +138,6 @@ Create a `.env.local` file at the project root:
 
 ```
 OGLI-LINK-SHORTENER_TEST_LIVE=TRUE
-OGLI-LINK-SHORTENER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -163,7 +160,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |

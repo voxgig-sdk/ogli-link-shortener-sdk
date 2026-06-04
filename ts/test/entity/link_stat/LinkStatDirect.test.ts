@@ -86,14 +86,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'OGLILINKSHORTENER_TEST_LINK_STAT_ENTID': {},
     'OGLILINKSHORTENER_TEST_LIVE': 'FALSE',
-    'OGLILINKSHORTENER_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.OGLILINKSHORTENER_TEST_LIVE
 
   if (live) {
     const client = new OgliLinkShortenerSDK({
-      apikey: env.OGLILINKSHORTENER_APIKEY,
     })
 
     let idmap: any = env['OGLILINKSHORTENER_TEST_LINK_STAT_ENTID']

@@ -16,8 +16,22 @@ main: {
       ]
       title: "Ogli Link Shortener"
       version: "1.0.0"
+      tagline: "Create and manage short links with customisable Open Graph meta tags for richer social previews"
+      homepage: "https://app.ogli.sh/api"
+      docs_url: "https://app.ogli.sh/api"
+      about_md: `Ogli Link Shortener is a small URL-shortening API hosted at [app.ogli.sh](https://app.ogli.sh/api). Its distinguishing feature is letting you attach custom Open Graph (OG) meta tags to each short link, so the preview card rendered by social networks and messaging apps can be tailored independently of the destination page.
+
+The service exposes two resource groupings:
+
+- \`link\` — create, retrieve, update and delete short links, including their OG title, description and image fields used for social previews.
+- \`link_stat\` — read click counts and related usage statistics for an existing short link.
+
+Note: third-party monitoring (see the [freepublicapis.com listing](https://freepublicapis.com/ogli-link-shortener)) has recently reported the public endpoint as intermittently unavailable, so treat uptime and response shapes as best-effort and verify against the live server before relying on the API.`
+      entity_desc: {
+        link: "A shortened URL resource that bundles the destination, the short slug and customisable Open Graph metadata (title, description, image) used for social-media link previews."
+        link_stat: "Usage statistics for a given short link, such as click counts and related access metrics."
+      }
+      auth: false
     }
   }
-}
-
 }

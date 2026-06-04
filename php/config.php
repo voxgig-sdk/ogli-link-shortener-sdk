@@ -20,9 +20,6 @@ class OgliLinkShortenerConfig
             ],
             "options" => [
                 "base" => "https://app.ogli.sh/api",
-                "auth" => [
-                    "prefix" => "Bearer",
-                ],
                 "headers" => [
           'content-type' => 'application/json',
         ],

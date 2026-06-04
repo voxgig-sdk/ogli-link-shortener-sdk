@@ -144,7 +144,6 @@ function link_basic_setup(extra)
     ["OGLILINKSHORTENER_TEST_LINK_ENTID"] = idmap,
     ["OGLILINKSHORTENER_TEST_LIVE"] = "FALSE",
     ["OGLILINKSHORTENER_TEST_EXPLAIN"] = "FALSE",
-    ["OGLILINKSHORTENER_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -156,7 +155,6 @@ function link_basic_setup(extra)
   if env["OGLILINKSHORTENER_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
-        apikey = env["OGLILINKSHORTENER_APIKEY"],
       },
       extra or {},
     })

@@ -77,14 +77,12 @@ function link_stat_direct_setup(mockres)
   local env = runner.env_override({
     ["OGLILINKSHORTENER_TEST_LINK_STAT_ENTID"] = {},
     ["OGLILINKSHORTENER_TEST_LIVE"] = "FALSE",
-    ["OGLILINKSHORTENER_APIKEY"] = "NONE",
   })
 
   local live = env["OGLILINKSHORTENER_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["OGLILINKSHORTENER_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

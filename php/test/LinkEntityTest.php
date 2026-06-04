@@ -138,7 +138,6 @@ function link_basic_setup($extra)
         "OGLILINKSHORTENER_TEST_LINK_ENTID" => $idmap,
         "OGLILINKSHORTENER_TEST_LIVE" => "FALSE",
         "OGLILINKSHORTENER_TEST_EXPLAIN" => "FALSE",
-        "OGLILINKSHORTENER_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -150,7 +149,6 @@ function link_basic_setup($extra)
     if ($env["OGLILINKSHORTENER_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["OGLILINKSHORTENER_APIKEY"],
             ],
             $extra ?? [],
         ]);

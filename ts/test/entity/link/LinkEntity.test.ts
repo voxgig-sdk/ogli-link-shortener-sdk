@@ -154,7 +154,6 @@ function basicSetup(extra?: any) {
     'OGLI_LINK_SHORTENER_TEST_LINK_ENTID': idmap,
     'OGLI_LINK_SHORTENER_TEST_LIVE': 'FALSE',
     'OGLI_LINK_SHORTENER_TEST_EXPLAIN': 'FALSE',
-    'OGLI_LINK_SHORTENER_APIKEY': 'NONE',
   })
 
   idmap = env['OGLI_LINK_SHORTENER_TEST_LINK_ENTID']
@@ -164,7 +163,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new OgliLinkShortenerSDK(merge([
       {
-        apikey: env.OGLI_LINK_SHORTENER_APIKEY,
       },
       extra
     ]))
