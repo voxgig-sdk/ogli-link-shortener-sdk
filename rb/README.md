@@ -10,13 +10,13 @@ The Ruby SDK for the OgliLinkShortener API — an entity-oriented client using i
 
 ## Install
 ```bash
-gem install ogli-link-shortener-sdk
+gem install voxgig-sdk-ogli-link-shortener
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "ogli-link-shortener-sdk"
+gem "voxgig-sdk-ogli-link-shortener"
 ```
 
 Then run:

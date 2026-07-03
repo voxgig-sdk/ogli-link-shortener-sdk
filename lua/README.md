@@ -10,7 +10,7 @@ The Lua SDK for the OgliLinkShortener API — an entity-oriented client using Lu
 
 ## Install
 ```bash
-luarocks install ogli-link-shortener-sdk
+luarocks install voxgig-sdk-ogli-link-shortener
 ```
 
 If the module is not yet published, add the source directory to

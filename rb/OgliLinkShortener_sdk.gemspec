@@ -2,9 +2,17 @@ Gem::Specification.new do |spec|
   spec.name          = "voxgig-sdk-ogli-link-shortener"
   spec.version       = "0.0.1"
   spec.authors       = ["Voxgig"]
-  spec.summary       = "OgliLinkShortener SDK for Ruby"
+  spec.summary       = "Unofficial generated Ruby SDK for the Ogli Link Shortener public API. Not affiliated with or endorsed by the upstream API provider."
+  spec.description   = "Unofficial generated Ruby SDK for the Ogli Link Shortener public API. Not affiliated with or endorsed by the upstream API provider."
   spec.license       = "MIT"
   spec.homepage      = "https://github.com/voxgig-sdk/ogli-link-shortener-sdk"
+  spec.metadata      = {
+    "homepage_uri"          => "https://github.com/voxgig-sdk/ogli-link-shortener-sdk",
+    "source_code_uri"       => "https://github.com/voxgig-sdk/ogli-link-shortener-sdk",
+    "bug_tracker_uri"       => "https://github.com/voxgig-sdk/ogli-link-shortener-sdk/issues",
+    "changelog_uri"         => "https://github.com/voxgig-sdk/ogli-link-shortener-sdk/blob/main/CHANGELOG.md",
+    "rubygems_mfa_required" => "true"
+  }
 
   spec.files         = Dir["lib/**/*.rb", "*.rb"]
   spec.require_paths = ["."]

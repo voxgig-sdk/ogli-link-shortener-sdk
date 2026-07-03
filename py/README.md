@@ -10,7 +10,7 @@ The Python SDK for the OgliLinkShortener API — an entity-oriented client follo
 
 ## Install
 ```bash
-pip install ogli-link-shortener-sdk
+pip install voxgig-sdk-ogli-link-shortener
 ```
 
 Or install from source:

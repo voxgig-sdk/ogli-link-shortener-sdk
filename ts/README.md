@@ -10,7 +10,7 @@ The TypeScript SDK for the OgliLinkShortener API — a type-safe, entity-oriente
 
 ## Install
 ```bash
-npm install ogli-link-shortener
+npm install @voxgig-sdk/ogli-link-shortener
 ```
 ## Tutorial: your first API call
 

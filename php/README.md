@@ -10,7 +10,7 @@ The PHP SDK for the OgliLinkShortener API — an entity-oriented client using PH
 
 ## Install
 ```bash
-composer require voxgig/ogli-link-shortener-sdk
+composer require voxgig-sdk/ogli-link-shortener
 ```
 
 
