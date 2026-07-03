@@ -123,12 +123,14 @@ function link_direct_setup($mockres)
     $env = Runner::env_override([
         "OGLILINKSHORTENER_TEST_LINK_ENTID" => [],
         "OGLILINKSHORTENER_TEST_LIVE" => "FALSE",
+        "OGLILINKSHORTENER_APIKEY" => "NONE",
     ]);
 
     $live = $env["OGLILINKSHORTENER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["OGLILINKSHORTENER_APIKEY"],
         ];
         $client = new OgliLinkShortenerSDK($merged_opts);
         return [

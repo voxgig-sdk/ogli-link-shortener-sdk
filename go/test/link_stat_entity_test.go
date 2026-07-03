@@ -121,6 +121,7 @@ func link_statBasicSetup(extra map[string]any) *entityTestSetup {
 		"OGLILINKSHORTENER_TEST_LINK_STAT_ENTID": idmap,
 		"OGLILINKSHORTENER_TEST_LIVE":      "FALSE",
 		"OGLILINKSHORTENER_TEST_EXPLAIN":   "FALSE",
+		"OGLILINKSHORTENER_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["OGLILINKSHORTENER_TEST_LINK_STAT_ENTID"])
@@ -131,6 +132,7 @@ func link_statBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["OGLILINKSHORTENER_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["OGLILINKSHORTENER_APIKEY"],
 			},
 			extra,
 		})

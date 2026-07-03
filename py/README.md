@@ -1,6 +1,11 @@
 # OgliLinkShortener Python SDK
 
-The Python SDK for the OgliLinkShortener API. Provides an entity-oriented interface following Pythonic conventions.
+
+
+The Python SDK for the OgliLinkShortener API — an entity-oriented client following Pythonic conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -23,15 +28,18 @@ loading a specific record.
 ### 1. Create a client
 
 ```python
+import os
 from oglilinkshortener_sdk import OgliLinkShortenerSDK
 
-client = OgliLinkShortenerSDK({})
+client = OgliLinkShortenerSDK({
+    "apikey": os.environ.get("OGLI-LINK-SHORTENER_APIKEY"),
+})
 ```
 
 ### 2. List links
 
 ```python
-result, err = client.Link(None).list(None, None)
+result, err = client.Link().list()
 if err:
     raise Exception(err)
 
@@ -44,7 +52,7 @@ if isinstance(result, list):
 ### 3. Load a link
 
 ```python
-result, err = client.Link(None).load({"id": "example_id"}, None)
+result, err = client.Link().load({"id": "example_id"})
 if err:
     raise Exception(err)
 print(result)
@@ -54,13 +62,13 @@ print(result)
 
 ```python
 # Create
-created, _ = client.Link(None).create({"name": "Example"}, None)
+created, _ = client.Link().create({"name": "Example"})
 
 # Update
-client.Link(None).update({"id": created["id"], "name": "Example-Renamed"}, None)
+client.Link().update({"id": created["id"], "name": "Example-Renamed"})
 
 # Remove
-client.Link(None).remove({"id": created["id"]}, None)
+client.Link().remove({"id": created["id"]})
 ```
 
 
@@ -105,11 +113,9 @@ print(fetchdef["headers"])
 Create a mock client for unit testing — no server required:
 
 ```python
-client = OgliLinkShortenerSDK.test(None, None)
+client = OgliLinkShortenerSDK.test()
 
-result, err = client.OgliLinkShortener(None).load(
-    {"id": "test01"}, None
-)
+result, err = client.OgliLinkShortener().load({"id": "test01"})
 # result contains mock response data
 ```
 
@@ -140,6 +146,7 @@ Create a `.env.local` file at the project root:
 
 ```
 OGLI-LINK-SHORTENER_TEST_LIVE=TRUE
+OGLI-LINK-SHORTENER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -163,6 +170,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `str` | API key for authentication. |
 | `base` | `str` | Base URL of the API server. |
 | `prefix` | `str` | URL path prefix prepended to all requests. |
 | `suffix` | `str` | URL path suffix appended to all requests. |

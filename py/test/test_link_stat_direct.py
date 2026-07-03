@@ -73,12 +73,14 @@ def _link_stat_direct_setup(mockres):
     env = runner.env_override({
         "OGLILINKSHORTENER_TEST_LINK_STAT_ENTID": {},
         "OGLILINKSHORTENER_TEST_LIVE": "FALSE",
+        "OGLILINKSHORTENER_APIKEY": "NONE",
     })
 
     live = env.get("OGLILINKSHORTENER_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("OGLILINKSHORTENER_APIKEY"),
         }
         client = OgliLinkShortenerSDK(merged_opts)
         return {

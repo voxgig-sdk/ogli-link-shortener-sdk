@@ -1,19 +1,8 @@
 # OgliLinkShortener SDK
 
-Create and manage short links with customisable Open Graph meta tags for richer social previews
+Ogli Link Shortener client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About Ogli Link Shortener
-
-Ogli Link Shortener is a small URL-shortening API hosted at [app.ogli.sh](https://app.ogli.sh/api). Its distinguishing feature is letting you attach custom Open Graph (OG) meta tags to each short link, so the preview card rendered by social networks and messaging apps can be tailored independently of the destination page.
-
-The service exposes two resource groupings:
-
-- `link` — create, retrieve, update and delete short links, including their OG title, description and image fields used for social previews.
-- `link_stat` — read click counts and related usage statistics for an existing short link.
-
-Note: third-party monitoring (see the [freepublicapis.com listing](https://freepublicapis.com/ogli-link-shortener)) has recently reported the public endpoint as intermittently unavailable, so treat uptime and response shapes as best-effort and verify against the live server before relying on the API.
 
 ## Try it
 
@@ -47,29 +36,31 @@ gem install ogli-link-shortener-sdk
 luarocks install ogli-link-shortener-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { OgliLinkShortenerSDK } from 'ogli-link-shortener'
 
-const client = new OgliLinkShortenerSDK({})
+const client = new OgliLinkShortenerSDK({
+  apikey: process.env.OGLI-LINK-SHORTENER_APIKEY,
+})
 
 // List all links
 const links = await client.Link().list()
+console.log(links.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -99,8 +90,8 @@ The API exposes 2 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Link** | A shortened URL resource that bundles the destination, the short slug and customisable Open Graph metadata (title, description, image) used for social-media link previews. | `/links` |
-| **LinkStat** | Usage statistics for a given short link, such as click counts and related access metrics. | `/links/{linkId}/stats` |
+| **Link** |  | `/links` |
+| **LinkStat** |  | `/links/{linkId}/stats` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -110,17 +101,20 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from oglilinkshortener_sdk import OgliLinkShortenerSDK
 
-client = OgliLinkShortenerSDK({})
+client = OgliLinkShortenerSDK({
+    "apikey": os.environ.get("OGLI-LINK-SHORTENER_APIKEY"),
+})
 
 # List all links
-links, err = client.Link(None).list(None, None)
+links, err = client.Link().list()
+print(links)
 
 # Load a specific link
-link, err = client.Link(None).load(
-    {"id": "example_id"}, None
-)
+link, err = client.Link().load({"id": "example_id"})
+print(link)
 ```
 
 ### PHP
@@ -129,15 +123,17 @@ link, err = client.Link(None).load(
 <?php
 require_once 'oglilinkshortener_sdk.php';
 
-$client = new OgliLinkShortenerSDK([]);
+$client = new OgliLinkShortenerSDK([
+    "apikey" => getenv("OGLI-LINK-SHORTENER_APIKEY"),
+]);
 
 // List all links
-[$links, $err] = $client->Link(null)->list(null, null);
+[$links, $err] = $client->Link()->list();
+print_r($links);
 
 // Load a specific link
-[$link, $err] = $client->Link(null)->load(
-    ["id" => "example_id"], null
-);
+[$link, $err] = $client->Link()->load(["id" => "example_id"]);
+print_r($link);
 ```
 
 ### Golang
@@ -145,10 +141,13 @@ $client = new OgliLinkShortenerSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk/go"
 
-client := sdk.NewOgliLinkShortenerSDK(map[string]any{})
+client := sdk.NewOgliLinkShortenerSDK(map[string]any{
+    "apikey": os.Getenv("OGLI-LINK-SHORTENER_APIKEY"),
+})
 
 // List all links
 links, err := client.Link(nil).List(nil, nil)
+fmt.Println(links)
 ```
 
 ### Ruby
@@ -156,15 +155,17 @@ links, err := client.Link(nil).List(nil, nil)
 ```ruby
 require_relative "OgliLinkShortener_sdk"
 
-client = OgliLinkShortenerSDK.new({})
+client = OgliLinkShortenerSDK.new({
+  "apikey" => ENV["OGLI-LINK-SHORTENER_APIKEY"],
+})
 
 # List all links
-links, err = client.Link(nil).list(nil, nil)
+links, err = client.Link().list
+puts links
 
 # Load a specific link
-link, err = client.Link(nil).load(
-  { "id" => "example_id" }, nil
-)
+link, err = client.Link().load({ "id" => "example_id" })
+puts link
 ```
 
 ### Lua
@@ -172,15 +173,17 @@ link, err = client.Link(nil).load(
 ```lua
 local sdk = require("ogli-link-shortener_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("OGLI-LINK-SHORTENER_APIKEY"),
+})
 
 -- List all links
-local links, err = client:Link(nil):list(nil, nil)
+local links, err = client:Link():list()
+print(links)
 
 -- Load a specific link
-local link, err = client:Link(nil):load(
-  { id = "example_id" }, nil
-)
+local link, err = client:Link():load({ id = "example_id" })
+print(link)
 ```
 
 ## Unit testing in offline mode
@@ -199,25 +202,21 @@ const result = await client.Link().load({ id: 'test01' })
 ### Python
 
 ```python
-client = OgliLinkShortenerSDK.test(None, None)
-result, err = client.Link(None).load(
-    {"id": "test01"}, None
-)
+client = OgliLinkShortenerSDK.test()
+result, err = client.Link().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = OgliLinkShortenerSDK::test(null, null);
-[$result, $err] = $client->Link(null)->load(
-    ["id" => "test01"], null
-);
+$client = OgliLinkShortenerSDK::test();
+[$result, $err] = $client->Link()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Link(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -226,19 +225,15 @@ result, err := client.Link(nil).Load(
 ### Ruby
 
 ```ruby
-client = OgliLinkShortenerSDK.test(nil, nil)
-result, err = client.Link(nil).load(
-  { "id" => "test01" }, nil
-)
+client = OgliLinkShortenerSDK.test
+result, err = client.Link().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Link(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Link():load({ id = "test01" })
 ```
 
 ## How it works
@@ -342,10 +337,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the Ogli Link Shortener
-
-- Upstream: [https://app.ogli.sh/api](https://app.ogli.sh/api)
 
 ---
 

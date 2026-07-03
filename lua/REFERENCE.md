@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -128,8 +128,8 @@ local link = client:Link(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Link(nil):create({
-}, nil)
+local result, err = client:Link():create({
+})
 ```
 
 #### `list(reqmatch, ctrl) -> any, err`
@@ -137,7 +137,7 @@ local result, err = client:Link(nil):create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Link(nil):list(nil, nil)
+local results, err = client:Link():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -145,7 +145,7 @@ local results, err = client:Link(nil):list(nil, nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Link(nil):load({ id = "link_id" }, nil)
+local result, err = client:Link():load({ id = "link_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -153,7 +153,7 @@ local result, err = client:Link(nil):load({ id = "link_id" }, nil)
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Link(nil):remove({ id = "link_id" }, nil)
+local result, err = client:Link():remove({ id = "link_id" })
 ```
 
 #### `update(reqdata, ctrl) -> any, err`
@@ -161,10 +161,10 @@ local result, err = client:Link(nil):remove({ id = "link_id" }, nil)
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:Link(nil):update({
+local result, err = client:Link():update({
   id = "link_id",
   -- Fields to update
-}, nil)
+})
 ```
 
 ### Common Methods
@@ -222,7 +222,7 @@ local link_stat = client:LinkStat(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:LinkStat(nil):list(nil, nil)
+local results, err = client:LinkStat():list()
 ```
 
 ### Common Methods

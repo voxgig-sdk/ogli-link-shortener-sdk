@@ -118,12 +118,14 @@ func link_statDirectSetup(mockres any) *link_statDirectSetupResult {
 	env := envOverride(map[string]any{
 		"OGLILINKSHORTENER_TEST_LINK_STAT_ENTID": map[string]any{},
 		"OGLILINKSHORTENER_TEST_LIVE":    "FALSE",
+		"OGLILINKSHORTENER_APIKEY":       "NONE",
 	})
 
 	live := env["OGLILINKSHORTENER_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["OGLILINKSHORTENER_APIKEY"],
 		}
 		client := sdk.NewOgliLinkShortenerSDK(mergedOpts)
 
