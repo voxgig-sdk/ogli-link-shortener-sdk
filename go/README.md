@@ -30,7 +30,12 @@ go mod edit -replace github.com/voxgig-sdk/ogli-link-shortener-sdk/go=../ogli-li
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
@@ -38,70 +43,51 @@ package main
 import (
     "fmt"
     "os"
-
     sdk "github.com/voxgig-sdk/ogli-link-shortener-sdk/go"
-    "github.com/voxgig-sdk/ogli-link-shortener-sdk/go/core"
 )
 
 func main() {
     client := sdk.NewOgliLinkShortenerSDK(map[string]any{
         "apikey": os.Getenv("OGLI_LINK_SHORTENER_APIKEY"),
     })
-```
 
-### 2. List links
-
-```go
-    result, err := client.Link(nil).List(nil, nil)
+    // List link records — the value is the array of records itself.
+    links, err := client.Link(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range links.([]any) {
+        fmt.Println(item)
     }
-```
 
-### 3. Load a link
-
-```go
-    result, err = client.Link(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single link — the value is the loaded record.
+    link, err := client.Link(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
+    fmt.Println(link)
 
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
+    // Create a link.
+    created, err := client.Link(nil).Create(map[string]any{"name": "Example"}, nil)
+    if err != nil {
+        panic(err)
     }
+    fmt.Println(created)
+
+    // Update a link.
+    updated, err := client.Link(nil).Update(map[string]any{"id": "example_id", "name": "Renamed"}, nil)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(updated)
+
+    // Remove a link.
+    removed, err := client.Link(nil).Remove(map[string]any{"id": "example_id"}, nil)
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println(removed)
 }
-```
-
-### 4. Create, update, and remove
-
-```go
-// Create
-created, _ := client.Link(nil).Create(
-    map[string]any{"name": "Example"}, nil,
-)
-cm := core.ToMapAny(created)
-newID := core.ToMapAny(cm["data"])["id"]
-
-// Update
-client.Link(nil).Update(
-    map[string]any{"id": newID, "name": "Example-Renamed"}, nil,
-)
-
-// Remove
-client.Link(nil).Remove(
-    map[string]any{"id": newID}, nil,
-)
 ```
 
 
@@ -151,10 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Link(nil).Load(
+link, err := client.Link(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(link) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -254,17 +243,24 @@ All entities implement the `OgliLinkShortenerEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    link, err := client.Link(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // link is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -340,13 +336,21 @@ Create an instance: `link := client.Link(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Link(nil).Load(map[string]any{"id": "link_id"}, nil)
+link, err := client.Link(nil).Load(map[string]any{"id": "link_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(link) // the loaded record
 ```
 
 #### Example: List
 
 ```go
-results, err := client.Link(nil).List(nil, nil)
+links, err := client.Link(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(links) // the array of records
 ```
 
 #### Example: Create
@@ -382,7 +386,11 @@ Create an instance: `link_stat := client.LinkStat(nil)`
 #### Example: List
 
 ```go
-results, err := client.LinkStat(nil).List(nil, nil)
+link_stats, err := client.LinkStat(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(link_stats) // the array of records
 ```
 
 

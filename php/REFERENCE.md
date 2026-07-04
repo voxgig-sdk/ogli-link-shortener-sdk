@@ -90,7 +90,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## LinkEntity
 
 ```php
-$link = $client->link();
+$link = $client->Link();
 ```
 
 ### Fields
@@ -130,7 +130,7 @@ $link = $client->link();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->link()->create([
+$result = $client->Link()->create([
 ]);
 ```
 
@@ -139,7 +139,7 @@ $result = $client->link()->create([
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->link()->list([]);
+$results = $client->Link()->list([]);
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -147,7 +147,7 @@ $results = $client->link()->list([]);
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->link()->load(["id" => "link_id"]);
+$result = $client->Link()->load(["id" => "link_id"]);
 ```
 
 #### `remove(array $reqmatch, ?array $ctrl = null): mixed`
@@ -155,7 +155,7 @@ $result = $client->link()->load(["id" => "link_id"]);
 Remove the entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->link()->remove(["id" => "link_id"]);
+$result = $client->Link()->remove(["id" => "link_id"]);
 ```
 
 #### `update(array $reqdata, ?array $ctrl = null): mixed`
@@ -163,7 +163,7 @@ $result = $client->link()->remove(["id" => "link_id"]);
 Update an existing entity. The data must include the entity `id`. Throws on error.
 
 ```php
-$result = $client->link()->update([
+$result = $client->Link()->update([
   "id" => "link_id",
   // Fields to update
 ]);
@@ -202,7 +202,7 @@ Return the entity name.
 ## LinkStatEntity
 
 ```php
-$link_stat = $client->link_stat();
+$link_stat = $client->LinkStat();
 ```
 
 ### Fields
@@ -224,7 +224,7 @@ $link_stat = $client->link_stat();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->link_stat()->list([]);
+$results = $client->LinkStat()->list([]);
 ```
 
 ### Common Methods

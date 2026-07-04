@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:link():list() / client:link():load({ id = ... })
-function OgliLinkShortenerSDK:link(data)
+-- Idiomatic facade: client:Link():list() / client:Link():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function OgliLinkShortenerSDK:Link(data)
   local EntityMod = require("entity.link_entity")
   if data == nil then
     if self._link == nil then
@@ -256,15 +257,10 @@ function OgliLinkShortenerSDK:link(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:link() instead.
-function OgliLinkShortenerSDK:Link(data)
-  local EntityMod = require("entity.link_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:link_stat():list() / client:link_stat():load({ id = ... })
-function OgliLinkShortenerSDK:link_stat(data)
+-- Idiomatic facade: client:LinkStat():list() / client:LinkStat():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function OgliLinkShortenerSDK:LinkStat(data)
   local EntityMod = require("entity.link_stat_entity")
   if data == nil then
     if self._link_stat == nil then
@@ -272,12 +268,6 @@ function OgliLinkShortenerSDK:link_stat(data)
     end
     return self._link_stat
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:link_stat() instead.
-function OgliLinkShortenerSDK:LinkStat(data)
-  local EntityMod = require("entity.link_stat_entity")
   return EntityMod.new(self, data)
 end
 

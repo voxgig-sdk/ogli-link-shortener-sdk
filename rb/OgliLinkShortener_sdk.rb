@@ -208,26 +208,14 @@ class OgliLinkShortenerSDK
   end
 
 
-  # Idiomatic facade: client.link.list / client.link.load({ "id" => ... })
-  def link
-    require_relative 'entity/link_entity'
-    @link ||= LinkEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.link instead.
+  # Canonical facade: client.Link.list / client.Link.load({ "id" => ... })
   def Link(data = nil)
     require_relative 'entity/link_entity'
     LinkEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.link_stat.list / client.link_stat.load({ "id" => ... })
-  def link_stat
-    require_relative 'entity/link_stat_entity'
-    @link_stat ||= LinkStatEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.link_stat instead.
+  # Canonical facade: client.LinkStat.list / client.LinkStat.load({ "id" => ... })
   def LinkStat(data = nil)
     require_relative 'entity/link_stat_entity'
     LinkStatEntity.new(self, data)

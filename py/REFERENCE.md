@@ -85,7 +85,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## LinkEntity
 
 ```python
-link = client.link
+link = client.Link()
 ```
 
 ### Fields
@@ -125,7 +125,7 @@ link = client.link
 Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result = client.link.create({
+result = client.Link().create({
 })
 ```
 
@@ -134,7 +134,9 @@ result = client.link.create({
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.link.list({})
+results = client.Link().list({})
+for link in results:
+    print(link)
 ```
 
 #### `load(reqmatch, ctrl=None) -> dict`
@@ -142,7 +144,7 @@ results = client.link.list({})
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.link.load({"id": "link_id"})
+result = client.Link().load({"id": "link_id"})
 ```
 
 #### `remove(reqmatch, ctrl=None) -> dict`
@@ -150,7 +152,7 @@ result = client.link.load({"id": "link_id"})
 Remove the entity matching the given criteria. Raises on error.
 
 ```python
-result = client.link.remove({"id": "link_id"})
+result = client.Link().remove({"id": "link_id"})
 ```
 
 #### `update(reqdata, ctrl=None) -> dict`
@@ -158,7 +160,7 @@ result = client.link.remove({"id": "link_id"})
 Update an existing entity. The data must include the entity `id`. Returns the updated entity data and raises on error.
 
 ```python
-result = client.link.update({
+result = client.Link().update({
     "id": "link_id",
     # Fields to update
 })
@@ -196,7 +198,7 @@ Return the entity name.
 ## LinkStatEntity
 
 ```python
-link_stat = client.link_stat
+link_stat = client.LinkStat()
 ```
 
 ### Fields
@@ -218,7 +220,9 @@ link_stat = client.link_stat
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.link_stat.list({})
+results = client.LinkStat().list({})
+for link_stat in results:
+    print(link_stat)
 ```
 
 ### Common Methods

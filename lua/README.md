@@ -33,39 +33,40 @@ local client = sdk.new({
 })
 ```
 
-### 2. List links
+### 2. List link records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:link():list()
+local links, err = client:Link():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(links) do
+  print(item["id"], item["name"])
 end
 ```
 
 ### 3. Load a link
 
 ```lua
-local result, err = client:link():load({ id = "example_id" })
+local link, err = client:Link():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(link)
 ```
 
 ### 4. Create, update, and remove
 
 ```lua
 -- Create
-local created, _ = client:link():create({ name = "Example" })
+local created, err = client:Link():create({ name = "Example" })
+if err then error(err) end
 
 -- Update
-client:link():update({ id = created["id"], name = "Example-Renamed" })
+client:Link():update({ id = created["id"], name = "Example-Renamed" })
 
 -- Remove
-client:link():remove({ id = created["id"] })
+client:Link():remove({ id = created["id"] })
 ```
 
 
@@ -111,8 +112,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:link():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Link():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -215,17 +216,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local link, err = client:Link():load({ id = "example_id" })
+    if err then error(err) end
+    -- link is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -271,7 +277,7 @@ API path: `/links/{linkId}/stats`
 
 ### Link
 
-Create an instance: `const link = client.link`
+Create an instance: `local link = client:Link(nil)`
 
 #### Operations
 
@@ -300,27 +306,27 @@ Create an instance: `const link = client.link`
 
 #### Example: Load
 
-```ts
-const link = await client.link.load({ id: 'link_id' })
+```lua
+local link, err = client:Link():load({ id = "link_id" })
 ```
 
 #### Example: List
 
-```ts
-const links = await client.link.list()
+```lua
+local links, err = client:Link():list()
 ```
 
 #### Example: Create
 
-```ts
-const link = await client.link.create({
+```lua
+local link, err = client:Link():create({
 })
 ```
 
 
 ### LinkStat
 
-Create an instance: `const link_stat = client.link_stat`
+Create an instance: `local link_stat = client:LinkStat(nil)`
 
 #### Operations
 
@@ -342,8 +348,8 @@ Create an instance: `const link_stat = client.link_stat`
 
 #### Example: List
 
-```ts
-const link_stats = await client.link_stat.list()
+```lua
+local link_stats, err = client:LinkStat():list()
 ```
 
 
@@ -418,7 +424,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local link = client:link()
+local link = client:Link()
 link:load({ id = "example_id" })
 
 -- link:data_get() now returns the loaded link data

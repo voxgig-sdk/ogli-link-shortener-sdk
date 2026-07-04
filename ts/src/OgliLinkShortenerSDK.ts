@@ -205,28 +205,14 @@ class OgliLinkShortenerSDK {
 
 
 
-  _link?: LinkEntity
-
-  // Idiomatic facade: `client.link.list()` / `client.link.load({ id })`.
-  get link(): LinkEntity {
-    return (this._link ??= new LinkEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.link` instead. */
+  // Entity access: `client.Link().list()` / `client.Link().load({ id })`.
   Link(data?: any) {
     const self = this
     return new LinkEntity(self,data)
   }
 
 
-  _link_stat?: LinkStatEntity
-
-  // Idiomatic facade: `client.link_stat.list()` / `client.link_stat.load({ id })`.
-  get link_stat(): LinkStatEntity {
-    return (this._link_stat ??= new LinkStatEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.link_stat` instead. */
+  // Entity access: `client.LinkStat().list()` / `client.LinkStat().load({ id })`.
   LinkStat(data?: any) {
     const self = this
     return new LinkStatEntity(self,data)

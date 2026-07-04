@@ -30,16 +30,14 @@ client = OgliLinkShortenerSDK.new({
 })
 ```
 
-### 2. List links
+### 2. List link records
 
 ```ruby
 begin
-  result = client.link.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Link records — iterate directly.
+  links = client.Link.list
+  links.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -50,8 +48,9 @@ end
 
 ```ruby
 begin
-  result = client.link.load({ "id" => "example_id" })
-  puts result
+  # load returns the bare Link record (raises on error).
+  link = client.Link.load({ "id" => "example_id" })
+  puts link
 rescue => err
   warn "load failed: #{err}"
 end
@@ -60,14 +59,14 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# Create
-created = client.link.create({ "name" => "Example" })
+# create returns the bare created Link record.
+created = client.Link.create({ "name" => "Example" })
 
-# Update
-client.link.update({ "id" => created["id"], "name" => "Example-Renamed" })
+# Update — index the bare record directly (created["id"]).
+client.Link.update({ "id" => created["id"], "name" => "Example-Renamed" })
 
 # Remove
-client.link.remove({ "id" => created["id"] })
+client.Link.remove({ "id" => created["id"] })
 ```
 
 
@@ -111,13 +110,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = OgliLinkShortenerSDK.test
+client = OgliLinkShortenerSDK.test({
+  "entity" => { "link" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.link.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+link = client.Link.load({ "id" => "test01" })
+puts link
 ```
 
 ### Use a custom fetch function
@@ -277,7 +280,7 @@ API path: `/links/{linkId}/stats`
 
 ### Link
 
-Create an instance: `const link = client.link`
+Create an instance: `link = client.Link`
 
 #### Operations
 
@@ -306,27 +309,29 @@ Create an instance: `const link = client.link`
 
 #### Example: Load
 
-```ts
-const link = await client.link.load({ id: 'link_id' })
+```ruby
+# load returns the bare Link record (raises on error).
+link = client.Link.load({ "id" => "link_id" })
 ```
 
 #### Example: List
 
-```ts
-const links = await client.link.list()
+```ruby
+# list returns an Array of Link records (raises on error).
+links = client.Link.list
 ```
 
 #### Example: Create
 
-```ts
-const link = await client.link.create({
+```ruby
+link = client.Link.create({
 })
 ```
 
 
 ### LinkStat
 
-Create an instance: `const link_stat = client.link_stat`
+Create an instance: `link_stat = client.LinkStat`
 
 #### Operations
 
@@ -348,8 +353,9 @@ Create an instance: `const link_stat = client.link_stat`
 
 #### Example: List
 
-```ts
-const link_stats = await client.link_stat.list()
+```ruby
+# list returns an Array of LinkStat records (raises on error).
+link_stats = client.LinkStat.list
 ```
 
 
@@ -424,7 +430,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-link = client.link
+link = client.Link
 link.load({ "id" => "example_id" })
 
 # link.data_get now returns the loaded link data

@@ -91,7 +91,7 @@ same parameters as `direct()`. Raises on error.
 ## LinkEntity
 
 ```ruby
-link = client.link
+link = client.Link
 ```
 
 ### Fields
@@ -131,7 +131,7 @@ link = client.link
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.link.create({
+result = client.Link.create({
 })
 ```
 
@@ -140,7 +140,7 @@ result = client.link.create({
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.link.list(nil)
+results = client.Link.list(nil)
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -148,7 +148,7 @@ results = client.link.list(nil)
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.link.load({ "id" => "link_id" })
+result = client.Link.load({ "id" => "link_id" })
 ```
 
 #### `remove(reqmatch, ctrl = nil) -> result`
@@ -156,7 +156,7 @@ result = client.link.load({ "id" => "link_id" })
 Remove the entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.link.remove({ "id" => "link_id" })
+result = client.Link.remove({ "id" => "link_id" })
 ```
 
 #### `update(reqdata, ctrl = nil) -> result`
@@ -164,7 +164,7 @@ result = client.link.remove({ "id" => "link_id" })
 Update an existing entity. The data must include the entity `id`. Raises on error.
 
 ```ruby
-result = client.link.update({
+result = client.Link.update({
   "id" => "link_id",
   # Fields to update
 })
@@ -203,7 +203,7 @@ Return the entity name.
 ## LinkStatEntity
 
 ```ruby
-link_stat = client.link_stat
+link_stat = client.LinkStat
 ```
 
 ### Fields
@@ -225,7 +225,7 @@ link_stat = client.link_stat
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.link_stat.list(nil)
+results = client.LinkStat.list(nil)
 ```
 
 ### Common Methods

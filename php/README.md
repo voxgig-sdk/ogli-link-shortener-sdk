@@ -31,18 +31,16 @@ $client = new OgliLinkShortenerSDK([
 ]);
 ```
 
-### 2. List links
+### 2. List link records
 
 ```php
 try {
-    $result = $client->link()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of Link records — iterate directly.
+    $links = $client->Link()->list();
+    foreach ($links as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -51,9 +49,10 @@ try {
 
 ```php
 try {
-    $result = $client->link()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Link record (throws on error).
+    $link = $client->Link()->load(["id" => "example_id"]);
+    print_r($link);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -61,14 +60,14 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// Create
-$created = $client->link()->create(["name" => "Example"]);
+// create() returns the bare created Link record.
+$created = $client->Link()->create(["name" => "Example"]);
 
-// Update
-$client->link()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
+// Update — index the bare record directly ($created["id"]).
+$client->Link()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
 
 // Remove
-$client->link()->remove(["id" => $created["id"]]);
+$client->Link()->remove(["id" => $created["id"]]);
 ```
 
 
@@ -112,13 +111,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = OgliLinkShortenerSDK::test();
+$client = OgliLinkShortenerSDK::test([
+    "entity" => ["link" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->link()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$link = $client->Link()->load(["id" => "test01"]);
+print_r($link);
 ```
 
 ### Use a custom fetch function
@@ -282,7 +285,7 @@ API path: `/links/{linkId}/stats`
 
 ### Link
 
-Create an instance: `const link = client.link`
+Create an instance: `$link = $client->Link();`
 
 #### Operations
 
@@ -311,27 +314,29 @@ Create an instance: `const link = client.link`
 
 #### Example: Load
 
-```ts
-const link = await client.link.load({ id: 'link_id' })
+```php
+// load() returns the bare Link record (throws on error).
+$link = $client->Link()->load(["id" => "link_id"]);
 ```
 
 #### Example: List
 
-```ts
-const links = await client.link.list()
+```php
+// list() returns an array of Link records (throws on error).
+$links = $client->Link()->list();
 ```
 
 #### Example: Create
 
-```ts
-const link = await client.link.create({
-})
+```php
+$link = $client->Link()->create([
+]);
 ```
 
 
 ### LinkStat
 
-Create an instance: `const link_stat = client.link_stat`
+Create an instance: `$link_stat = $client->LinkStat();`
 
 #### Operations
 
@@ -353,8 +358,9 @@ Create an instance: `const link_stat = client.link_stat`
 
 #### Example: List
 
-```ts
-const link_stats = await client.link_stat.list()
+```php
+// list() returns an array of LinkStat records (throws on error).
+$link_stats = $client->LinkStat()->list();
 ```
 
 
@@ -429,7 +435,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$link = $client->link();
+$link = $client->Link();
 $link->load(["id" => "example_id"]);
 
 // $link->dataGet() now returns the loaded link data

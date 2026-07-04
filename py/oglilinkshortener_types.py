@@ -4,82 +4,78 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Link:
-    click_count: Optional[int] = None
-    created_at: Optional[str] = None
-    description: Optional[str] = None
-    id: Optional[str] = None
-    image: Optional[str] = None
-    short_url: Optional[str] = None
-    slug: Optional[str] = None
-    title: Optional[str] = None
-    updated_at: Optional[str] = None
-    url: Optional[str] = None
+class Link(TypedDict, total=False):
+    click_count: int
+    created_at: str
+    description: str
+    id: str
+    image: str
+    short_url: str
+    slug: str
+    title: str
+    updated_at: str
+    url: str
 
 
-@dataclass
-class LinkLoadMatch:
+class LinkLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class LinkListMatch:
-    click_count: Optional[int] = None
-    created_at: Optional[str] = None
-    description: Optional[str] = None
-    id: Optional[str] = None
-    image: Optional[str] = None
-    short_url: Optional[str] = None
-    slug: Optional[str] = None
-    title: Optional[str] = None
-    updated_at: Optional[str] = None
-    url: Optional[str] = None
+class LinkListMatch(TypedDict, total=False):
+    click_count: int
+    created_at: str
+    description: str
+    id: str
+    image: str
+    short_url: str
+    slug: str
+    title: str
+    updated_at: str
+    url: str
 
 
-@dataclass
-class LinkCreateData:
-    click_count: Optional[int] = None
-    created_at: Optional[str] = None
-    description: Optional[str] = None
-    id: Optional[str] = None
-    image: Optional[str] = None
-    short_url: Optional[str] = None
-    slug: Optional[str] = None
-    title: Optional[str] = None
-    updated_at: Optional[str] = None
-    url: Optional[str] = None
+class LinkCreateData(TypedDict, total=False):
+    click_count: int
+    created_at: str
+    description: str
+    id: str
+    image: str
+    short_url: str
+    slug: str
+    title: str
+    updated_at: str
+    url: str
 
 
-@dataclass
-class LinkUpdateData:
+class LinkUpdateData(TypedDict):
     id: str
 
 
-@dataclass
-class LinkRemoveMatch:
+class LinkRemoveMatch(TypedDict):
     id: str
 
 
-@dataclass
-class LinkStat:
-    clicks_by_country: Optional[list] = None
-    clicks_by_date: Optional[list] = None
-    clicks_by_device: Optional[list] = None
-    clicks_by_referrer: Optional[list] = None
-    link_id: Optional[str] = None
-    total_click: Optional[int] = None
-    unique_click: Optional[int] = None
+class LinkStat(TypedDict, total=False):
+    clicks_by_country: list
+    clicks_by_date: list
+    clicks_by_device: list
+    clicks_by_referrer: list
+    link_id: str
+    total_click: int
+    unique_click: int
 
 
-@dataclass
-class LinkStatListMatch:
+class LinkStatListMatch(TypedDict):
     id: str
-

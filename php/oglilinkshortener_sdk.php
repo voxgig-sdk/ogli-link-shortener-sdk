@@ -233,10 +233,10 @@ class OgliLinkShortenerSDK
 
     private $_link = null;
 
-    // Idiomatic facade: $client->link()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Link() (PHP method
-    // names are case-insensitive).
-    public function link($data = null)
+    // Canonical facade: $client->Link()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->link()
+    // resolves here too.
+    public function Link($data = null)
     {
         require_once __DIR__ . '/entity/link_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class OgliLinkShortenerSDK
 
     private $_link_stat = null;
 
-    // Idiomatic facade: $client->link_stat()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias LinkStat() (PHP method
-    // names are case-insensitive).
-    public function link_stat($data = null)
+    // Canonical facade: $client->LinkStat()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->link_stat()
+    // resolves here too.
+    public function LinkStat($data = null)
     {
         require_once __DIR__ . '/entity/link_stat_entity.php';
         if ($data === null) {

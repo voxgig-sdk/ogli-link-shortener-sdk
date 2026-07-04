@@ -122,7 +122,7 @@ Alias for `OgliLinkShortenerSDK.test()`.
 ## LinkEntity
 
 ```ts
-const link = client.link
+const link = client.Link()
 ```
 
 ### Fields
@@ -162,7 +162,7 @@ const link = client.link
 Create a new entity with the given data.
 
 ```ts
-const result = await client.link.create({
+const result = await client.Link().create({
 })
 ```
 
@@ -171,7 +171,7 @@ const result = await client.link.create({
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.link.list()
+const results = await client.Link().list()
 ```
 
 #### `load(match: object, ctrl?: object)`
@@ -179,7 +179,7 @@ const results = await client.link.list()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.link.load({ id: 'link_id' })
+const result = await client.Link().load({ id: 'link_id' })
 ```
 
 #### `remove(match: object, ctrl?: object)`
@@ -187,7 +187,7 @@ const result = await client.link.load({ id: 'link_id' })
 Remove the entity matching the given criteria.
 
 ```ts
-const result = await client.link.remove({ id: 'link_id' })
+const result = await client.Link().remove({ id: 'link_id' })
 ```
 
 #### `update(data: object, ctrl?: object)`
@@ -195,7 +195,7 @@ const result = await client.link.remove({ id: 'link_id' })
 Update an existing entity. The data must include the entity `id`.
 
 ```ts
-const result = await client.link.update({
+const result = await client.Link().update({
   id: 'link_id',
   // Fields to update
 })
@@ -232,7 +232,7 @@ Return a copy of the entity options.
 ## LinkStatEntity
 
 ```ts
-const link_stat = client.link_stat
+const link_stat = client.LinkStat()
 ```
 
 ### Fields
@@ -254,7 +254,7 @@ const link_stat = client.link_stat
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.link_stat.list()
+const results = await client.LinkStat().list()
 ```
 
 ### Common Methods

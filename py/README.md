@@ -34,24 +34,28 @@ client = OgliLinkShortenerSDK({
 })
 ```
 
-### 2. List links
+### 2. List link records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.link.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    links = client.Link().list({})
+    for link in links:
+        print(link)
 except Exception as err:
     print(f"list failed: {err}")
 ```
 
 ### 3. Load a link
 
+`load()` returns the bare record (a `dict`) and raises on error.
+
 ```python
 try:
-    result = client.link.load({"id": "example_id"})
-    print(result)
+    link = client.Link().load({"id": "example_id"})
+    print(link)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -59,14 +63,14 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create
-created = client.link.create({"name": "Example"})
+# Create — returns the bare created record (a dict)
+created = client.Link().create({"name": "Example"})
 
-# Update
-client.link.update({"id": created["id"], "name": "Example-Renamed"})
+# Update — the created record's id is a plain dict key
+client.Link().update({"id": created["id"], "name": "Example-Renamed"})
 
 # Remove
-client.link.remove({"id": created["id"]})
+client.Link().remove({"id": created["id"]})
 ```
 
 
@@ -112,8 +116,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OgliLinkShortenerSDK.test()
 
-result = client.link.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+link = client.Link().load({"id": "test01"})
+# link contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -274,7 +279,7 @@ API path: `/links/{linkId}/stats`
 
 ### Link
 
-Create an instance: `const link = client.link`
+Create an instance: `link = client.Link()`
 
 #### Operations
 
@@ -303,27 +308,27 @@ Create an instance: `const link = client.link`
 
 #### Example: Load
 
-```ts
-const link = await client.link.load({ id: 'link_id' })
+```python
+link = client.Link().load({"id": "link_id"})
 ```
 
 #### Example: List
 
-```ts
-const links = await client.link.list()
+```python
+links = client.Link().list({})
 ```
 
 #### Example: Create
 
-```ts
-const link = await client.link.create({
+```python
+link = client.Link().create({
 })
 ```
 
 
 ### LinkStat
 
-Create an instance: `const link_stat = client.link_stat`
+Create an instance: `link_stat = client.LinkStat()`
 
 #### Operations
 
@@ -345,8 +350,8 @@ Create an instance: `const link_stat = client.link_stat`
 
 #### Example: List
 
-```ts
-const link_stats = await client.link_stat.list()
+```python
+link_stats = client.LinkStat().list({})
 ```
 
 
@@ -420,7 +425,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-link = client.link
+link = client.Link()
 link.load({"id": "example_id"})
 
 # link.data_get() now returns the loaded link data

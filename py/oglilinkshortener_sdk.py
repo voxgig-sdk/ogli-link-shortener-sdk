@@ -220,41 +220,21 @@ class OgliLinkShortenerSDK:
         }
 
 
-    @property
-    def link(self):
-        """Idiomatic facade: client.link.list() / client.link.load({"id": ...})."""
-        from entity.link_entity import LinkEntity
-        cached = getattr(self, "_link", None)
-        if cached is None:
-            cached = LinkEntity(self, None)
-            self._link = cached
-        return cached
-
-    def Link(self, data=None):
-        # Deprecated: use client.link instead.
+    def Link(self, data=None) -> "LinkEntity":
+        """Entity factory: client.Link().list({}) / client.Link().load({"id": ...})."""
         from entity.link_entity import LinkEntity
         return LinkEntity(self, data)
 
 
-    @property
-    def link_stat(self):
-        """Idiomatic facade: client.link_stat.list() / client.link_stat.load({"id": ...})."""
-        from entity.link_stat_entity import LinkStatEntity
-        cached = getattr(self, "_link_stat", None)
-        if cached is None:
-            cached = LinkStatEntity(self, None)
-            self._link_stat = cached
-        return cached
-
-    def LinkStat(self, data=None):
-        # Deprecated: use client.link_stat instead.
+    def LinkStat(self, data=None) -> "LinkStatEntity":
+        """Entity factory: client.LinkStat().list({}) / client.LinkStat().load({"id": ...})."""
         from entity.link_stat_entity import LinkStatEntity
         return LinkStatEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "OgliLinkShortenerSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -274,3 +254,10 @@ class OgliLinkShortenerSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.link_entity import LinkEntity
+    from entity.link_stat_entity import LinkStatEntity

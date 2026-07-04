@@ -28,9 +28,11 @@ const client = new OgliLinkShortenerSDK({
   apikey: process.env.OGLI_LINK_SHORTENER_APIKEY,
 })
 
-// List all links
-const links = await client.link.list()
-console.log(links.data)
+// List all links (returns Link[])
+const links = await client.Link().list()
+for (const link of links) {
+  console.log(link)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -89,12 +91,13 @@ client = OgliLinkShortenerSDK({
     "apikey": os.environ.get("OGLI_LINK_SHORTENER_APIKEY"),
 })
 
-# List all links
-links = client.link.list()
-print(links)
+# List all links (returns a list, raises on error)
+links = client.Link().list({})
+for link in links:
+    print(link)
 
-# Load a specific link
-link = client.link.load({"id": "example_id"})
+# Load a specific link (returns the record, raises on error)
+link = client.Link().load({"id": "example_id"})
 print(link)
 ```
 
@@ -108,12 +111,12 @@ $client = new OgliLinkShortenerSDK([
     "apikey" => getenv("OGLI_LINK_SHORTENER_APIKEY"),
 ]);
 
-// List all links (throws on error)
-$links = $client->link()->list();
+// List all links (returns an array; throws on error)
+$links = $client->Link()->list();
 print_r($links);
 
-// Load a specific link
-$link = $client->link()->load(["id" => "example_id"]);
+// Load a specific link (returns the bare record; throws on error)
+$link = $client->Link()->load(["id" => "example_id"]);
 print_r($link);
 ```
 
@@ -140,12 +143,12 @@ client = OgliLinkShortenerSDK.new({
   "apikey" => ENV["OGLI_LINK_SHORTENER_APIKEY"],
 })
 
-# List all links
-links = client.link.list
+# List all links (returns an Array; raises on error)
+links = client.Link.list
 puts links
 
-# Load a specific link
-link = client.link.load({ "id" => "example_id" })
+# Load a specific link (returns the bare record; raises on error)
+link = client.Link.load({ "id" => "example_id" })
 puts link
 ```
 
@@ -159,11 +162,11 @@ local client = sdk.new({
 })
 
 -- List all links
-local links, err = client:link():list()
+local links, err = client:Link():list()
 print(links)
 
 -- Load a specific link
-local link, err = client:link():load({ id = "example_id" })
+local link, err = client:Link():load({ id = "example_id" })
 print(link)
 ```
 
@@ -176,22 +179,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = OgliLinkShortenerSDK.test()
-const result = await client.link.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const link = await client.Link().load({ id: 'test01' })
+// link is a bare Link populated with mock data
+console.log(link)
 ```
 
 ### Python
 
 ```python
 client = OgliLinkShortenerSDK.test()
-result = client.link.load({"id": "test01"})
+link = client.Link().load({"id": "test01"})
+print(link)
 ```
 
 ### PHP
 
 ```php
-$client = OgliLinkShortenerSDK::test();
-$result = $client->link()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = OgliLinkShortenerSDK::test([
+    "entity" => ["link" => ["test01" => ["id" => "test01"]]],
+]);
+$link = $client->Link()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -206,15 +214,18 @@ result, err := client.Link(nil).Load(
 ### Ruby
 
 ```ruby
-client = OgliLinkShortenerSDK.test
-result = client.link.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = OgliLinkShortenerSDK.test({
+  "entity" => { "link" => { "test01" => { "id" => "test01" } } },
+})
+link = client.Link.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:link():load({ id = "test01" })
+local result, err = client:Link():load({ id = "test01" })
 ```
 
 ## How it works
@@ -262,6 +273,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 
