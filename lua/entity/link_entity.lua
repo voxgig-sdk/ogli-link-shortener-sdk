@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch LinkLoadMatch
+---@param ctrl? table
+---@return Link
+---@return string? err
 function LinkEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -104,6 +108,10 @@ end
 
 
 
+---@param reqmatch LinkListMatch
+---@param ctrl? table
+---@return Link[]
+---@return string? err
 function LinkEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -126,6 +134,10 @@ end
 
 
 
+---@param reqdata LinkCreateData
+---@param ctrl? table
+---@return Link
+---@return string? err
 function LinkEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -148,6 +160,10 @@ end
 
 
 
+---@param reqdata LinkUpdateData
+---@param ctrl? table
+---@return Link
+---@return string? err
 function LinkEntity:update(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
@@ -173,6 +189,10 @@ end
 
 
 
+---@param reqmatch LinkRemoveMatch
+---@param ctrl? table
+---@return Link
+---@return string? err
 function LinkEntity:remove(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

@@ -9,9 +9,12 @@ The TypeScript SDK for the OgliLinkShortener API — a type-safe, entity-oriente
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/ogli-link-shortener
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,17 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { OgliLinkShortenerSDK } from 'ogli-link-shortener'
+import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener'
 
 const client = new OgliLinkShortenerSDK({
-  apikey: process.env.OGLI-LINK-SHORTENER_APIKEY,
+  apikey: process.env.OGLI_LINK_SHORTENER_APIKEY,
 })
 ```
 
 ### 2. List links
 
 ```ts
-const result = await client.Link().list()
+const result = await client.link.list()
 
 if (result.ok) {
   for (const item of result.data) {
@@ -42,7 +45,7 @@ if (result.ok) {
 ### 3. Load a link
 
 ```ts
-const result = await client.Link().load({ id: 'example_id' })
+const result = await client.link.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -53,18 +56,18 @@ if (result.ok) {
 
 ```ts
 // Create
-const created = await client.Link().create({
+const created = await client.link.create({
   name: 'Example',
 })
 
 // Update
-const updated = await client.Link().update({
+const updated = await client.link.update({
   id: created.data.id,
   name: 'Example-Renamed',
 })
 
 // Remove
-const removed = await client.Link().remove({
+const removed = await client.link.remove({
   id: created.data.id,
 })
 ```
@@ -111,7 +114,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = OgliLinkShortenerSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.link.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -128,7 +131,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.link
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -165,8 +168,8 @@ const client = new OgliLinkShortenerSDK({
 Create a `.env.local` file at the project root:
 
 ```
-OGLI-LINK-SHORTENER_TEST_LIVE=TRUE
-OGLI-LINK-SHORTENER_APIKEY=<your-key>
+OGLI_LINK_SHORTENER_TEST_LIVE=TRUE
+OGLI_LINK_SHORTENER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -324,7 +327,7 @@ API path: `/links/{linkId}/stats`
 
 ### Link
 
-Create an instance: `const link = client.Link()`
+Create an instance: `const link = client.link`
 
 #### Operations
 
@@ -354,26 +357,26 @@ Create an instance: `const link = client.Link()`
 #### Example: Load
 
 ```ts
-const link = await client.Link().load({ id: 'link_id' })
+const link = await client.link.load({ id: 'link_id' })
 ```
 
 #### Example: List
 
 ```ts
-const links = await client.Link().list()
+const links = await client.link.list()
 ```
 
 #### Example: Create
 
 ```ts
-const link = await client.Link().create({
+const link = await client.link.create({
 })
 ```
 
 
 ### LinkStat
 
-Create an instance: `const link_stat = client.LinkStat()`
+Create an instance: `const link_stat = client.link_stat`
 
 #### Operations
 
@@ -396,7 +399,7 @@ Create an instance: `const link_stat = client.LinkStat()`
 #### Example: List
 
 ```ts
-const link_stats = await client.LinkStat().list()
+const link_stats = await client.link_stat.list()
 ```
 
 
@@ -457,7 +460,7 @@ ogli-link-shortener/
 Import the SDK from the package root:
 
 ```ts
-import { OgliLinkShortenerSDK } from 'ogli-link-shortener'
+import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener'
 ```
 
 ### Entity state
@@ -467,11 +470,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const link = client.link
+await link.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// link.data() now returns the loaded link data
+// link.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

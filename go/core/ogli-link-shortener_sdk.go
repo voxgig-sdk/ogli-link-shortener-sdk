@@ -245,11 +245,17 @@ func (sdk *OgliLinkShortenerSDK) Direct(fetchargs map[string]any) (map[string]an
 }
 
 
+// Link returns a Link entity bound to this client.
+// Idiomatic usage: client.Link(nil).List(nil, nil) or
+// client.Link(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *OgliLinkShortenerSDK) Link(data map[string]any) OgliLinkShortenerEntity {
 	return NewLinkEntityFunc(sdk, data)
 }
 
 
+// LinkStat returns a LinkStat entity bound to this client.
+// Idiomatic usage: client.LinkStat(nil).List(nil, nil) or
+// client.LinkStat(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *OgliLinkShortenerSDK) LinkStat(data map[string]any) OgliLinkShortenerEntity {
 	return NewLinkStatEntityFunc(sdk, data)
 }

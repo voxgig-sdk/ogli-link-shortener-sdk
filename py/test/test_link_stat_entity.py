@@ -52,8 +52,7 @@ class TestLinkStatEntity:
             "link_id": setup["idmap"]["link01"],
         }
 
-        link_stat_ref01_list_result, err = link_stat_ref01_ent.list(link_stat_ref01_match, None)
-        assert err is None
+        link_stat_ref01_list_result = link_stat_ref01_ent.list(link_stat_ref01_match, None)
         assert isinstance(link_stat_ref01_list_result, list)
 
 

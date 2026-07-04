@@ -44,17 +44,14 @@ class TestLinkEntity:
         link_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.link"), "link_ref01"))
 
-        link_ref01_data_result, err = link_ref01_ent.create(link_ref01_data, None)
-        assert err is None
-        link_ref01_data = helpers.to_map(link_ref01_data_result)
+        link_ref01_data = helpers.to_map(link_ref01_ent.create(link_ref01_data, None))
         assert link_ref01_data is not None
         assert link_ref01_data["id"] is not None
 
         # LIST
         link_ref01_match = {}
 
-        link_ref01_list_result, err = link_ref01_ent.list(link_ref01_match, None)
-        assert err is None
+        link_ref01_list_result = link_ref01_ent.list(link_ref01_match, None)
         assert isinstance(link_ref01_list_result, list)
 
         found_item = vs.select(
@@ -71,9 +68,7 @@ class TestLinkEntity:
         link_ref01_markdef_up0_value = "Mark01-link_ref01_" + str(setup["now"])
         link_ref01_data_up0_up[link_ref01_markdef_up0_name] = link_ref01_markdef_up0_value
 
-        link_ref01_resdata_up0_result, err = link_ref01_ent.update(link_ref01_data_up0_up, None)
-        assert err is None
-        link_ref01_resdata_up0 = helpers.to_map(link_ref01_resdata_up0_result)
+        link_ref01_resdata_up0 = helpers.to_map(link_ref01_ent.update(link_ref01_data_up0_up, None))
         assert link_ref01_resdata_up0 is not None
         assert link_ref01_resdata_up0["id"] == link_ref01_data_up0_up["id"]
         assert link_ref01_resdata_up0[link_ref01_markdef_up0_name] == link_ref01_markdef_up0_value
@@ -82,8 +77,7 @@ class TestLinkEntity:
         link_ref01_match_dt0 = {
             "id": link_ref01_data["id"],
         }
-        link_ref01_data_dt0_loaded, err = link_ref01_ent.load(link_ref01_match_dt0, None)
-        assert err is None
+        link_ref01_data_dt0_loaded = link_ref01_ent.load(link_ref01_match_dt0, None)
         link_ref01_data_dt0_load_result = helpers.to_map(link_ref01_data_dt0_loaded)
         assert link_ref01_data_dt0_load_result is not None
         assert link_ref01_data_dt0_load_result["id"] == link_ref01_data["id"]
@@ -92,14 +86,12 @@ class TestLinkEntity:
         link_ref01_match_rm0 = {
             "id": link_ref01_data["id"],
         }
-        _, err = link_ref01_ent.remove(link_ref01_match_rm0, None)
-        assert err is None
+        link_ref01_ent.remove(link_ref01_match_rm0, None)
 
         # LIST
         link_ref01_match_rt0 = {}
 
-        link_ref01_list_rt0_result, err = link_ref01_ent.list(link_ref01_match_rt0, None)
-        assert err is None
+        link_ref01_list_rt0_result = link_ref01_ent.list(link_ref01_match_rt0, None)
         assert isinstance(link_ref01_list_rt0_result, list)
 
         not_found_item = vs.select(

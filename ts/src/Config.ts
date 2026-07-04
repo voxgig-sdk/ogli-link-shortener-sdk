@@ -224,7 +224,8 @@ class Config {
                     "name": "id",
                     "orig": "link_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -267,7 +268,8 @@ class Config {
                     "name": "id",
                     "orig": "link_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -310,7 +312,8 @@ class Config {
                     "name": "id",
                     "orig": "link_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },
@@ -412,7 +415,8 @@ class Config {
                     "name": "id",
                     "orig": "link_id",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ],
                 "query": [

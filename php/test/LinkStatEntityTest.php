@@ -52,8 +52,7 @@ class LinkStatEntityTest extends TestCase
             "link_id" => $setup["idmap"]["link01"],
         ];
 
-        [$link_stat_ref01_list_result, $err] = $link_stat_ref01_ent->list($link_stat_ref01_match, null);
-        $this->assertNull($err);
+        $link_stat_ref01_list_result = $link_stat_ref01_ent->list($link_stat_ref01_match, null);
         $this->assertIsArray($link_stat_ref01_list_result);
 
     }

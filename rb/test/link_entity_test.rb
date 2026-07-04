@@ -36,8 +36,7 @@ class LinkEntityTest < Minitest::Test
     link_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.link"), "link_ref01"))
 
-    link_ref01_data_result, err = link_ref01_ent.create(link_ref01_data, nil)
-    assert_nil err
+    link_ref01_data_result = link_ref01_ent.create(link_ref01_data, nil)
     link_ref01_data = Helpers.to_map(link_ref01_data_result)
     assert !link_ref01_data.nil?
     assert !link_ref01_data["id"].nil?
@@ -45,8 +44,7 @@ class LinkEntityTest < Minitest::Test
     # LIST
     link_ref01_match = {}
 
-    link_ref01_list_result, err = link_ref01_ent.list(link_ref01_match, nil)
-    assert_nil err
+    link_ref01_list_result = link_ref01_ent.list(link_ref01_match, nil)
     assert link_ref01_list_result.is_a?(Array)
 
     found_item = Vs.select(
@@ -63,8 +61,7 @@ class LinkEntityTest < Minitest::Test
     link_ref01_markdef_up0_value = "Mark01-link_ref01_#{setup[:now]}"
     link_ref01_data_up0_up[link_ref01_markdef_up0_name] = link_ref01_markdef_up0_value
 
-    link_ref01_resdata_up0_result, err = link_ref01_ent.update(link_ref01_data_up0_up, nil)
-    assert_nil err
+    link_ref01_resdata_up0_result = link_ref01_ent.update(link_ref01_data_up0_up, nil)
     link_ref01_resdata_up0 = Helpers.to_map(link_ref01_resdata_up0_result)
     assert !link_ref01_resdata_up0.nil?
     assert_equal link_ref01_resdata_up0["id"], link_ref01_data_up0_up["id"]
@@ -74,8 +71,7 @@ class LinkEntityTest < Minitest::Test
     link_ref01_match_dt0 = {
       "id" => link_ref01_data["id"],
     }
-    link_ref01_data_dt0_loaded, err = link_ref01_ent.load(link_ref01_match_dt0, nil)
-    assert_nil err
+    link_ref01_data_dt0_loaded = link_ref01_ent.load(link_ref01_match_dt0, nil)
     link_ref01_data_dt0_load_result = Helpers.to_map(link_ref01_data_dt0_loaded)
     assert !link_ref01_data_dt0_load_result.nil?
     assert_equal link_ref01_data_dt0_load_result["id"], link_ref01_data["id"]
@@ -84,14 +80,12 @@ class LinkEntityTest < Minitest::Test
     link_ref01_match_rm0 = {
       "id" => link_ref01_data["id"],
     }
-    _, err = link_ref01_ent.remove(link_ref01_match_rm0, nil)
-    assert_nil err
+    link_ref01_ent.remove(link_ref01_match_rm0, nil)
 
     # LIST
     link_ref01_match_rt0 = {}
 
-    link_ref01_list_rt0_result, err = link_ref01_ent.list(link_ref01_match_rt0, nil)
-    assert_nil err
+    link_ref01_list_rt0_result = link_ref01_ent.list(link_ref01_match_rt0, nil)
     assert link_ref01_list_rt0_result.is_a?(Array)
 
     not_found_item = Vs.select(

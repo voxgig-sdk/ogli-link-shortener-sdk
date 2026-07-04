@@ -45,6 +45,7 @@ class LinkStatEntity
     end
   end
 
+  # @return [LinkStat, Hash] the current LinkStat data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class LinkStatEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of LinkStat fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class LinkStatEntity
   
 
   
+  # List LinkStat items matching the given filter.
+  #
+  # @param reqmatch [LinkStatListMatch, Hash, nil] match filter (any subset of LinkStat fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<LinkStat>, Array] the matching LinkStat items; raises OgliLinkShortenerError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

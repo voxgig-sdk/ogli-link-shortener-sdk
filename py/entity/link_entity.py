@@ -1,7 +1,17 @@
 # OgliLinkShortener SDK Link entity
 
+from __future__ import annotations
+
 from utility.voxgig_struct import voxgig_struct as vs
 from core import helpers
+from oglilinkshortener_types import (
+    Link,
+    LinkLoadMatch,
+    LinkListMatch,
+    LinkCreateData,
+    LinkUpdateData,
+    LinkRemoveMatch,
+)
 
 
 class LinkEntity:
@@ -44,7 +54,7 @@ class LinkEntity:
             self._data = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetData")
 
-    def data_get(self):
+    def data_get(self) -> Link:
         self._utility.feature_hook(self._entctx, "GetData")
         return vs.clone(self._data)
 
@@ -53,12 +63,12 @@ class LinkEntity:
             self._match = helpers.to_map(vs.clone(args)) or {}
             self._utility.feature_hook(self._entctx, "SetMatch")
 
-    def match_get(self):
+    def match_get(self) -> Link:
         self._utility.feature_hook(self._entctx, "GetMatch")
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch, ctrl=None):
+    def load(self, reqmatch: LinkLoadMatch, ctrl=None) -> Link:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "load",
@@ -80,7 +90,7 @@ class LinkEntity:
 
 
     
-    def list(self, reqmatch, ctrl=None):
+    def list(self, reqmatch: LinkListMatch, ctrl=None) -> list[Link]:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "list",
@@ -100,7 +110,7 @@ class LinkEntity:
 
 
     
-    def create(self, reqdata, ctrl=None):
+    def create(self, reqdata: LinkCreateData, ctrl=None) -> Link:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "create",
@@ -120,7 +130,7 @@ class LinkEntity:
 
 
     
-    def update(self, reqdata, ctrl=None):
+    def update(self, reqdata: LinkUpdateData, ctrl=None) -> Link:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "update",
@@ -142,7 +152,7 @@ class LinkEntity:
 
 
     
-    def remove(self, reqmatch, ctrl=None):
+    def remove(self, reqmatch: LinkRemoveMatch, ctrl=None) -> Link:
         utility = self._utility
         ctx = utility.make_context({
             "opname": "remove",

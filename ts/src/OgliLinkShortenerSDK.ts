@@ -3,6 +3,8 @@
 import { LinkEntity } from './entity/LinkEntity'
 import { LinkStatEntity } from './entity/LinkStatEntity'
 
+export type * from './OgliLinkShortenerTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -203,12 +205,28 @@ class OgliLinkShortenerSDK {
 
 
 
+  _link?: LinkEntity
+
+  // Idiomatic facade: `client.link.list()` / `client.link.load({ id })`.
+  get link(): LinkEntity {
+    return (this._link ??= new LinkEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.link` instead. */
   Link(data?: any) {
     const self = this
     return new LinkEntity(self,data)
   }
 
 
+  _link_stat?: LinkStatEntity
+
+  // Idiomatic facade: `client.link_stat.list()` / `client.link_stat.load({ id })`.
+  get link_stat(): LinkStatEntity {
+    return (this._link_stat ??= new LinkStatEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.link_stat` instead. */
   LinkStat(data?: any) {
     const self = this
     return new LinkStatEntity(self,data)

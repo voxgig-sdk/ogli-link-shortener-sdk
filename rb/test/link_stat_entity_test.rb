@@ -45,8 +45,7 @@ class LinkStatEntityTest < Minitest::Test
       "link_id" => setup[:idmap]["link01"],
     }
 
-    link_stat_ref01_list_result, err = link_stat_ref01_ent.list(link_stat_ref01_match, nil)
-    assert_nil err
+    link_stat_ref01_list_result = link_stat_ref01_ent.list(link_stat_ref01_match, nil)
     assert link_stat_ref01_list_result.is_a?(Array)
 
   end

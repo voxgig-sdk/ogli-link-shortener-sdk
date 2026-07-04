@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch LinkStatListMatch
+---@param ctrl? table
+---@return LinkStat[]
+---@return string? err
 function LinkStatEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

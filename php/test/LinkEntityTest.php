@@ -43,8 +43,7 @@ class LinkEntityTest extends TestCase
         $link_ref01_data = Helpers::to_map(Vs::getprop(
             Vs::getpath($setup["data"], "new.link"), "link_ref01"));
 
-        [$link_ref01_data_result, $err] = $link_ref01_ent->create($link_ref01_data, null);
-        $this->assertNull($err);
+        $link_ref01_data_result = $link_ref01_ent->create($link_ref01_data, null);
         $link_ref01_data = Helpers::to_map($link_ref01_data_result);
         $this->assertNotNull($link_ref01_data);
         $this->assertNotNull($link_ref01_data["id"]);
@@ -52,8 +51,7 @@ class LinkEntityTest extends TestCase
         // LIST
         $link_ref01_match = [];
 
-        [$link_ref01_list_result, $err] = $link_ref01_ent->list($link_ref01_match, null);
-        $this->assertNull($err);
+        $link_ref01_list_result = $link_ref01_ent->list($link_ref01_match, null);
         $this->assertIsArray($link_ref01_list_result);
 
         $found_item = sdk_select(
@@ -70,8 +68,7 @@ class LinkEntityTest extends TestCase
         $link_ref01_markdef_up0_value = "Mark01-link_ref01_" . $setup["now"];
         $link_ref01_data_up0_up[$link_ref01_markdef_up0_name] = $link_ref01_markdef_up0_value;
 
-        [$link_ref01_resdata_up0_result, $err] = $link_ref01_ent->update($link_ref01_data_up0_up, null);
-        $this->assertNull($err);
+        $link_ref01_resdata_up0_result = $link_ref01_ent->update($link_ref01_data_up0_up, null);
         $link_ref01_resdata_up0 = Helpers::to_map($link_ref01_resdata_up0_result);
         $this->assertNotNull($link_ref01_resdata_up0);
         $this->assertEquals($link_ref01_resdata_up0["id"], $link_ref01_data_up0_up["id"]);
@@ -81,8 +78,7 @@ class LinkEntityTest extends TestCase
         $link_ref01_match_dt0 = [
             "id" => $link_ref01_data["id"],
         ];
-        [$link_ref01_data_dt0_loaded, $err] = $link_ref01_ent->load($link_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $link_ref01_data_dt0_loaded = $link_ref01_ent->load($link_ref01_match_dt0, null);
         $link_ref01_data_dt0_load_result = Helpers::to_map($link_ref01_data_dt0_loaded);
         $this->assertNotNull($link_ref01_data_dt0_load_result);
         $this->assertEquals($link_ref01_data_dt0_load_result["id"], $link_ref01_data["id"]);
@@ -91,14 +87,12 @@ class LinkEntityTest extends TestCase
         $link_ref01_match_rm0 = [
             "id" => $link_ref01_data["id"],
         ];
-        [$_, $err] = $link_ref01_ent->remove($link_ref01_match_rm0, null);
-        $this->assertNull($err);
+        $link_ref01_ent->remove($link_ref01_match_rm0, null);
 
         // LIST
         $link_ref01_match_rt0 = [];
 
-        [$link_ref01_list_rt0_result, $err] = $link_ref01_ent->list($link_ref01_match_rt0, null);
-        $this->assertNull($err);
+        $link_ref01_list_rt0_result = $link_ref01_ent->list($link_ref01_match_rt0, null);
         $this->assertIsArray($link_ref01_list_rt0_result);
 
         $not_found_item = sdk_select(

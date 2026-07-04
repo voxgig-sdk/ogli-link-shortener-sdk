@@ -9,9 +9,10 @@ The PHP SDK for the OgliLinkShortener API — an entity-oriented client using PH
 
 
 ## Install
-```bash
-composer require voxgig-sdk/ogli-link-shortener
-```
+This package is not yet published to Packagist. Install it from the
+GitHub release tag (`php/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -26,43 +27,48 @@ loading a specific record.
 require_once 'oglilinkshortener_sdk.php';
 
 $client = new OgliLinkShortenerSDK([
-    "apikey" => getenv("OGLI-LINK-SHORTENER_APIKEY"),
+    "apikey" => getenv("OGLI_LINK_SHORTENER_APIKEY"),
 ]);
 ```
 
 ### 2. List links
 
 ```php
-[$result, $err] = $client->Link()->list();
-if ($err) { throw new \Exception($err); }
-
-if (is_array($result)) {
-    foreach ($result as $item) {
-        $d = $item->data_get();
-        echo $d["id"] . " " . $d["name"] . "\n";
+try {
+    $result = $client->link()->list();
+    if (is_array($result)) {
+        foreach ($result as $item) {
+            $d = $item->data_get();
+            echo $d["id"] . " " . $d["name"] . "\n";
+        }
     }
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
 }
 ```
 
 ### 3. Load a link
 
 ```php
-[$result, $err] = $client->Link()->load(["id" => "example_id"]);
-if ($err) { throw new \Exception($err); }
-print_r($result);
+try {
+    $result = $client->link()->load(["id" => "example_id"]);
+    print_r($result);
+} catch (\Exception $err) {
+    echo "Error: " . $err->getMessage();
+}
 ```
 
 ### 4. Create, update, and remove
 
 ```php
 // Create
-[$created, $_] = $client->Link()->create(["name" => "Example"]);
+$created = $client->link()->create(["name" => "Example"]);
 
 // Update
-$client->Link()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
+$client->link()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
 
 // Remove
-$client->Link()->remove(["id" => $created["id"]]);
+$client->link()->remove(["id" => $created["id"]]);
 ```
 
 
@@ -73,28 +79,31 @@ $client->Link()->remove(["id" => $created["id"]]);
 For endpoints not covered by entity methods:
 
 ```php
-[$result, $err] = $client->direct([
+// direct() is the raw-HTTP escape hatch: it returns a result array
+// (it does not throw). Branch on $result["ok"].
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
+} else {
+    echo "Error: " . $result["err"]->getMessage();
 }
 ```
 
 ### Prepare a request without sending it
 
 ```php
-[$fetchdef, $err] = $client->prepare([
+// prepare() throws on error and returns the fetch definition.
+$fetchdef = $client->prepare([
     "path" => "/api/resource/{id}",
     "method" => "DELETE",
     "params" => ["id" => "example"],
 ]);
-if ($err) { throw new \Exception($err); }
 
 echo $fetchdef["url"];
 echo $fetchdef["method"];
@@ -108,7 +117,7 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = OgliLinkShortenerSDK::test();
 
-[$result, $err] = $client->OgliLinkShortener()->load(["id" => "test01"]);
+$result = $client->link()->load(["id" => "test01"]);
 // $result contains mock response data
 ```
 
@@ -142,8 +151,8 @@ $client = new OgliLinkShortenerSDK([
 Create a `.env.local` file at the project root:
 
 ```
-OGLI-LINK-SHORTENER_TEST_LIVE=TRUE
-OGLI-LINK-SHORTENER_APIKEY=<your-key>
+OGLI_LINK_SHORTENER_TEST_LIVE=TRUE
+OGLI_LINK_SHORTENER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -213,8 +222,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[$result, $err]`. The first value is an
-`array` with these keys:
+Entity operations return the bare result data (an `array` for single-entity
+ops, a `list` for `list`) and throw on error. Wrap calls in
+`try`/`catch` to handle failures.
+
+The `direct()` escape hatch never throws — it returns a result `array`
+you branch on via `$result["ok"]`:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -269,7 +282,7 @@ API path: `/links/{linkId}/stats`
 
 ### Link
 
-Create an instance: `const link = client.Link()`
+Create an instance: `const link = client.link`
 
 #### Operations
 
@@ -299,26 +312,26 @@ Create an instance: `const link = client.Link()`
 #### Example: Load
 
 ```ts
-const link = await client.Link().load({ id: 'link_id' })
+const link = await client.link.load({ id: 'link_id' })
 ```
 
 #### Example: List
 
 ```ts
-const links = await client.Link().list()
+const links = await client.link.list()
 ```
 
 #### Example: Create
 
 ```ts
-const link = await client.Link().create({
+const link = await client.link.create({
 })
 ```
 
 
 ### LinkStat
 
-Create an instance: `const link_stat = client.LinkStat()`
+Create an instance: `const link_stat = client.link_stat`
 
 #### Operations
 
@@ -341,7 +354,7 @@ Create an instance: `const link_stat = client.LinkStat()`
 #### Example: List
 
 ```ts
-const link_stats = await client.LinkStat().list()
+const link_stats = await client.link_stat.list()
 ```
 
 
@@ -416,11 +429,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$moon = $client->Moon();
-[$result, $err] = $moon->load(["planet_id" => "earth", "id" => "luna"]);
+$link = $client->link();
+$link->load(["id" => "example_id"]);
 
-// $moon->dataGet() now returns the loaded moon data
-// $moon->matchGet() returns the last match criteria
+// $link->dataGet() now returns the loaded link data
+// $link->matchGet() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

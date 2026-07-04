@@ -103,7 +103,7 @@ class OgliLinkShortenerSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class OgliLinkShortenerSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class OgliLinkShortenerSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,31 +216,53 @@ class OgliLinkShortenerSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Link($data = null)
+    private $_link = null;
+
+    // Idiomatic facade: $client->link()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Link() (PHP method
+    // names are case-insensitive).
+    public function link($data = null)
     {
         require_once __DIR__ . '/entity/link_entity.php';
+        if ($data === null) {
+            if ($this->_link === null) {
+                $this->_link = new LinkEntity($this, null);
+            }
+            return $this->_link;
+        }
         return new LinkEntity($this, $data);
     }
 
 
-    public function LinkStat($data = null)
+    private $_link_stat = null;
+
+    // Idiomatic facade: $client->link_stat()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias LinkStat() (PHP method
+    // names are case-insensitive).
+    public function link_stat($data = null)
     {
         require_once __DIR__ . '/entity/link_stat_entity.php';
+        if ($data === null) {
+            if ($this->_link_stat === null) {
+                $this->_link_stat = new LinkStatEntity($this, null);
+            }
+            return $this->_link_stat;
+        }
         return new LinkStatEntity($this, $data);
     }
 

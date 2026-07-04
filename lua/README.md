@@ -9,12 +9,9 @@ The Lua SDK for the OgliLinkShortener API — an entity-oriented client using Lu
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-ogli-link-shortener
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -32,14 +29,14 @@ loading a specific record.
 local sdk = require("ogli-link-shortener_sdk")
 
 local client = sdk.new({
-  apikey = os.getenv("OGLI-LINK-SHORTENER_APIKEY"),
+  apikey = os.getenv("OGLI_LINK_SHORTENER_APIKEY"),
 })
 ```
 
 ### 2. List links
 
 ```lua
-local result, err = client:Link():list()
+local result, err = client:link():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -53,7 +50,7 @@ end
 ### 3. Load a link
 
 ```lua
-local result, err = client:Link():load({ id = "example_id" })
+local result, err = client:link():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -62,13 +59,13 @@ print(result)
 
 ```lua
 -- Create
-local created, _ = client:Link():create({ name = "Example" })
+local created, _ = client:link():create({ name = "Example" })
 
 -- Update
-client:Link():update({ id = created["id"], name = "Example-Renamed" })
+client:link():update({ id = created["id"], name = "Example-Renamed" })
 
 -- Remove
-client:Link():remove({ id = created["id"] })
+client:link():remove({ id = created["id"] })
 ```
 
 
@@ -114,7 +111,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:OgliLinkShortener():load({ id = "test01" })
+local result, err = client:link():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -147,8 +144,8 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-OGLI-LINK-SHORTENER_TEST_LIVE=TRUE
-OGLI-LINK-SHORTENER_APIKEY=<your-key>
+OGLI_LINK_SHORTENER_TEST_LIVE=TRUE
+OGLI_LINK_SHORTENER_APIKEY=<your-key>
 ```
 
 Then run:
@@ -274,7 +271,7 @@ API path: `/links/{linkId}/stats`
 
 ### Link
 
-Create an instance: `const link = client.Link()`
+Create an instance: `const link = client.link`
 
 #### Operations
 
@@ -304,26 +301,26 @@ Create an instance: `const link = client.Link()`
 #### Example: Load
 
 ```ts
-const link = await client.Link().load({ id: 'link_id' })
+const link = await client.link.load({ id: 'link_id' })
 ```
 
 #### Example: List
 
 ```ts
-const links = await client.Link().list()
+const links = await client.link.list()
 ```
 
 #### Example: Create
 
 ```ts
-const link = await client.Link().create({
+const link = await client.link.create({
 })
 ```
 
 
 ### LinkStat
 
-Create an instance: `const link_stat = client.LinkStat()`
+Create an instance: `const link_stat = client.link_stat`
 
 #### Operations
 
@@ -346,7 +343,7 @@ Create an instance: `const link_stat = client.LinkStat()`
 #### Example: List
 
 ```ts
-const link_stats = await client.LinkStat().list()
+const link_stats = await client.link_stat.list()
 ```
 
 
@@ -421,11 +418,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local link = client:link()
+link:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- link:data_get() now returns the loaded link data
+-- link:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

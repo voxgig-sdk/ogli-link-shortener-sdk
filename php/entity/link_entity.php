@@ -55,6 +55,9 @@ class LinkEntity
         return new LinkEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Link|array $args Link data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class LinkEntity
         }
     }
 
+    /**
+     * @return Link|array The current Link data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Link fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class LinkEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Link fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class LinkEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Link.
+     *
+     * @param LinkLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed LinkLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Link|array The loaded Link as an assoc-array at the
+     *   SDK boundary; throws OgliLinkShortenerError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -110,7 +131,16 @@ class LinkEntity
 
 
     
-    public function list($reqmatch, $ctrl = null): array
+    /**
+     * List Link items matching the given filter.
+     *
+     * @param LinkListMatch|array|null $reqmatch Match filter (any subset
+     *   of Link fields) as an assoc-array; LinkListMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Link[]|array A list of Link items as assoc-arrays at
+     *   the SDK boundary; throws OgliLinkShortenerError on failure (item-5 convention).
+     */
+    public function list(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -133,7 +163,16 @@ class LinkEntity
 
 
     
-    public function create($reqdata, $ctrl = null): array
+    /**
+     * Create a new Link.
+     *
+     * @param LinkCreateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed LinkCreateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Link|array The created Link as an assoc-array at the
+     *   SDK boundary; throws OgliLinkShortenerError on failure (item-5 convention).
+     */
+    public function create(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -156,7 +195,16 @@ class LinkEntity
 
 
     
-    public function update($reqdata, $ctrl = null): array
+    /**
+     * Update an existing Link.
+     *
+     * @param LinkUpdateData|array|null $reqdata Body data as an assoc-array;
+     *   a typed LinkUpdateData names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Link|array The updated Link as an assoc-array at the
+     *   SDK boundary; throws OgliLinkShortenerError on failure (item-5 convention).
+     */
+    public function update(?array $reqdata = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -182,7 +230,16 @@ class LinkEntity
 
 
     
-    public function remove($reqmatch, $ctrl = null): array
+    /**
+     * Remove an Link matching the given criteria.
+     *
+     * @param LinkRemoveMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; LinkRemoveMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Link|array The removed Link as an assoc-array at the
+     *   SDK boundary; throws OgliLinkShortenerError on failure (item-5 convention).
+     */
+    public function remove(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -207,7 +264,7 @@ class LinkEntity
 
 
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

@@ -88,7 +88,7 @@ same parameters as `direct()`.
 ## LinkEntity
 
 ```lua
-local link = client:Link(nil)
+local link = client:link(nil)
 ```
 
 ### Fields
@@ -128,7 +128,7 @@ local link = client:Link(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Link():create({
+local result, err = client:link():create({
 })
 ```
 
@@ -137,7 +137,7 @@ local result, err = client:Link():create({
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Link():list()
+local results, err = client:link():list()
 ```
 
 #### `load(reqmatch, ctrl) -> any, err`
@@ -145,7 +145,7 @@ local results, err = client:Link():list()
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Link():load({ id = "link_id" })
+local result, err = client:link():load({ id = "link_id" })
 ```
 
 #### `remove(reqmatch, ctrl) -> any, err`
@@ -153,7 +153,7 @@ local result, err = client:Link():load({ id = "link_id" })
 Remove the entity matching the given criteria.
 
 ```lua
-local result, err = client:Link():remove({ id = "link_id" })
+local result, err = client:link():remove({ id = "link_id" })
 ```
 
 #### `update(reqdata, ctrl) -> any, err`
@@ -161,7 +161,7 @@ local result, err = client:Link():remove({ id = "link_id" })
 Update an existing entity. The data must include the entity `id`.
 
 ```lua
-local result, err = client:Link():update({
+local result, err = client:link():update({
   id = "link_id",
   -- Fields to update
 })
@@ -200,7 +200,7 @@ Return the entity name.
 ## LinkStatEntity
 
 ```lua
-local link_stat = client:LinkStat(nil)
+local link_stat = client:link_stat(nil)
 ```
 
 ### Fields
@@ -222,7 +222,7 @@ local link_stat = client:LinkStat(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:LinkStat():list()
+local results, err = client:link_stat():list()
 ```
 
 ### Common Methods

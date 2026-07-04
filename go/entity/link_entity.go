@@ -85,6 +85,27 @@ func (e *LinkEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Link; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *LinkEntity) DataTyped(data ...Link) Link {
+	if len(data) > 0 {
+		return typedFrom[Link](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Link](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Link (all fields
+// optional at the wire level).
+func (e *LinkEntity) MatchTyped(match ...Link) Link {
+	if len(match) > 0 {
+		return typedFrom[Link](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Link](e.Match())
+}
+
 
 func (e *LinkEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, error) {
 	utility := e.utility
@@ -111,6 +132,17 @@ func (e *LinkEntity) Load(reqmatch map[string]any, ctrl map[string]any) (any, er
 	})
 }
 
+// LoadTyped is the statically-typed variant of Load: it takes an
+// LinkLoadMatch and returns an Link. It delegates to the untyped
+// Load (identical runtime) and converts at the typed boundary.
+func (e *LinkEntity) LoadTyped(reqmatch LinkLoadMatch, ctrl map[string]any) (Link, error) {
+	res, err := e.Load(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Link{}, err
+	}
+	return typedFrom[Link](res), nil
+}
+
 
 
 
@@ -131,6 +163,17 @@ func (e *LinkEntity) List(reqmatch map[string]any, ctrl map[string]any) (any, er
 			}
 		}
 	})
+}
+
+// ListTyped is the statically-typed variant of List: it takes an
+// LinkListMatch and returns []Link. It delegates to the untyped
+// List (identical runtime) and converts at the typed boundary.
+func (e *LinkEntity) ListTyped(reqmatch LinkListMatch, ctrl map[string]any) ([]Link, error) {
+	res, err := e.List(asMap(reqmatch), ctrl)
+	if err != nil {
+		return nil, err
+	}
+	return typedSliceFrom[Link](res), nil
 }
 
 
@@ -156,6 +199,17 @@ func (e *LinkEntity) Create(reqdata map[string]any, ctrl map[string]any) (any, e
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// LinkCreateData and returns an Link. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *LinkEntity) CreateTyped(reqdata LinkCreateData, ctrl map[string]any) (Link, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Link{}, err
+	}
+	return typedFrom[Link](res), nil
 }
 
 
@@ -186,6 +240,17 @@ func (e *LinkEntity) Update(reqdata map[string]any, ctrl map[string]any) (any, e
 	})
 }
 
+// UpdateTyped is the statically-typed variant of Update: it takes an
+// LinkUpdateData and returns an Link. It delegates to the untyped
+// Update (identical runtime) and converts at the typed boundary.
+func (e *LinkEntity) UpdateTyped(reqdata LinkUpdateData, ctrl map[string]any) (Link, error) {
+	res, err := e.Update(asMap(reqdata), ctrl)
+	if err != nil {
+		return Link{}, err
+	}
+	return typedFrom[Link](res), nil
+}
+
 
 
 
@@ -212,6 +277,17 @@ func (e *LinkEntity) Remove(reqmatch map[string]any, ctrl map[string]any) (any, 
 			}
 		}
 	})
+}
+
+// RemoveTyped is the statically-typed variant of Remove: it takes an
+// LinkRemoveMatch and returns an Link. It delegates to the untyped
+// Remove (identical runtime) and converts at the typed boundary.
+func (e *LinkEntity) RemoveTyped(reqmatch LinkRemoveMatch, ctrl map[string]any) (Link, error) {
+	res, err := e.Remove(asMap(reqmatch), ctrl)
+	if err != nil {
+		return Link{}, err
+	}
+	return typedFrom[Link](res), nil
 }
 
 
