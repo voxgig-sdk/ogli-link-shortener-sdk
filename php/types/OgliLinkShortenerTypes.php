@@ -33,7 +33,7 @@ class LinkLoadMatch
     public string $id;
 }
 
-/** Match filter for Link#list (any subset of Link fields). */
+/** Request payload for Link#list. */
 class LinkListMatch
 {
     public ?int $click_count = null;
@@ -48,7 +48,7 @@ class LinkListMatch
     public ?string $url = null;
 }
 
-/** Match filter for Link#create (any subset of Link fields). */
+/** Request payload for Link#create. */
 class LinkCreateData
 {
     public ?int $click_count = null;

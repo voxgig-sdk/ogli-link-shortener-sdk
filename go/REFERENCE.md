@@ -102,16 +102,16 @@ link := client.Link(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | ``$INTEGER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `click_count` | `int` | No |  |
+| `created_at` | `string` | No |  |
+| `description` | `string` | No |  |
+| `id` | `string` | No |  |
+| `image` | `string` | No |  |
+| `short_url` | `string` | No |  |
+| `slug` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -208,13 +208,13 @@ link_stat := client.LinkStat(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | ``$ARRAY`` | No |  |
-| `clicks_by_date` | ``$ARRAY`` | No |  |
-| `clicks_by_device` | ``$ARRAY`` | No |  |
-| `clicks_by_referrer` | ``$ARRAY`` | No |  |
-| `link_id` | ``$STRING`` | No |  |
-| `total_click` | ``$INTEGER`` | No |  |
-| `unique_click` | ``$INTEGER`` | No |  |
+| `clicks_by_country` | `[]any` | No |  |
+| `clicks_by_date` | `[]any` | No |  |
+| `clicks_by_device` | `[]any` | No |  |
+| `clicks_by_referrer` | `[]any` | No |  |
+| `link_id` | `string` | No |  |
+| `total_click` | `int` | No |  |
+| `unique_click` | `int` | No |  |
 
 ### Operations
 

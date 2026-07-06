@@ -8,7 +8,7 @@ Complete API reference for the OgliLinkShortener Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'ogli-link-shortener_sdk'
+require_relative 'OgliLinkShortener_sdk'
 
 client = OgliLinkShortenerSDK.new(options)
 ```
@@ -98,16 +98,16 @@ link = client.Link
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | ``$INTEGER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `click_count` | `Integer` | No |  |
+| `created_at` | `String` | No |  |
+| `description` | `String` | No |  |
+| `id` | `String` | No |  |
+| `image` | `String` | No |  |
+| `short_url` | `String` | No |  |
+| `slug` | `String` | No |  |
+| `title` | `String` | No |  |
+| `updated_at` | `String` | No |  |
+| `url` | `String` | No |  |
 
 ### Field Usage by Operation
 
@@ -135,12 +135,12 @@ result = client.Link.create({
 })
 ```
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Link.list(nil)
+results = client.Link.list
 ```
 
 #### `load(reqmatch, ctrl = nil) -> result`
@@ -210,22 +210,22 @@ link_stat = client.LinkStat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | ``$ARRAY`` | No |  |
-| `clicks_by_date` | ``$ARRAY`` | No |  |
-| `clicks_by_device` | ``$ARRAY`` | No |  |
-| `clicks_by_referrer` | ``$ARRAY`` | No |  |
-| `link_id` | ``$STRING`` | No |  |
-| `total_click` | ``$INTEGER`` | No |  |
-| `unique_click` | ``$INTEGER`` | No |  |
+| `clicks_by_country` | `Array` | No |  |
+| `clicks_by_date` | `Array` | No |  |
+| `clicks_by_device` | `Array` | No |  |
+| `clicks_by_referrer` | `Array` | No |  |
+| `link_id` | `String` | No |  |
+| `total_click` | `Integer` | No |  |
+| `unique_click` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.LinkStat.list(nil)
+results = client.LinkStat.list
 ```
 
 ### Common Methods

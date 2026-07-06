@@ -79,12 +79,12 @@ describe('LinkEntity', async () => {
     link_ref01_data_up0.id = link_ref01_data.id
 
     const link_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-link_ref01_' + setup.now }
-    link_ref01_data_up0 [link_ref01_markdef_up0.name] = link_ref01_markdef_up0.value
+    ;(link_ref01_data_up0 as any)[link_ref01_markdef_up0.name] = link_ref01_markdef_up0.value
 
     const link_ref01_resdata_up0 = await link_ref01_ent.update(link_ref01_data_up0)
     assert(link_ref01_resdata_up0.id === link_ref01_data_up0.id)
 
-    assert(link_ref01_resdata_up0[link_ref01_markdef_up0.name] === link_ref01_markdef_up0.value)
+    assert((link_ref01_resdata_up0 as any)[link_ref01_markdef_up0.name] === link_ref01_markdef_up0.value)
 
 
     // LOAD

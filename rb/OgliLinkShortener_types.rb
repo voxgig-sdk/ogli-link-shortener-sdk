@@ -62,7 +62,7 @@ LinkLoadMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Link#list (any subset of Link fields).
+# Request payload for Link#list.
 #
 # @!attribute [rw] click_count
 #   @return [Integer, nil]
@@ -107,7 +107,7 @@ LinkListMatch = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Link#create (any subset of Link fields).
+# Request payload for Link#create.
 #
 # @!attribute [rw] click_count
 #   @return [Integer, nil]

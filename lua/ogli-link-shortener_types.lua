@@ -22,8 +22,28 @@
 ---@field id string
 
 ---@class LinkListMatch
+---@field click_count? number
+---@field created_at? string
+---@field description? string
+---@field id? string
+---@field image? string
+---@field short_url? string
+---@field slug? string
+---@field title? string
+---@field updated_at? string
+---@field url? string
 
 ---@class LinkCreateData
+---@field click_count? number
+---@field created_at? string
+---@field description? string
+---@field id? string
+---@field image? string
+---@field short_url? string
+---@field slug? string
+---@field title? string
+---@field updated_at? string
+---@field url? string
 
 ---@class LinkUpdateData
 ---@field id string

@@ -4,6 +4,11 @@
 
 The TypeScript SDK for the OgliLinkShortener API — a type-safe, entity-oriented client with full async/await support.
 
+The API is exposed as capitalised, semantic **Entities** — e.g.
+`client.Link()` — each with a small set of operations (`list`, `load`, `create`, `update`, `remove`)
+instead of raw URL paths and query parameters. This keeps the surface
+predictable and low-friction for both humans and AI agents.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -60,19 +65,48 @@ try {
 ```ts
 // Create — returns the created Link
 const created = await client.Link().create({
-  name: 'Example',
+  click_count: 1,
+  created_at: 'example_created_at',
 })
 
 // Update — the id comes straight off the returned entity
 const updated = await client.Link().update({
-  id: created.id,
-  name: 'Example-Renamed',
+  id: created.id!,
 })
 
 // Remove
 await client.Link().remove({
-  id: created.id,
+  id: created.id!,
 })
+```
+
+
+## Error handling
+
+Entity operations reject on failure, so wrap them in `try` / `catch`:
+
+```ts
+try {
+  const links = await client.Link().list()
+  console.log(links)
+} catch (err) {
+  console.error('list failed:', err)
+}
+```
+
+The low-level `direct()` method does **not** throw — it returns the
+value or an `Error`, so check the result before using it:
+
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example_id' },
+})
+
+if (result instanceof Error) {
+  throw result
+}
 ```
 
 
@@ -120,7 +154,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = OgliLinkShortenerSDK.test()
 
-const link = await client.Link().load({ id: 'test01' })
+const link = await client.Link().list()
 // link is a bare entity populated with mock response data
 console.log(link)
 ```
@@ -139,12 +173,12 @@ Entity instances remember their last match and data:
 ```ts
 const entity = client.Link()
 
-// First call sets internal match
-await entity.load({ id: 'example' })
+// First call runs the operation and stores its result
+await entity.list()
 
-// Subsequent calls reuse the stored match
+// Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id) // 'example'
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -242,8 +276,8 @@ All entities share the same interface.
 | `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
 | `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
 | `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
-| `data` | `data(data?): any` | Get or set entity data. |
-| `match` | `match(match?): any` | Get or set entity match criteria. |
+| `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
+| `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): OgliLinkShortenerSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
@@ -350,16 +384,16 @@ Create an instance: `const link = client.Link()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | ``$INTEGER`` |  |
-| `created_at` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$STRING`` |  |
-| `short_url` | ``$STRING`` |  |
-| `slug` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `click_count` | `number` |  |
+| `created_at` | `string` |  |
+| `description` | `string` |  |
+| `id` | `string` |  |
+| `image` | `string` |  |
+| `short_url` | `string` |  |
+| `slug` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -395,13 +429,13 @@ Create an instance: `const link_stat = client.LinkStat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | ``$ARRAY`` |  |
-| `clicks_by_date` | ``$ARRAY`` |  |
-| `clicks_by_device` | ``$ARRAY`` |  |
-| `clicks_by_referrer` | ``$ARRAY`` |  |
-| `link_id` | ``$STRING`` |  |
-| `total_click` | ``$INTEGER`` |  |
-| `unique_click` | ``$INTEGER`` |  |
+| `clicks_by_country` | `any[]` |  |
+| `clicks_by_date` | `any[]` |  |
+| `clicks_by_device` | `any[]` |  |
+| `clicks_by_referrer` | `any[]` |  |
+| `link_id` | `string` |  |
+| `total_click` | `number` |  |
+| `unique_click` | `number` |  |
 
 #### Example: List
 
@@ -410,12 +444,16 @@ const link_stats = await client.LinkStat().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -432,11 +470,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller.
-
-An unexpected exception triggers the `PreUnexpected` hook before
-propagating.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -472,16 +508,16 @@ import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener'
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
 const link = client.Link()
-await link.load({ id: "example_id" })
+await link.list()
 
-// link.data() now returns the loaded link data
-// link.match() returns { id: "example_id" }
+// link.data() now returns the link data from the last `list`
+// link.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

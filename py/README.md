@@ -4,6 +4,11 @@
 
 The Python SDK for the OgliLinkShortener API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Link()` — each
+carrying a small, uniform set of operations (`list`, `load`, `create`, `update`, `remove`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -41,7 +46,7 @@ error — iterate it directly.
 
 ```python
 try:
-    links = client.Link().list({})
+    links = client.Link().list()
     for link in links:
         print(link)
 except Exception as err:
@@ -64,13 +69,41 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Link().create({"name": "Example"})
+created = client.Link().create({"click_count": 1, "created_at": "example"})
 
 # Update — the created record's id is a plain dict key
-client.Link().update({"id": created["id"], "name": "Example-Renamed"})
+client.Link().update({"id": created["id"]})
 
 # Remove
 client.Link().remove({"id": created["id"]})
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    links = client.Link().list()
+    print(links)
+except Exception as err:
+    print(f"list failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -91,7 +124,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -117,7 +153,7 @@ Create a mock client for unit testing — no server required:
 client = OgliLinkShortenerSDK.test()
 
 # Entity ops return the bare record and raise on error.
-link = client.Link().load({"id": "test01"})
+link = client.Link().list()
 # link contains the mock response record
 ```
 
@@ -286,7 +322,7 @@ Create an instance: `link = client.Link()`
 | Method | Description |
 | --- | --- |
 | `create(data)` | Create a new entity with the given data. |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 | `load(match)` | Load a single entity by match criteria. |
 | `remove(match)` | Remove the matching entity. |
 | `update(data)` | Update an existing entity. |
@@ -295,16 +331,16 @@ Create an instance: `link = client.Link()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | ``$INTEGER`` |  |
-| `created_at` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$STRING`` |  |
-| `short_url` | ``$STRING`` |  |
-| `slug` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `click_count` | `int` |  |
+| `created_at` | `str` |  |
+| `description` | `str` |  |
+| `id` | `str` |  |
+| `image` | `str` |  |
+| `short_url` | `str` |  |
+| `slug` | `str` |  |
+| `title` | `str` |  |
+| `updated_at` | `str` |  |
+| `url` | `str` |  |
 
 #### Example: Load
 
@@ -315,7 +351,7 @@ link = client.Link().load({"id": "link_id"})
 #### Example: List
 
 ```python
-links = client.Link().list({})
+links = client.Link().list()
 ```
 
 #### Example: Create
@@ -334,33 +370,37 @@ Create an instance: `link_stat = client.LinkStat()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | ``$ARRAY`` |  |
-| `clicks_by_date` | ``$ARRAY`` |  |
-| `clicks_by_device` | ``$ARRAY`` |  |
-| `clicks_by_referrer` | ``$ARRAY`` |  |
-| `link_id` | ``$STRING`` |  |
-| `total_click` | ``$INTEGER`` |  |
-| `unique_click` | ``$INTEGER`` |  |
+| `clicks_by_country` | `list` |  |
+| `clicks_by_date` | `list` |  |
+| `clicks_by_device` | `list` |  |
+| `clicks_by_referrer` | `list` |  |
+| `link_id` | `str` |  |
+| `total_click` | `int` |  |
+| `unique_click` | `int` |  |
 
 #### Example: List
 
 ```python
-link_stats = client.LinkStat().list({})
+link_stats = client.LinkStat().list()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -377,8 +417,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -421,14 +462,14 @@ Import entity or utility modules directly only when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
 link = client.Link()
-link.load({"id": "example_id"})
+link.list()
 
-# link.data_get() now returns the loaded link data
+# link.data_get() now returns the link data from the last list
 # link.match_get() returns the last match criteria
 ```
 

@@ -221,13 +221,13 @@ class OgliLinkShortenerSDK:
 
 
     def Link(self, data=None) -> "LinkEntity":
-        """Entity factory: client.Link().list({}) / client.Link().load({"id": ...})."""
+        """Entity factory: client.Link().list() / client.Link().load({"id": ...})."""
         from entity.link_entity import LinkEntity
         return LinkEntity(self, data)
 
 
     def LinkStat(self, data=None) -> "LinkStatEntity":
-        """Entity factory: client.LinkStat().list({}) / client.LinkStat().load({"id": ...})."""
+        """Entity factory: client.LinkStat().list() / client.LinkStat().load({"id": ...})."""
         from entity.link_stat_entity import LinkStatEntity
         return LinkStatEntity(self, data)
 

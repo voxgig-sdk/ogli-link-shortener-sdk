@@ -4,6 +4,8 @@
 
 The PHP SDK for the OgliLinkShortener API — an entity-oriented client using PHP conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Link()` — with named operations (`list`/`load`/`create`/`update`/`remove`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -38,7 +40,7 @@ try {
     // list() returns an array of Link records — iterate directly.
     $links = $client->Link()->list();
     foreach ($links as $item) {
-        echo $item["id"] . " " . $item["name"] . "\n";
+        echo $item["id"] . " " . $item["click_count"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -61,13 +63,44 @@ try {
 
 ```php
 // create() returns the bare created Link record.
-$created = $client->Link()->create(["name" => "Example"]);
+$created = $client->Link()->create(["click_count" => 1, "created_at" => "example"]);
 
 // Update — index the bare record directly ($created["id"]).
-$client->Link()->update(["id" => $created["id"], "name" => "Example-Renamed"]);
+$client->Link()->update(["id" => $created["id"]]);
 
 // Remove
 $client->Link()->remove(["id" => $created["id"]]);
+```
+
+
+## Error handling
+
+Entity operations throw a `\Throwable` on failure, so wrap them in
+`try` / `catch`:
+
+```php
+try {
+    $links = $client->Link()->list();
+} catch (\Throwable $err) {
+    echo "Error: " . $err->getMessage();
+}
+```
+
+`direct()` does **not** throw — it returns the result array. Branch on
+`ok`; on failure `status` holds the HTTP status (for error responses) and
+`err` holds a transport error, so read both defensively:
+
+```php
+$result = $client->direct([
+    "path" => "/api/resource/{id}",
+    "method" => "GET",
+    "params" => ["id" => "example_id"],
+]);
+
+if (! $result["ok"]) {
+    $err = $result["err"] ?? null;
+    echo "request failed: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
+}
 ```
 
 
@@ -90,7 +123,10 @@ if ($result["ok"]) {
     echo $result["status"];  // 200
     print_r($result["data"]);  // response body
 } else {
-    echo "Error: " . $result["err"]->getMessage();
+    // On an HTTP error status there is no err (only a transport failure sets
+    // it), so fall back to the status code.
+    $err = $result["err"] ?? null;
+    echo "Error: " . ($err ? $err->getMessage() : "HTTP " . $result["status"]);
 }
 ```
 
@@ -119,8 +155,8 @@ $client = OgliLinkShortenerSDK::test([
     "entity" => ["link" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// load() returns the bare mock record (throws on error).
-$link = $client->Link()->load(["id" => "test01"]);
+// Entity ops return the bare mock record (throws on error).
+$link = $client->Link()->list();
 print_r($link);
 ```
 
@@ -212,7 +248,7 @@ All entities share the same interface.
 | Method | Signature | Description |
 | --- | --- | --- |
 | `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `($reqmatch, $ctrl): array` | List entities matching the criteria. |
+| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
 | `create` | `($reqdata, $ctrl): array` | Create a new entity. |
 | `update` | `($reqdata, $ctrl): array` | Update an existing entity. |
 | `remove` | `($reqmatch, $ctrl): array` | Remove an entity. |
@@ -301,16 +337,16 @@ Create an instance: `$link = $client->Link();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | ``$INTEGER`` |  |
-| `created_at` | ``$STRING`` |  |
-| `description` | ``$STRING`` |  |
-| `id` | ``$STRING`` |  |
-| `image` | ``$STRING`` |  |
-| `short_url` | ``$STRING`` |  |
-| `slug` | ``$STRING`` |  |
-| `title` | ``$STRING`` |  |
-| `updated_at` | ``$STRING`` |  |
-| `url` | ``$STRING`` |  |
+| `click_count` | `int` |  |
+| `created_at` | `string` |  |
+| `description` | `string` |  |
+| `id` | `string` |  |
+| `image` | `string` |  |
+| `short_url` | `string` |  |
+| `slug` | `string` |  |
+| `title` | `string` |  |
+| `updated_at` | `string` |  |
+| `url` | `string` |  |
 
 #### Example: Load
 
@@ -348,13 +384,13 @@ Create an instance: `$link_stat = $client->LinkStat();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | ``$ARRAY`` |  |
-| `clicks_by_date` | ``$ARRAY`` |  |
-| `clicks_by_device` | ``$ARRAY`` |  |
-| `clicks_by_referrer` | ``$ARRAY`` |  |
-| `link_id` | ``$STRING`` |  |
-| `total_click` | ``$INTEGER`` |  |
-| `unique_click` | ``$INTEGER`` |  |
+| `clicks_by_country` | `array` |  |
+| `clicks_by_date` | `array` |  |
+| `clicks_by_device` | `array` |  |
+| `clicks_by_referrer` | `array` |  |
+| `link_id` | `string` |  |
+| `total_click` | `int` |  |
+| `unique_click` | `int` |  |
 
 #### Example: List
 
@@ -364,12 +400,16 @@ $link_stats = $client->LinkStat()->list();
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -386,8 +426,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return array.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -431,15 +472,15 @@ when needed.
 
 ### Entity state
 
-Entity instances are stateful. After a successful `load`, the entity
+Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
 $link = $client->Link();
-$link->load(["id" => "example_id"]);
+$link->list();
 
-// $link->dataGet() now returns the loaded link data
-// $link->matchGet() returns the last match criteria
+// $link->data_get() now returns the link data from the last list
+// $link->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

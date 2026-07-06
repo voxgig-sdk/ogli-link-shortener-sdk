@@ -68,8 +68,13 @@ class LinkEntity:
         return vs.clone(self._match)
 
     
-    def load(self, reqmatch: LinkLoadMatch, ctrl=None) -> Link:
+    def load(self, reqmatch=None, ctrl=None) -> Link:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key loads with no
+        # match. Treat None as an empty match so client.Link().load()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "load",
             "ctrl": ctrl,
@@ -90,8 +95,12 @@ class LinkEntity:
 
 
     
-    def list(self, reqmatch: LinkListMatch, ctrl=None) -> list[Link]:
+    def list(self, reqmatch=None, ctrl=None) -> list[Link]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Link().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,
@@ -152,8 +161,13 @@ class LinkEntity:
 
 
     
-    def remove(self, reqmatch: LinkRemoveMatch, ctrl=None) -> Link:
+    def remove(self, reqmatch=None, ctrl=None) -> Link:
         utility = self._utility
+        # reqmatch is optional: an entity with no id-like key removes with no
+        # match. Treat None as an empty match so client.Link().remove()
+        # works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "remove",
             "ctrl": ctrl,

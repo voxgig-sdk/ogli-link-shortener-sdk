@@ -27,8 +27,7 @@ type LinkLoadMatch struct {
 	Id string `json:"id"`
 }
 
-// LinkListMatch mirrors the link fields as an all-optional match
-// filter (Go analog of Partial<Link>).
+// LinkListMatch is the typed request payload for Link.ListTyped.
 type LinkListMatch struct {
 	ClickCount *int `json:"click_count,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`
@@ -42,8 +41,7 @@ type LinkListMatch struct {
 	Url *string `json:"url,omitempty"`
 }
 
-// LinkCreateData mirrors the link fields as an all-optional match
-// filter (Go analog of Partial<Link>).
+// LinkCreateData is the typed request payload for Link.CreateTyped.
 type LinkCreateData struct {
 	ClickCount *int `json:"click_count,omitempty"`
 	CreatedAt *string `json:"created_at,omitempty"`

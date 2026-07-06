@@ -8,7 +8,7 @@ Complete API reference for the OgliLinkShortener Python SDK.
 ### Constructor
 
 ```python
-from ogli-link-shortener_sdk import OgliLinkShortenerSDK
+from oglilinkshortener_sdk import OgliLinkShortenerSDK
 
 client = OgliLinkShortenerSDK(options)
 ```
@@ -92,16 +92,16 @@ link = client.Link()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | ``$INTEGER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `click_count` | `int` | No |  |
+| `created_at` | `str` | No |  |
+| `description` | `str` | No |  |
+| `id` | `str` | No |  |
+| `image` | `str` | No |  |
+| `short_url` | `str` | No |  |
+| `slug` | `str` | No |  |
+| `title` | `str` | No |  |
+| `updated_at` | `str` | No |  |
+| `url` | `str` | No |  |
 
 ### Field Usage by Operation
 
@@ -129,12 +129,12 @@ result = client.Link().create({
 })
 ```
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Link().list({})
+results = client.Link().list()
 for link in results:
     print(link)
 ```
@@ -205,22 +205,22 @@ link_stat = client.LinkStat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | ``$ARRAY`` | No |  |
-| `clicks_by_date` | ``$ARRAY`` | No |  |
-| `clicks_by_device` | ``$ARRAY`` | No |  |
-| `clicks_by_referrer` | ``$ARRAY`` | No |  |
-| `link_id` | ``$STRING`` | No |  |
-| `total_click` | ``$INTEGER`` | No |  |
-| `unique_click` | ``$INTEGER`` | No |  |
+| `clicks_by_country` | `list` | No |  |
+| `clicks_by_date` | `list` | No |  |
+| `clicks_by_device` | `list` | No |  |
+| `clicks_by_referrer` | `list` | No |  |
+| `link_id` | `str` | No |  |
+| `total_click` | `int` | No |  |
+| `unique_click` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.LinkStat().list({})
+results = client.LinkStat().list()
 for link_stat in results:
     print(link_stat)
 ```

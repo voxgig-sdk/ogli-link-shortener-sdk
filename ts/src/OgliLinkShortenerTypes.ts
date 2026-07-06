@@ -22,9 +22,31 @@ export interface LinkLoadMatch {
   id: string
 }
 
-export type LinkListMatch = Partial<Link>
+export interface LinkListMatch {
+  click_count?: number
+  created_at?: string
+  description?: string
+  id?: string
+  image?: string
+  short_url?: string
+  slug?: string
+  title?: string
+  updated_at?: string
+  url?: string
+}
 
-export type LinkCreateData = Partial<Link>
+export interface LinkCreateData {
+  click_count?: number
+  created_at?: string
+  description?: string
+  id?: string
+  image?: string
+  short_url?: string
+  slug?: string
+  title?: string
+  updated_at?: string
+  url?: string
+}
 
 export interface LinkUpdateData {
   id: string

@@ -19,6 +19,7 @@ go build -o ogli-link-shortener-cli ./...
 ./ogli-link-shortener-cli list link
 ./ogli-link-shortener-cli load 1 link
 ./ogli-link-shortener-cli load '{id:1}' link
+./ogli-link-shortener-cli update '{id:1}' link
 
 # REPL
 ./ogli-link-shortener-cli

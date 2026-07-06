@@ -8,7 +8,7 @@ Complete API reference for the OgliLinkShortener PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/ogli-link-shortener_sdk.php';
+require_once __DIR__ . '/oglilinkshortener_sdk.php';
 
 $client = new OgliLinkShortenerSDK($options);
 ```
@@ -50,11 +50,11 @@ Create a new `LinkEntity` instance. Pass `null` for no initial data.
 
 Create a new `LinkStatEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): OgliLinkShortenerUtility`
 
 Return a copy of the SDK utility object.
 
@@ -97,16 +97,16 @@ $link = $client->Link();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | ``$INTEGER`` | No |  |
-| `created_at` | ``$STRING`` | No |  |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `image` | ``$STRING`` | No |  |
-| `short_url` | ``$STRING`` | No |  |
-| `slug` | ``$STRING`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `updated_at` | ``$STRING`` | No |  |
-| `url` | ``$STRING`` | No |  |
+| `click_count` | `int` | No |  |
+| `created_at` | `string` | No |  |
+| `description` | `string` | No |  |
+| `id` | `string` | No |  |
+| `image` | `string` | No |  |
+| `short_url` | `string` | No |  |
+| `slug` | `string` | No |  |
+| `title` | `string` | No |  |
+| `updated_at` | `string` | No |  |
+| `url` | `string` | No |  |
 
 ### Field Usage by Operation
 
@@ -134,12 +134,12 @@ $result = $client->Link()->create([
 ]);
 ```
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Link()->list([]);
+$results = $client->Link()->list();
 ```
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
@@ -171,19 +171,19 @@ $result = $client->Link()->update([
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -192,7 +192,7 @@ Set the entity match criteria.
 Create a new `LinkEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -209,39 +209,39 @@ $link_stat = $client->LinkStat();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | ``$ARRAY`` | No |  |
-| `clicks_by_date` | ``$ARRAY`` | No |  |
-| `clicks_by_device` | ``$ARRAY`` | No |  |
-| `clicks_by_referrer` | ``$ARRAY`` | No |  |
-| `link_id` | ``$STRING`` | No |  |
-| `total_click` | ``$INTEGER`` | No |  |
-| `unique_click` | ``$INTEGER`` | No |  |
+| `clicks_by_country` | `array` | No |  |
+| `clicks_by_date` | `array` | No |  |
+| `clicks_by_device` | `array` | No |  |
+| `clicks_by_referrer` | `array` | No |  |
+| `link_id` | `string` | No |  |
+| `total_click` | `int` | No |  |
+| `unique_click` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->LinkStat()->list([]);
+$results = $client->LinkStat()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -250,7 +250,7 @@ Set the entity match criteria.
 Create a new `LinkStatEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
