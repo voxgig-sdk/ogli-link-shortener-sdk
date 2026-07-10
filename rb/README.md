@@ -62,7 +62,7 @@ end
 
 ```ruby
 # create returns the bare created Link record.
-created = client.Link.create({ "click_count" => 1, "created_at" => "example" })
+created = client.Link.create({ "click_count" => 1, "created_at" => "example_created_at" })
 
 # Update — index the bare record directly (created["id"]).
 client.Link.update({ "id" => created["id"] })

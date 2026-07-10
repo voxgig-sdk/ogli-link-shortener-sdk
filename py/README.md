@@ -69,7 +69,7 @@ except Exception as err:
 
 ```python
 # Create — returns the bare created record (a dict)
-created = client.Link().create({"click_count": 1, "created_at": "example"})
+created = client.Link().create({"click_count": 1, "created_at": "example_created_at"})
 
 # Update — the created record's id is a plain dict key
 client.Link().update({"id": created["id"]})

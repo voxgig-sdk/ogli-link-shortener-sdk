@@ -96,6 +96,7 @@ same parameters as `Direct()`.
 
 ```go
 link := client.Link(nil)
+fmt.Println(link.GetName()) // "link"
 ```
 
 ### Fields
@@ -130,21 +131,16 @@ link := client.Link(nil)
 
 ### Operations
 
-#### `Create(reqdata, ctrl map[string]any) (any, error)`
-
-Create a new entity with the given data.
-
-```go
-result, err := client.Link(nil).Create(map[string]any{
-}, nil)
-```
-
 #### `List(reqmatch, ctrl map[string]any) (any, error)`
 
 List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Link(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 #### `Load(reqmatch, ctrl map[string]any) (any, error)`
@@ -153,14 +149,23 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Link(nil).Load(map[string]any{"id": "link_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
-#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+#### `Create(reqdata, ctrl map[string]any) (any, error)`
 
-Remove the entity matching the given criteria.
+Create a new entity with the given data.
 
 ```go
-result, err := client.Link(nil).Remove(map[string]any{"id": "link_id"}, nil)
+result, err := client.Link(nil).Create(map[string]any{
+}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 #### `Update(reqdata, ctrl map[string]any) (any, error)`
@@ -172,6 +177,22 @@ result, err := client.Link(nil).Update(map[string]any{
     "id": "link_id",
     // Fields to update
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
+```
+
+#### `Remove(reqmatch, ctrl map[string]any) (any, error)`
+
+Remove the entity matching the given criteria.
+
+```go
+result, err := client.Link(nil).Remove(map[string]any{"id": "link_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -201,7 +222,8 @@ Return the entity name.
 ## LinkStatEntity
 
 ```go
-link_stat := client.LinkStat(nil)
+linkStat := client.LinkStat(nil)
+fmt.Println(linkStat.GetName()) // "link_stat"
 ```
 
 ### Fields
@@ -224,6 +246,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.LinkStat(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods

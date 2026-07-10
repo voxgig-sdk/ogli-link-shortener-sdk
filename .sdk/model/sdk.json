@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -654,14 +651,24 @@
           "url": "https://app.ogli.sh"
         },
         "description": "The Ogli API allows users to create and manage short links with customizable Open Graph meta tags for optimal social media previews. It provides endpoints for creating, retrieving, updating, and deleting links, as well as accessing link statistics for performance tracking.",
+        "meta_source": "https://www.freepublicapis.com",
+        "security": {
+          "in": "header",
+          "name": "Authorization",
+          "prefix": "Bearer",
+          "scheme": "bearerAuth",
+          "type": "http"
+        },
         "servers": [
           {
             "description": "Production server",
             "url": "https://app.ogli.sh/api"
           }
         ],
+        "summary": "The Ogli API allows users to create and manage short links with customizable Open Graph meta tags for optimal social media previews.",
         "title": "Ogli Link Shortener",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://app.ogli.sh"
       },
       "option": {},
       "target": {
@@ -714,6 +721,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -764,6 +774,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },

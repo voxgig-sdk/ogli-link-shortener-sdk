@@ -63,28 +63,28 @@ func main() {
     }
 
     // Load a single link — the value is the loaded record.
-    link, err := client.Link(nil).Load(map[string]any{"id": "example"}, nil)
+    link, err := client.Link(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(link)
 
     // Create a link.
-    created, err := client.Link(nil).Create(map[string]any{"click_count": 1, "created_at": "example"}, nil)
+    created, err := client.Link(nil).Create(map[string]any{"click_count": 1, "created_at": "example_created_at"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 
     // Update a link.
-    updated, err := client.Link(nil).Update(map[string]any{"id": "example"}, nil)
+    updated, err := client.Link(nil).Update(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(updated)
 
     // Remove a link.
-    removed, err := client.Link(nil).Remove(map[string]any{"id": "example"}, nil)
+    removed, err := client.Link(nil).Remove(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
@@ -343,11 +343,11 @@ Create an instance: `link := client.Link(nil)`
 
 | Method | Description |
 | --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `List(match, ctrl)` | List entities matching the criteria. |
 | `Load(match, ctrl)` | Load a single entity by match criteria. |
-| `Remove(match, ctrl)` | Remove the matching entity. |
+| `Create(data, ctrl)` | Create a new entity with the given data. |
 | `Update(data, ctrl)` | Update an existing entity. |
+| `Remove(match, ctrl)` | Remove the matching entity. |
 
 #### Fields
 
@@ -389,12 +389,16 @@ fmt.Println(links) // the array of records
 ```go
 result, err := client.Link(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 
 ### LinkStat
 
-Create an instance: `link_stat := client.LinkStat(nil)`
+Create an instance: `linkStat := client.LinkStat(nil)`
 
 #### Operations
 
@@ -417,11 +421,11 @@ Create an instance: `link_stat := client.LinkStat(nil)`
 #### Example: List
 
 ```go
-link_stats, err := client.LinkStat(nil).List(nil, nil)
+linkStats, err := client.LinkStat(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(link_stats) // the array of records
+fmt.Println(linkStats) // the array of records
 ```
 
 

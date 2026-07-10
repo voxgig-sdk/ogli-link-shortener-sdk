@@ -61,7 +61,7 @@ print(link)
 
 ```lua
 -- Create
-local created, err = client:Link():create({ click_count = 1, created_at = "example" })
+local created, err = client:Link():create({ click_count = 1, created_at = "example_created_at" })
 if err then error(err) end
 
 -- Update
