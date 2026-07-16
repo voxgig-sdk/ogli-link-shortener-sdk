@@ -37,7 +37,20 @@ func main() {
 	addr := flag.String("addr", ":8080", "listen address for http transport")
 	flag.Parse()
 
-	client := sdk.NewOgliLinkShortenerSDK(nil)
+	// Configure from the environment: OGLI_LINK_SHORTENER_APIKEY carries the API key and
+	// OGLI_LINK_SHORTENER_BASE optionally overrides the API base URL (e.g. production).
+	// Both injectable by a secrets vault. Unset -> nil config defaults.
+	var opts map[string]any
+	if apikey := os.Getenv("OGLI_LINK_SHORTENER_APIKEY"); apikey != "" {
+		opts = map[string]any{"apikey": apikey}
+	}
+	if base := os.Getenv("OGLI_LINK_SHORTENER_BASE"); base != "" {
+		if opts == nil {
+			opts = map[string]any{}
+		}
+		opts["base"] = base
+	}
+	client := sdk.NewOgliLinkShortenerSDK(opts)
 	server := mcp.NewServer(
 		&mcp.Implementation{
 			Name:    "ogli-link-shortener",
