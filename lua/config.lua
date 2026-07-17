@@ -1,4 +1,4 @@
--- ProjectName SDK configuration
+-- OgliLinkShortener SDK configuration
 
 local function make_config()
   return {
