@@ -12,23 +12,26 @@ at `../go`.
 # 1. Build a native binary (-> dist/<os>-<arch>/ogli-link-shortener-cli)
 make build
 
-# 2. Provide credentials once, via the environment
+# 2. See usage (words, entities, env vars)
+./ogli-link-shortener-cli --help
+
+# 3. Provide credentials once, via the environment
 export OGLI_LINK_SHORTENER_APIKEY=sk_live_xxx
 
-# 3. Each command line is ONE AQL expression, run against the API:
+# 4. Each command line is ONE AQL expression, run against the API:
 ./ogli-link-shortener-cli list link
 ./ogli-link-shortener-cli load 1 link            # {id:1} shorthand
 ./ogli-link-shortener-cli load '{id:1}' link       # explicit match map
 ./ogli-link-shortener-cli update '{name:"x"}' link
 ./ogli-link-shortener-cli list link_stat
 
-# 4. Override the API base URL for a single call
+# 5. Override the API base URL for a single call
 OGLI_LINK_SHORTENER_BASE=https://api.example.com ./ogli-link-shortener-cli list link
 
-# 5. No arguments -> interactive REPL
+# 6. No arguments -> interactive REPL
 ./ogli-link-shortener-cli
 ogli-link-shortener> list link
-ogli-link-shortener> :quit
+ogli-link-shortener> /quit
 ```
 
 > The rest of this guide follows the [Diátaxis](https://diataxis.fr) framework:
@@ -57,7 +60,7 @@ ogli-link-shortener> :quit
    ```
 
 4. **Go interactive.** Run the binary with no arguments to open the REPL, then
-   type `:help` for the word and entity lists and `:quit` to leave.
+   type `/help` for the word and entity lists and `/quit` to leave.
 
 That is the whole loop: *build → set key → evaluate AQL expressions*.
 
@@ -111,8 +114,8 @@ evaluated as its own AQL expression:
 ```text
 $ ./ogli-link-shortener-cli
 ogli-link-shortener> list link
-ogli-link-shortener> :help
-ogli-link-shortener> :quit
+ogli-link-shortener> /help
+ogli-link-shortener> /quit
 ```
 
 ### Cross-compile release binaries
@@ -124,7 +127,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 
 ### Discover the available entities
 
-`:help` in the REPL prints the full entity list, or see [Entities](#entities)
+`/help` in the REPL prints the full entity list, or see [Entities](#entities)
 below — this SDK exposes 2 entities.
 
 ## Reference
@@ -152,10 +155,16 @@ The CLI registers these AQL words, each bound to the SDK:
 
 Unset variables fall back to the SDK's built-in defaults.
 
+### CLI flags
+
+- `--help` / `-h` — print usage (words, entities, env vars) and exit.
+
 ### REPL commands
 
-- `:quit` / `:q` / `:exit` — exit the REPL
-- `:help` / `:h` / `:?`     — show the word list, entity list and meta commands
+Meta-commands use the `/` prefix (everything else on a line is evaluated as AQL):
+
+- `/quit` / `/q` / `/exit` — exit the REPL
+- `/help` / `/h` / `/?`     — show the word list, entity list and meta commands
 
 ### Exit codes
 
