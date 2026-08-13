@@ -35,8 +35,8 @@ end
 
 
 function runner.env_override(m)
-  local live = runner.getenv("OGLILINKSHORTENER_TEST_LIVE")
-  local override = runner.getenv("OGLILINKSHORTENER_TEST_OVERRIDE")
+  local live = runner.getenv("OGLI_LINK_SHORTENER_TEST_LIVE")
+  local override = runner.getenv("OGLI_LINK_SHORTENER_TEST_OVERRIDE")
 
   if live == "TRUE" or override == "TRUE" then
     for key, _ in pairs(m) do
@@ -56,9 +56,9 @@ function runner.env_override(m)
     end
   end
 
-  local explain = runner.getenv("OGLILINKSHORTENER_TEST_EXPLAIN")
+  local explain = runner.getenv("OGLI_LINK_SHORTENER_TEST_EXPLAIN")
   if explain ~= nil and explain ~= "" then
-    m["OGLILINKSHORTENER_TEST_EXPLAIN"] = explain
+    m["OGLI_LINK_SHORTENER_TEST_EXPLAIN"] = explain
   end
 
   return m

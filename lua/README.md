@@ -45,7 +45,7 @@ local links, err = client:Link():list()
 if err then error(err) end
 
 for _, item in ipairs(links) do
-  print(item["id"], item["created_at"])
+  print(item["id"], item["createdAt"])
 end
 ```
 
@@ -61,14 +61,14 @@ print(link)
 
 ```lua
 -- Create
-local created, err = client:Link():create({ click_count = 1, created_at = "example_created_at" })
+local created, err = client:Link():create({ clickCount = 1, createdAt = "example_createdAt" })
 if err then error(err) end
 
 -- Update
-client:Link():update({ id = created["id"] })
+client:Link():update({ id = created:data_get()["id"], clickCount = 1, createdAt = "example_createdAt" })
 
 -- Remove
-client:Link():remove({ id = created["id"] })
+client:Link():remove({ id = created:data_get()["id"] })
 ```
 
 
@@ -263,15 +263,15 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `click_count` |  |
-| `created_at` |  |
+| `clickCount` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
 | `image` |  |
-| `short_url` |  |
+| `shortUrl` |  |
 | `slug` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 | `url` |  |
 
 Operations: Create, List, Load, Remove, Update.
@@ -282,13 +282,13 @@ API path: `/links`
 
 | Field | Description |
 | --- | --- |
-| `clicks_by_country` |  |
-| `clicks_by_date` |  |
-| `clicks_by_device` |  |
-| `clicks_by_referrer` |  |
-| `link_id` |  |
-| `total_click` |  |
-| `unique_click` |  |
+| `clicksByCountry` |  |
+| `clicksByDate` |  |
+| `clicksByDevice` |  |
+| `clicksByReferrer` |  |
+| `linkId` |  |
+| `totalClicks` |  |
+| `uniqueClicks` |  |
 
 Operations: List.
 
@@ -317,15 +317,15 @@ Create an instance: `local link = client:Link(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | `number` |  |
-| `created_at` | `string` |  |
+| `clickCount` | `number` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
 | `image` | `string` |  |
-| `short_url` | `string` |  |
+| `shortUrl` | `string` |  |
 | `slug` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 | `url` | `string` |  |
 
 #### Example: Load
@@ -362,13 +362,13 @@ Create an instance: `local link_stat = client:LinkStat(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | `table` |  |
-| `clicks_by_date` | `table` |  |
-| `clicks_by_device` | `table` |  |
-| `clicks_by_referrer` | `table` |  |
-| `link_id` | `string` |  |
-| `total_click` | `number` |  |
-| `unique_click` | `number` |  |
+| `clicksByCountry` | `table` |  |
+| `clicksByDate` | `table` |  |
+| `clicksByDevice` | `table` |  |
+| `clicksByReferrer` | `table` |  |
+| `linkId` | `string` |  |
+| `totalClicks` | `number` |  |
+| `uniqueClicks` | `number` |  |
 
 #### Example: List
 

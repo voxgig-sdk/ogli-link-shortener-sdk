@@ -15,15 +15,15 @@ declare(strict_types=1);
 /** Link entity data model. */
 class Link
 {
-    public ?int $click_count = null;
-    public ?string $created_at = null;
+    public ?int $clickCount = null;
+    public ?string $createdAt = null;
     public ?string $description = null;
     public ?string $id = null;
     public ?string $image = null;
-    public ?string $short_url = null;
+    public ?string $shortUrl = null;
     public ?string $slug = null;
     public ?string $title = null;
-    public ?string $updated_at = null;
+    public ?string $updatedAt = null;
     public ?string $url = null;
 }
 
@@ -36,30 +36,30 @@ class LinkLoadMatch
 /** Request payload for Link#list. */
 class LinkListMatch
 {
-    public ?int $click_count = null;
-    public ?string $created_at = null;
+    public ?int $clickCount = null;
+    public ?string $createdAt = null;
     public ?string $description = null;
     public ?string $id = null;
     public ?string $image = null;
-    public ?string $short_url = null;
+    public ?string $shortUrl = null;
     public ?string $slug = null;
     public ?string $title = null;
-    public ?string $updated_at = null;
+    public ?string $updatedAt = null;
     public ?string $url = null;
 }
 
 /** Request payload for Link#create. */
 class LinkCreateData
 {
-    public ?int $click_count = null;
-    public ?string $created_at = null;
+    public ?int $clickCount = null;
+    public ?string $createdAt = null;
     public ?string $description = null;
     public ?string $id = null;
     public ?string $image = null;
-    public ?string $short_url = null;
+    public ?string $shortUrl = null;
     public ?string $slug = null;
     public ?string $title = null;
-    public ?string $updated_at = null;
+    public ?string $updatedAt = null;
     public ?string $url = null;
 }
 
@@ -67,6 +67,15 @@ class LinkCreateData
 class LinkUpdateData
 {
     public string $id;
+    public ?int $clickCount = null;
+    public ?string $createdAt = null;
+    public ?string $description = null;
+    public ?string $image = null;
+    public ?string $shortUrl = null;
+    public ?string $slug = null;
+    public ?string $title = null;
+    public ?string $updatedAt = null;
+    public ?string $url = null;
 }
 
 /** Request payload for Link#remove. */
@@ -78,13 +87,13 @@ class LinkRemoveMatch
 /** LinkStat entity data model. */
 class LinkStat
 {
-    public ?array $clicks_by_country = null;
-    public ?array $clicks_by_date = null;
-    public ?array $clicks_by_device = null;
-    public ?array $clicks_by_referrer = null;
-    public ?string $link_id = null;
-    public ?int $total_click = null;
-    public ?int $unique_click = null;
+    public ?array $clicksByCountry = null;
+    public ?array $clicksByDate = null;
+    public ?array $clicksByDevice = null;
+    public ?array $clicksByReferrer = null;
+    public ?string $linkId = null;
+    public ?int $totalClicks = null;
+    public ?int $uniqueClicks = null;
 }
 
 /** Request payload for LinkStat#list. */

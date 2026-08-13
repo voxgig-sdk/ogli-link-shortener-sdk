@@ -70,14 +70,14 @@ func main() {
     fmt.Println(link)
 
     // Create a link.
-    created, err := client.Link(nil).Create(map[string]any{"click_count": 1, "created_at": "example_created_at"}, nil)
+    created, err := client.Link(nil).Create(map[string]any{"clickCount": 1, "createdAt": "example_createdAt"}, nil)
     if err != nil {
         panic(err)
     }
     fmt.Println(created)
 
     // Update a link.
-    updated, err := client.Link(nil).Update(map[string]any{"id": "example_id"}, nil)
+    updated, err := client.Link(nil).Update(map[string]any{"id": "example_id", "clickCount": 1, "createdAt": "example_createdAt"}, nil)
     if err != nil {
         panic(err)
     }
@@ -299,15 +299,15 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"click_count"` |  |
-| `"created_at"` |  |
+| `"clickCount"` |  |
+| `"createdAt"` |  |
 | `"description"` |  |
 | `"id"` |  |
 | `"image"` |  |
-| `"short_url"` |  |
+| `"shortUrl"` |  |
 | `"slug"` |  |
 | `"title"` |  |
-| `"updated_at"` |  |
+| `"updatedAt"` |  |
 | `"url"` |  |
 
 Operations: Create, List, Load, Remove, Update.
@@ -318,13 +318,13 @@ API path: `/links`
 
 | Field | Description |
 | --- | --- |
-| `"clicks_by_country"` |  |
-| `"clicks_by_date"` |  |
-| `"clicks_by_device"` |  |
-| `"clicks_by_referrer"` |  |
-| `"link_id"` |  |
-| `"total_click"` |  |
-| `"unique_click"` |  |
+| `"clicksByCountry"` |  |
+| `"clicksByDate"` |  |
+| `"clicksByDevice"` |  |
+| `"clicksByReferrer"` |  |
+| `"linkId"` |  |
+| `"totalClicks"` |  |
+| `"uniqueClicks"` |  |
 
 Operations: List.
 
@@ -353,15 +353,15 @@ Create an instance: `link := client.Link(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | `int` |  |
-| `created_at` | `string` |  |
+| `clickCount` | `int` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
 | `image` | `string` |  |
-| `short_url` | `string` |  |
+| `shortUrl` | `string` |  |
 | `slug` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 | `url` | `string` |  |
 
 #### Example: Load
@@ -410,13 +410,13 @@ Create an instance: `linkStat := client.LinkStat(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | `[]any` |  |
-| `clicks_by_date` | `[]any` |  |
-| `clicks_by_device` | `[]any` |  |
-| `clicks_by_referrer` | `[]any` |  |
-| `link_id` | `string` |  |
-| `total_click` | `int` |  |
-| `unique_click` | `int` |  |
+| `clicksByCountry` | `[]any` |  |
+| `clicksByDate` | `[]any` |  |
+| `clicksByDevice` | `[]any` |  |
+| `clicksByReferrer` | `[]any` |  |
+| `linkId` | `string` |  |
+| `totalClicks` | `int` |  |
+| `uniqueClicks` | `int` |  |
 
 #### Example: List
 

@@ -115,16 +115,16 @@ function link_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["OGLILINKSHORTENER_TEST_LINK_ENTID"] = {},
-    ["OGLILINKSHORTENER_TEST_LIVE"] = "FALSE",
-    ["OGLILINKSHORTENER_APIKEY"] = "NONE",
+    ["OGLI_LINK_SHORTENER_TEST_LINK_ENTID"] = {},
+    ["OGLI_LINK_SHORTENER_TEST_LIVE"] = "FALSE",
+    ["OGLI_LINK_SHORTENER_APIKEY"] = "NONE",
   })
 
-  local live = env["OGLILINKSHORTENER_TEST_LIVE"] == "TRUE"
+  local live = env["OGLI_LINK_SHORTENER_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
-      apikey = env["OGLILINKSHORTENER_APIKEY"],
+      apikey = env["OGLI_LINK_SHORTENER_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

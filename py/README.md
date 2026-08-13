@@ -55,7 +55,7 @@ except Exception as err:
 
 ### 3. Load a link
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -68,14 +68,14 @@ except Exception as err:
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
-created = client.Link().create({"click_count": 1, "created_at": "example_created_at"})
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.Link().create({"clickCount": 1, "createdAt": "example_createdAt"})
 
 # Update — the created record's id is a plain dict key
-client.Link().update({"id": created["id"]})
+client.Link().update({"id": created.data_get()["id"], "clickCount": 1, "createdAt": "example_createdAt"})
 
 # Remove
-client.Link().remove({"id": created["id"]})
+client.Link().remove({"id": created.data_get()["id"]})
 ```
 
 
@@ -152,7 +152,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = OgliLinkShortenerSDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 link = client.Link().list()
 # link contains the mock response record
 ```
@@ -255,7 +256,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -277,15 +278,15 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `click_count` |  |
-| `created_at` |  |
+| `clickCount` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
 | `image` |  |
-| `short_url` |  |
+| `shortUrl` |  |
 | `slug` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 | `url` |  |
 
 Operations: Create, List, Load, Remove, Update.
@@ -296,13 +297,13 @@ API path: `/links`
 
 | Field | Description |
 | --- | --- |
-| `clicks_by_country` |  |
-| `clicks_by_date` |  |
-| `clicks_by_device` |  |
-| `clicks_by_referrer` |  |
-| `link_id` |  |
-| `total_click` |  |
-| `unique_click` |  |
+| `clicksByCountry` |  |
+| `clicksByDate` |  |
+| `clicksByDevice` |  |
+| `clicksByReferrer` |  |
+| `linkId` |  |
+| `totalClicks` |  |
+| `uniqueClicks` |  |
 
 Operations: List.
 
@@ -331,15 +332,15 @@ Create an instance: `link = client.Link()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | `int` |  |
-| `created_at` | `str` |  |
+| `clickCount` | `int` |  |
+| `createdAt` | `str` |  |
 | `description` | `str` |  |
 | `id` | `str` |  |
 | `image` | `str` |  |
-| `short_url` | `str` |  |
+| `shortUrl` | `str` |  |
 | `slug` | `str` |  |
 | `title` | `str` |  |
-| `updated_at` | `str` |  |
+| `updatedAt` | `str` |  |
 | `url` | `str` |  |
 
 #### Example: Load
@@ -376,18 +377,18 @@ Create an instance: `link_stat = client.LinkStat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | `list` |  |
-| `clicks_by_date` | `list` |  |
-| `clicks_by_device` | `list` |  |
-| `clicks_by_referrer` | `list` |  |
-| `link_id` | `str` |  |
-| `total_click` | `int` |  |
-| `unique_click` | `int` |  |
+| `clicksByCountry` | `list` |  |
+| `clicksByDate` | `list` |  |
+| `clicksByDevice` | `list` |  |
+| `clicksByReferrer` | `list` |  |
+| `linkId` | `str` |  |
+| `totalClicks` | `int` |  |
+| `uniqueClicks` | `int` |  |
 
 #### Example: List
 
 ```python
-link_stats = client.LinkStat().list()
+link_stats = client.LinkStat().list({"id": "example"})
 ```
 
 

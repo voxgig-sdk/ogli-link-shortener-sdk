@@ -7,58 +7,67 @@
 -- edit by hand.
 
 ---@class Link
----@field click_count? number
----@field created_at? string
+---@field clickCount? number
+---@field createdAt? string
 ---@field description? string
 ---@field id? string
 ---@field image? string
----@field short_url? string
+---@field shortUrl? string
 ---@field slug? string
 ---@field title? string
----@field updated_at? string
+---@field updatedAt? string
 ---@field url? string
 
 ---@class LinkLoadMatch
 ---@field id string
 
 ---@class LinkListMatch
----@field click_count? number
----@field created_at? string
+---@field clickCount? number
+---@field createdAt? string
 ---@field description? string
 ---@field id? string
 ---@field image? string
----@field short_url? string
+---@field shortUrl? string
 ---@field slug? string
 ---@field title? string
----@field updated_at? string
+---@field updatedAt? string
 ---@field url? string
 
 ---@class LinkCreateData
----@field click_count? number
----@field created_at? string
+---@field clickCount? number
+---@field createdAt? string
 ---@field description? string
 ---@field id? string
 ---@field image? string
----@field short_url? string
+---@field shortUrl? string
 ---@field slug? string
 ---@field title? string
----@field updated_at? string
+---@field updatedAt? string
 ---@field url? string
 
 ---@class LinkUpdateData
 ---@field id string
+---@field clickCount? number
+---@field createdAt? string
+---@field description? string
+---@field image? string
+---@field shortUrl? string
+---@field slug? string
+---@field title? string
+---@field updatedAt? string
+---@field url? string
 
 ---@class LinkRemoveMatch
 ---@field id string
 
 ---@class LinkStat
----@field clicks_by_country? table
----@field clicks_by_date? table
----@field clicks_by_device? table
----@field clicks_by_referrer? table
----@field link_id? string
----@field total_click? number
----@field unique_click? number
+---@field clicksByCountry? table
+---@field clicksByDate? table
+---@field clicksByDevice? table
+---@field clicksByReferrer? table
+---@field linkId? string
+---@field totalClicks? number
+---@field uniqueClicks? number
 
 ---@class LinkStatListMatch
 ---@field id string

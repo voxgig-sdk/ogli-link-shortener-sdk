@@ -10,10 +10,10 @@
 
 # Link entity data model.
 #
-# @!attribute [rw] click_count
+# @!attribute [rw] clickCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
 # @!attribute [rw] description
@@ -25,7 +25,7 @@
 # @!attribute [rw] image
 #   @return [String, nil]
 #
-# @!attribute [rw] short_url
+# @!attribute [rw] shortUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] slug
@@ -34,21 +34,21 @@
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 #
 # @!attribute [rw] url
 #   @return [String, nil]
 Link = Struct.new(
-  :click_count,
-  :created_at,
+  :clickCount,
+  :createdAt,
   :description,
   :id,
   :image,
-  :short_url,
+  :shortUrl,
   :slug,
   :title,
-  :updated_at,
+  :updatedAt,
   :url,
   keyword_init: true
 )
@@ -64,10 +64,10 @@ LinkLoadMatch = Struct.new(
 
 # Request payload for Link#list.
 #
-# @!attribute [rw] click_count
+# @!attribute [rw] clickCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
 # @!attribute [rw] description
@@ -79,7 +79,7 @@ LinkLoadMatch = Struct.new(
 # @!attribute [rw] image
 #   @return [String, nil]
 #
-# @!attribute [rw] short_url
+# @!attribute [rw] shortUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] slug
@@ -88,31 +88,31 @@ LinkLoadMatch = Struct.new(
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 #
 # @!attribute [rw] url
 #   @return [String, nil]
 LinkListMatch = Struct.new(
-  :click_count,
-  :created_at,
+  :clickCount,
+  :createdAt,
   :description,
   :id,
   :image,
-  :short_url,
+  :shortUrl,
   :slug,
   :title,
-  :updated_at,
+  :updatedAt,
   :url,
   keyword_init: true
 )
 
 # Request payload for Link#create.
 #
-# @!attribute [rw] click_count
+# @!attribute [rw] clickCount
 #   @return [Integer, nil]
 #
-# @!attribute [rw] created_at
+# @!attribute [rw] createdAt
 #   @return [String, nil]
 #
 # @!attribute [rw] description
@@ -124,7 +124,7 @@ LinkListMatch = Struct.new(
 # @!attribute [rw] image
 #   @return [String, nil]
 #
-# @!attribute [rw] short_url
+# @!attribute [rw] shortUrl
 #   @return [String, nil]
 #
 # @!attribute [rw] slug
@@ -133,21 +133,21 @@ LinkListMatch = Struct.new(
 # @!attribute [rw] title
 #   @return [String, nil]
 #
-# @!attribute [rw] updated_at
+# @!attribute [rw] updatedAt
 #   @return [String, nil]
 #
 # @!attribute [rw] url
 #   @return [String, nil]
 LinkCreateData = Struct.new(
-  :click_count,
-  :created_at,
+  :clickCount,
+  :createdAt,
   :description,
   :id,
   :image,
-  :short_url,
+  :shortUrl,
   :slug,
   :title,
-  :updated_at,
+  :updatedAt,
   :url,
   keyword_init: true
 )
@@ -156,8 +156,44 @@ LinkCreateData = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
+#
+# @!attribute [rw] clickCount
+#   @return [Integer, nil]
+#
+# @!attribute [rw] createdAt
+#   @return [String, nil]
+#
+# @!attribute [rw] description
+#   @return [String, nil]
+#
+# @!attribute [rw] image
+#   @return [String, nil]
+#
+# @!attribute [rw] shortUrl
+#   @return [String, nil]
+#
+# @!attribute [rw] slug
+#   @return [String, nil]
+#
+# @!attribute [rw] title
+#   @return [String, nil]
+#
+# @!attribute [rw] updatedAt
+#   @return [String, nil]
+#
+# @!attribute [rw] url
+#   @return [String, nil]
 LinkUpdateData = Struct.new(
   :id,
+  :clickCount,
+  :createdAt,
+  :description,
+  :image,
+  :shortUrl,
+  :slug,
+  :title,
+  :updatedAt,
+  :url,
   keyword_init: true
 )
 
@@ -172,34 +208,34 @@ LinkRemoveMatch = Struct.new(
 
 # LinkStat entity data model.
 #
-# @!attribute [rw] clicks_by_country
+# @!attribute [rw] clicksByCountry
 #   @return [Array, nil]
 #
-# @!attribute [rw] clicks_by_date
+# @!attribute [rw] clicksByDate
 #   @return [Array, nil]
 #
-# @!attribute [rw] clicks_by_device
+# @!attribute [rw] clicksByDevice
 #   @return [Array, nil]
 #
-# @!attribute [rw] clicks_by_referrer
+# @!attribute [rw] clicksByReferrer
 #   @return [Array, nil]
 #
-# @!attribute [rw] link_id
+# @!attribute [rw] linkId
 #   @return [String, nil]
 #
-# @!attribute [rw] total_click
+# @!attribute [rw] totalClicks
 #   @return [Integer, nil]
 #
-# @!attribute [rw] unique_click
+# @!attribute [rw] uniqueClicks
 #   @return [Integer, nil]
 LinkStat = Struct.new(
-  :clicks_by_country,
-  :clicks_by_date,
-  :clicks_by_device,
-  :clicks_by_referrer,
-  :link_id,
-  :total_click,
-  :unique_click,
+  :clicksByCountry,
+  :clicksByDate,
+  :clicksByDevice,
+  :clicksByReferrer,
+  :linkId,
+  :totalClicks,
+  :uniqueClicks,
   keyword_init: true
 )
 

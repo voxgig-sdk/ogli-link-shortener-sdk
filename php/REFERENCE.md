@@ -97,30 +97,30 @@ $link = $client->Link();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | `int` | No |  |
-| `created_at` | `string` | No |  |
+| `clickCount` | `int` | No |  |
+| `createdAt` | `string` | No |  |
 | `description` | `string` | No |  |
 | `id` | `string` | No |  |
 | `image` | `string` | No |  |
-| `short_url` | `string` | No |  |
+| `shortUrl` | `string` | No |  |
 | `slug` | `string` | No |  |
 | `title` | `string` | No |  |
-| `updated_at` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 | `url` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `click_count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
+| `clickCount` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `image` | - | - | - | - | - |
-| `short_url` | - | - | - | - | - |
+| `shortUrl` | - | - | - | - | - |
 | `slug` | - | - | - | - | - |
 | `title` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 | `url` | - | - | Yes | - | - |
 
 ### Operations
@@ -209,13 +209,13 @@ $link_stat = $client->LinkStat();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | `array` | No |  |
-| `clicks_by_date` | `array` | No |  |
-| `clicks_by_device` | `array` | No |  |
-| `clicks_by_referrer` | `array` | No |  |
-| `link_id` | `string` | No |  |
-| `total_click` | `int` | No |  |
-| `unique_click` | `int` | No |  |
+| `clicksByCountry` | `array` | No |  |
+| `clicksByDate` | `array` | No |  |
+| `clicksByDevice` | `array` | No |  |
+| `clicksByReferrer` | `array` | No |  |
+| `linkId` | `string` | No |  |
+| `totalClicks` | `int` | No |  |
+| `uniqueClicks` | `int` | No |  |
 
 ### Operations
 

@@ -43,8 +43,8 @@ class OgliLinkShortenerTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('OGLILINKSHORTENER_TEST_LIVE');
-        $override = self::getenv('OGLILINKSHORTENER_TEST_OVERRIDE');
+        $live = self::getenv('OGLI_LINK_SHORTENER_TEST_LIVE');
+        $override = self::getenv('OGLI_LINK_SHORTENER_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class OgliLinkShortenerTestRunner
             }
         }
 
-        $explain = self::getenv('OGLILINKSHORTENER_TEST_EXPLAIN');
+        $explain = self::getenv('OGLI_LINK_SHORTENER_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['OGLILINKSHORTENER_TEST_EXPLAIN'] = $explain;
+            $m['OGLI_LINK_SHORTENER_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

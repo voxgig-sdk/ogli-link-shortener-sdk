@@ -23,8 +23,8 @@ module OgliLinkShortenerTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("OGLILINKSHORTENER_TEST_LIVE")
-    override = getenv("OGLILINKSHORTENER_TEST_OVERRIDE")
+    live = getenv("OGLI_LINK_SHORTENER_TEST_LIVE")
+    override = getenv("OGLI_LINK_SHORTENER_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module OgliLinkShortenerTestRunner
       end
     end
 
-    explain = getenv("OGLILINKSHORTENER_TEST_EXPLAIN")
-    m["OGLILINKSHORTENER_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("OGLI_LINK_SHORTENER_TEST_EXPLAIN")
+    m["OGLI_LINK_SHORTENER_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

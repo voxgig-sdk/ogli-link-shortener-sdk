@@ -92,30 +92,30 @@ link = client.Link()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | `int` | No |  |
-| `created_at` | `str` | No |  |
+| `clickCount` | `int` | No |  |
+| `createdAt` | `str` | No |  |
 | `description` | `str` | No |  |
 | `id` | `str` | No |  |
 | `image` | `str` | No |  |
-| `short_url` | `str` | No |  |
+| `shortUrl` | `str` | No |  |
 | `slug` | `str` | No |  |
 | `title` | `str` | No |  |
-| `updated_at` | `str` | No |  |
+| `updatedAt` | `str` | No |  |
 | `url` | `str` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `click_count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
+| `clickCount` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `image` | - | - | - | - | - |
-| `short_url` | - | - | - | - | - |
+| `shortUrl` | - | - | - | - | - |
 | `slug` | - | - | - | - | - |
 | `title` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 | `url` | - | - | Yes | - | - |
 
 ### Operations
@@ -205,13 +205,13 @@ link_stat = client.LinkStat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | `list` | No |  |
-| `clicks_by_date` | `list` | No |  |
-| `clicks_by_device` | `list` | No |  |
-| `clicks_by_referrer` | `list` | No |  |
-| `link_id` | `str` | No |  |
-| `total_click` | `int` | No |  |
-| `unique_click` | `int` | No |  |
+| `clicksByCountry` | `list` | No |  |
+| `clicksByDate` | `list` | No |  |
+| `clicksByDevice` | `list` | No |  |
+| `clicksByReferrer` | `list` | No |  |
+| `linkId` | `str` | No |  |
+| `totalClicks` | `int` | No |  |
+| `uniqueClicks` | `int` | No |  |
 
 ### Operations
 
@@ -220,7 +220,7 @@ link_stat = client.LinkStat()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.LinkStat().list()
+results = client.LinkStat().list({"id": "example"})
 for link_stat in results:
     print(link_stat)
 ```

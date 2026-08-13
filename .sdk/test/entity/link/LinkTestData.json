@@ -2,39 +2,39 @@
   "existing": {
     "link": {
       "LINK00": {
-        "click_count": "s64",
-        "created_at": "s65",
+        "clickCount": "s64",
+        "createdAt": "s65",
         "description": "s66",
         "id": "LINK00",
         "image": "s68",
-        "short_url": "s69",
+        "shortUrl": "s69",
         "slug": "s6a",
         "title": "s6b",
-        "updated_at": "s6c",
+        "updatedAt": "s6c",
         "url": "s6d"
       },
       "LINK01": {
-        "click_count": "sc8",
-        "created_at": "sc9",
+        "clickCount": "sc8",
+        "createdAt": "sc9",
         "description": "sca",
         "id": "LINK01",
         "image": "scc",
-        "short_url": "scd",
+        "shortUrl": "scd",
         "slug": "sce",
         "title": "scf",
-        "updated_at": "sd0",
+        "updatedAt": "sd0",
         "url": "sd1"
       },
       "LINK02": {
-        "click_count": "s12c",
-        "created_at": "s12d",
+        "clickCount": "s12c",
+        "createdAt": "s12d",
         "description": "s12e",
         "id": "LINK02",
         "image": "s130",
-        "short_url": "s131",
+        "shortUrl": "s131",
         "slug": "s132",
         "title": "s133",
-        "updated_at": "s134",
+        "updatedAt": "s134",
         "url": "s135"
       }
     }
@@ -42,14 +42,14 @@
   "new": {
     "link": {
       "link_ref01": {
-        "click_count": "s190",
-        "created_at": "s191",
+        "clickCount": "s190",
+        "createdAt": "s191",
         "description": "s192",
         "image": "s194",
-        "short_url": "s195",
+        "shortUrl": "s195",
         "slug": "s196",
         "title": "s197",
-        "updated_at": "s198",
+        "updatedAt": "s198",
         "url": "s199"
       }
     }

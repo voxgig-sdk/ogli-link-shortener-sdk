@@ -129,30 +129,30 @@ const link = client.Link()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | `number` | No |  |
-| `created_at` | `string` | No |  |
+| `clickCount` | `number` | No |  |
+| `createdAt` | `string` | No |  |
 | `description` | `string` | No |  |
 | `id` | `string` | No |  |
 | `image` | `string` | No |  |
-| `short_url` | `string` | No |  |
+| `shortUrl` | `string` | No |  |
 | `slug` | `string` | No |  |
 | `title` | `string` | No |  |
-| `updated_at` | `string` | No |  |
+| `updatedAt` | `string` | No |  |
 | `url` | `string` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `click_count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
+| `clickCount` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `image` | - | - | - | - | - |
-| `short_url` | - | - | - | - | - |
+| `shortUrl` | - | - | - | - | - |
 | `slug` | - | - | - | - | - |
 | `title` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 | `url` | - | - | Yes | - | - |
 
 ### Operations
@@ -239,13 +239,13 @@ const link_stat = client.LinkStat()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | `any[]` | No |  |
-| `clicks_by_date` | `any[]` | No |  |
-| `clicks_by_device` | `any[]` | No |  |
-| `clicks_by_referrer` | `any[]` | No |  |
-| `link_id` | `string` | No |  |
-| `total_click` | `number` | No |  |
-| `unique_click` | `number` | No |  |
+| `clicksByCountry` | `any[]` | No |  |
+| `clicksByDate` | `any[]` | No |  |
+| `clicksByDevice` | `any[]` | No |  |
+| `clicksByReferrer` | `any[]` | No |  |
+| `linkId` | `string` | No |  |
+| `totalClicks` | `number` | No |  |
+| `uniqueClicks` | `number` | No |  |
 
 ### Operations
 
@@ -254,7 +254,7 @@ const link_stat = client.LinkStat()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.LinkStat().list()
+const results = await client.LinkStat().list({ id: "example" })
 ```
 
 ### Common Methods

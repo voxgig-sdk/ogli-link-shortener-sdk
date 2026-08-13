@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import OgliLinkShortenerSDK
-from core.error import OgliLinkShortenerError
-from core.result import OgliLinkShortenerResult
-from core.response import OgliLinkShortenerResponse
-from core.spec import OgliLinkShortenerSpec
-from feature.base_feature import OgliLinkShortenerBaseFeature
+from projectname_sdk.core.error import OgliLinkShortenerError
+from projectname_sdk.core.result import OgliLinkShortenerResult
+from projectname_sdk.core.response import OgliLinkShortenerResponse
+from projectname_sdk.core.spec import OgliLinkShortenerSpec
+from projectname_sdk.feature.base_feature import OgliLinkShortenerBaseFeature
 
 
 def _client():

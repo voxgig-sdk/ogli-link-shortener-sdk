@@ -40,7 +40,7 @@ try {
     // list() returns an array of Link records — iterate directly.
     $links = $client->Link()->list();
     foreach ($links as $item) {
-        echo $item["id"] . " " . $item["click_count"] . "\n";
+        echo $item["id"] . " " . $item["clickCount"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -51,7 +51,7 @@ try {
 
 ```php
 try {
-    // load() returns the bare Link record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Link record (throws on error).
     $link = $client->Link()->load(["id" => "example_id"]);
     print_r($link);
 } catch (\Throwable $err) {
@@ -62,14 +62,14 @@ try {
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Link record.
-$created = $client->Link()->create(["click_count" => 1, "created_at" => "example_created_at"]);
+// create() returns the ENTITY — call data_get() for the created Link record.
+$created = $client->Link()->create(["clickCount" => 1, "createdAt" => "example_createdAt"]);
 
-// Update — index the bare record directly ($created["id"]).
-$client->Link()->update(["id" => $created["id"]]);
+// Update — index the record via data_get() ($created->data_get()["id"]).
+$client->Link()->update(["id" => $created->data_get()["id"], "clickCount" => 1, "createdAt" => "example_createdAt"]);
 
 // Remove
-$client->Link()->remove(["id" => $created["id"]]);
+$client->Link()->remove(["id" => $created->data_get()["id"]]);
 ```
 
 
@@ -155,7 +155,8 @@ $client = OgliLinkShortenerSDK::test([
     "entity" => ["link" => ["test01" => ["id" => "test01"]]],
 ]);
 
-// Entity ops return the bare mock record (throws on error).
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
 $link = $client->Link()->list();
 print_r($link);
 ```
@@ -261,7 +262,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -283,15 +284,15 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `click_count` |  |
-| `created_at` |  |
+| `clickCount` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
 | `image` |  |
-| `short_url` |  |
+| `shortUrl` |  |
 | `slug` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 | `url` |  |
 
 Operations: Create, List, Load, Remove, Update.
@@ -302,13 +303,13 @@ API path: `/links`
 
 | Field | Description |
 | --- | --- |
-| `clicks_by_country` |  |
-| `clicks_by_date` |  |
-| `clicks_by_device` |  |
-| `clicks_by_referrer` |  |
-| `link_id` |  |
-| `total_click` |  |
-| `unique_click` |  |
+| `clicksByCountry` |  |
+| `clicksByDate` |  |
+| `clicksByDevice` |  |
+| `clicksByReferrer` |  |
+| `linkId` |  |
+| `totalClicks` |  |
+| `uniqueClicks` |  |
 
 Operations: List.
 
@@ -337,21 +338,21 @@ Create an instance: `$link = $client->Link();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | `int` |  |
-| `created_at` | `string` |  |
+| `clickCount` | `int` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
 | `image` | `string` |  |
-| `short_url` | `string` |  |
+| `shortUrl` | `string` |  |
 | `slug` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 | `url` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Link record (throws on error).
+// load() returns the ENTITY — call data_get() for the Link record (throws on error).
 $link = $client->Link()->load(["id" => "link_id"]);
 ```
 
@@ -384,13 +385,13 @@ Create an instance: `$link_stat = $client->LinkStat();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | `array` |  |
-| `clicks_by_date` | `array` |  |
-| `clicks_by_device` | `array` |  |
-| `clicks_by_referrer` | `array` |  |
-| `link_id` | `string` |  |
-| `total_click` | `int` |  |
-| `unique_click` | `int` |  |
+| `clicksByCountry` | `array` |  |
+| `clicksByDate` | `array` |  |
+| `clicksByDevice` | `array` |  |
+| `clicksByReferrer` | `array` |  |
+| `linkId` | `string` |  |
+| `totalClicks` | `int` |  |
+| `uniqueClicks` | `int` |  |
 
 #### Example: List
 

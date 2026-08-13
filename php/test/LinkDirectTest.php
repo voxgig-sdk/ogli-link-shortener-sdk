@@ -121,16 +121,16 @@ function link_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "OGLILINKSHORTENER_TEST_LINK_ENTID" => [],
-        "OGLILINKSHORTENER_TEST_LIVE" => "FALSE",
-        "OGLILINKSHORTENER_APIKEY" => "NONE",
+        "OGLI_LINK_SHORTENER_TEST_LINK_ENTID" => [],
+        "OGLI_LINK_SHORTENER_TEST_LIVE" => "FALSE",
+        "OGLI_LINK_SHORTENER_APIKEY" => "NONE",
     ]);
 
-    $live = $env["OGLILINKSHORTENER_TEST_LIVE"] === "TRUE";
+    $live = $env["OGLI_LINK_SHORTENER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
-            "apikey" => $env["OGLILINKSHORTENER_APIKEY"],
+            "apikey" => $env["OGLI_LINK_SHORTENER_APIKEY"],
         ];
         $client = new OgliLinkShortenerSDK($merged_opts);
         return [

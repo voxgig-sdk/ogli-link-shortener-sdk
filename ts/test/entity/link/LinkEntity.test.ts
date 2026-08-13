@@ -26,8 +26,8 @@ import {
 describe('LinkEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when OGLILINKSHORTENER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('OGLILINKSHORTENER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when OGLI_LINK_SHORTENER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('OGLI_LINK_SHORTENER_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = OgliLinkShortenerSDK.test()
@@ -62,14 +62,14 @@ describe('LinkEntity', async () => {
     const link_ref01_ent = client.Link()
     let link_ref01_data = setup.data.new.link['link_ref01']
 
-    link_ref01_data = await link_ref01_ent.create(link_ref01_data)
+    link_ref01_data = (await link_ref01_ent.create(link_ref01_data)).data()
     assert(null != link_ref01_data.id)
 
 
     // LIST
     const link_ref01_match: any = {}
 
-    const link_ref01_list = await link_ref01_ent.list(link_ref01_match)
+    const link_ref01_list = (await link_ref01_ent.list(link_ref01_match)).map((e: any) => e.data())
 
     assert(!isempty(select(link_ref01_list, { id: link_ref01_data.id })))
 
@@ -78,10 +78,10 @@ describe('LinkEntity', async () => {
     const link_ref01_data_up0: any = {}
     link_ref01_data_up0.id = link_ref01_data.id
 
-    const link_ref01_markdef_up0 = { name: 'created_at', value: 'Mark01-link_ref01_' + setup.now }
+    const link_ref01_markdef_up0 = { name: 'createdAt', value: 'Mark01-link_ref01_' + setup.now }
     ;(link_ref01_data_up0 as any)[link_ref01_markdef_up0.name] = link_ref01_markdef_up0.value
 
-    const link_ref01_resdata_up0 = await link_ref01_ent.update(link_ref01_data_up0)
+    const link_ref01_resdata_up0 = (await link_ref01_ent.update(link_ref01_data_up0)).data()
     assert(link_ref01_resdata_up0.id === link_ref01_data_up0.id)
 
     assert((link_ref01_resdata_up0 as any)[link_ref01_markdef_up0.name] === link_ref01_markdef_up0.value)
@@ -90,7 +90,7 @@ describe('LinkEntity', async () => {
     // LOAD
     const link_ref01_match_dt0: any = {}
     link_ref01_match_dt0.id = link_ref01_data.id
-    const link_ref01_data_dt0 = await link_ref01_ent.load(link_ref01_match_dt0)
+    const link_ref01_data_dt0 = (await link_ref01_ent.load(link_ref01_match_dt0)).data()
     assert(link_ref01_data_dt0.id === link_ref01_data.id)
 
 
@@ -102,7 +102,7 @@ describe('LinkEntity', async () => {
     // LIST
     const link_ref01_match_rt0: any = {}
 
-    const link_ref01_list_rt0 = await link_ref01_ent.list(link_ref01_match_rt0)
+    const link_ref01_list_rt0 = (await link_ref01_ent.list(link_ref01_match_rt0)).map((e: any) => e.data())
 
     assert(isempty(select(link_ref01_list_rt0, { id: link_ref01_data.id })))
 

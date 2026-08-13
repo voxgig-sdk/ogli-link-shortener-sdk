@@ -98,30 +98,30 @@ link = client.Link
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `click_count` | `Integer` | No |  |
-| `created_at` | `String` | No |  |
+| `clickCount` | `Integer` | No |  |
+| `createdAt` | `String` | No |  |
 | `description` | `String` | No |  |
 | `id` | `String` | No |  |
 | `image` | `String` | No |  |
-| `short_url` | `String` | No |  |
+| `shortUrl` | `String` | No |  |
 | `slug` | `String` | No |  |
 | `title` | `String` | No |  |
-| `updated_at` | `String` | No |  |
+| `updatedAt` | `String` | No |  |
 | `url` | `String` | No |  |
 
 ### Field Usage by Operation
 
 | Field | load | list | create | update | remove |
 | --- | --- | --- | --- | --- | --- |
-| `click_count` | - | - | - | - | - |
-| `created_at` | - | - | - | - | - |
+| `clickCount` | - | - | - | - | - |
+| `createdAt` | - | - | - | - | - |
 | `description` | - | - | - | - | - |
 | `id` | - | - | - | - | - |
 | `image` | - | - | - | - | - |
-| `short_url` | - | - | - | - | - |
+| `shortUrl` | - | - | - | - | - |
 | `slug` | - | - | - | - | - |
 | `title` | - | - | - | - | - |
-| `updated_at` | - | - | - | - | - |
+| `updatedAt` | - | - | - | - | - |
 | `url` | - | - | Yes | - | - |
 
 ### Operations
@@ -210,13 +210,13 @@ link_stat = client.LinkStat
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clicks_by_country` | `Array` | No |  |
-| `clicks_by_date` | `Array` | No |  |
-| `clicks_by_device` | `Array` | No |  |
-| `clicks_by_referrer` | `Array` | No |  |
-| `link_id` | `String` | No |  |
-| `total_click` | `Integer` | No |  |
-| `unique_click` | `Integer` | No |  |
+| `clicksByCountry` | `Array` | No |  |
+| `clicksByDate` | `Array` | No |  |
+| `clicksByDevice` | `Array` | No |  |
+| `clicksByReferrer` | `Array` | No |  |
+| `linkId` | `String` | No |  |
+| `totalClicks` | `Integer` | No |  |
+| `uniqueClicks` | `Integer` | No |  |
 
 ### Operations
 

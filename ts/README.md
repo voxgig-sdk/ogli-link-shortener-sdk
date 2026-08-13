@@ -37,7 +37,9 @@ const client = new OgliLinkShortenerSDK({
 
 ### 2. List link records
 
-`list()` resolves to an array of Link objects — iterate it directly:
+`list()` resolves to an array of Link ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
 const links = await client.Link().list()
@@ -63,20 +65,22 @@ try {
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Link
+// Create — returns the created Link ENTITY (.data() for the record)
 const created = await client.Link().create({
-  click_count: 1,
-  created_at: 'example_created_at',
+  clickCount: 1,
+  createdAt: 'example_createdAt',
 })
 
-// Update — the id comes straight off the returned entity
+// Update — the id comes off the returned entity's data()
 const updated = await client.Link().update({
-  id: created.id!,
+  id: created.data().id!,
+  clickCount: 1,
+  createdAt: 'example_createdAt',
 })
 
 // Remove
 await client.Link().remove({
-  id: created.id!,
+  id: created.data().id!,
 })
 ```
 
@@ -155,7 +159,8 @@ Create a mock client for unit testing — no server required:
 const client = OgliLinkShortenerSDK.test()
 
 const link = await client.Link().list()
-// link is a bare entity populated with mock response data
+// link is the entity, populated with mock response data
+// — call link.data() for the record itself
 console.log(link)
 ```
 
@@ -330,15 +335,15 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `click_count` |  |
-| `created_at` |  |
+| `clickCount` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
 | `image` |  |
-| `short_url` |  |
+| `shortUrl` |  |
 | `slug` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 | `url` |  |
 
 Operations: create, list, load, remove, update.
@@ -349,13 +354,13 @@ API path: `/links`
 
 | Field | Description |
 | --- | --- |
-| `clicks_by_country` |  |
-| `clicks_by_date` |  |
-| `clicks_by_device` |  |
-| `clicks_by_referrer` |  |
-| `link_id` |  |
-| `total_click` |  |
-| `unique_click` |  |
+| `clicksByCountry` |  |
+| `clicksByDate` |  |
+| `clicksByDevice` |  |
+| `clicksByReferrer` |  |
+| `linkId` |  |
+| `totalClicks` |  |
+| `uniqueClicks` |  |
 
 Operations: list.
 
@@ -384,15 +389,15 @@ Create an instance: `const link = client.Link()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | `number` |  |
-| `created_at` | `string` |  |
+| `clickCount` | `number` |  |
+| `createdAt` | `string` |  |
 | `description` | `string` |  |
 | `id` | `string` |  |
 | `image` | `string` |  |
-| `short_url` | `string` |  |
+| `shortUrl` | `string` |  |
 | `slug` | `string` |  |
 | `title` | `string` |  |
-| `updated_at` | `string` |  |
+| `updatedAt` | `string` |  |
 | `url` | `string` |  |
 
 #### Example: Load
@@ -429,18 +434,18 @@ Create an instance: `const link_stat = client.LinkStat()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | `any[]` |  |
-| `clicks_by_date` | `any[]` |  |
-| `clicks_by_device` | `any[]` |  |
-| `clicks_by_referrer` | `any[]` |  |
-| `link_id` | `string` |  |
-| `total_click` | `number` |  |
-| `unique_click` | `number` |  |
+| `clicksByCountry` | `any[]` |  |
+| `clicksByDate` | `any[]` |  |
+| `clicksByDevice` | `any[]` |  |
+| `clicksByReferrer` | `any[]` |  |
+| `linkId` | `string` |  |
+| `totalClicks` | `number` |  |
+| `uniqueClicks` | `number` |  |
 
 #### Example: List
 
 ```ts
-const link_stats = await client.LinkStat().list()
+const link_stats = await client.LinkStat().list({ id: "example" })
 ```
 
 

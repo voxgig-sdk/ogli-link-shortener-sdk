@@ -6,15 +6,15 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Link {
-  click_count?: number
-  created_at?: string
+  clickCount?: number
+  createdAt?: string
   description?: string
   id?: string
   image?: string
-  short_url?: string
+  shortUrl?: string
   slug?: string
   title?: string
-  updated_at?: string
+  updatedAt?: string
   url?: string
 }
 
@@ -23,33 +23,42 @@ export interface LinkLoadMatch {
 }
 
 export interface LinkListMatch {
-  click_count?: number
-  created_at?: string
+  clickCount?: number
+  createdAt?: string
   description?: string
   id?: string
   image?: string
-  short_url?: string
+  shortUrl?: string
   slug?: string
   title?: string
-  updated_at?: string
+  updatedAt?: string
   url?: string
 }
 
 export interface LinkCreateData {
-  click_count?: number
-  created_at?: string
+  clickCount?: number
+  createdAt?: string
   description?: string
   id?: string
   image?: string
-  short_url?: string
+  shortUrl?: string
   slug?: string
   title?: string
-  updated_at?: string
+  updatedAt?: string
   url?: string
 }
 
 export interface LinkUpdateData {
   id: string
+  clickCount?: number
+  createdAt?: string
+  description?: string
+  image?: string
+  shortUrl?: string
+  slug?: string
+  title?: string
+  updatedAt?: string
+  url?: string
 }
 
 export interface LinkRemoveMatch {
@@ -57,13 +66,13 @@ export interface LinkRemoveMatch {
 }
 
 export interface LinkStat {
-  clicks_by_country?: any[]
-  clicks_by_date?: any[]
-  clicks_by_device?: any[]
-  clicks_by_referrer?: any[]
-  link_id?: string
-  total_click?: number
-  unique_click?: number
+  clicksByCountry?: any[]
+  clicksByDate?: any[]
+  clicksByDevice?: any[]
+  clicksByReferrer?: any[]
+  linkId?: string
+  totalClicks?: number
+  uniqueClicks?: number
 }
 
 export interface LinkStatListMatch {

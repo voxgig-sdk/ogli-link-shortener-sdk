@@ -19,11 +19,15 @@ import {
 describe('LinkDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when OGLILINKSHORTENER_TEST_LIVE=TRUE.
-  afterEach(liveDelay('OGLILINKSHORTENER_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when OGLI_LINK_SHORTENER_TEST_LIVE=TRUE.
+  afterEach(liveDelay('OGLI_LINK_SHORTENER_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new OgliLinkShortenerSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -134,19 +138,19 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'OGLILINKSHORTENER_TEST_LINK_ENTID': {},
-    'OGLILINKSHORTENER_TEST_LIVE': 'FALSE',
-    'OGLILINKSHORTENER_APIKEY': 'NONE',
+    'OGLI_LINK_SHORTENER_TEST_LINK_ENTID': {},
+    'OGLI_LINK_SHORTENER_TEST_LIVE': 'FALSE',
+    'OGLI_LINK_SHORTENER_APIKEY': 'NONE',
   })
 
-  const live = 'TRUE' === env.OGLILINKSHORTENER_TEST_LIVE
+  const live = 'TRUE' === env.OGLI_LINK_SHORTENER_TEST_LIVE
 
   if (live) {
     const client = new OgliLinkShortenerSDK({
-      apikey: env.OGLILINKSHORTENER_APIKEY,
+      apikey: env.OGLI_LINK_SHORTENER_APIKEY,
     })
 
-    let idmap: any = env['OGLILINKSHORTENER_TEST_LINK_ENTID']
+    let idmap: any = env['OGLI_LINK_SHORTENER_TEST_LINK_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

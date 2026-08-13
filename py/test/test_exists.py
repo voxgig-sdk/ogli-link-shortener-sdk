@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# OgliLinkShortener SDK exists test
 
 import pytest
 from oglilinkshortener_sdk import OgliLinkShortenerSDK

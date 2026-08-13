@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = OgliLinkShortenerSDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = OgliLinkShortenerSDK.test({
+  entity: {
+    link: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const links = await client.Link().list()
-// links is an array of bare Link records populated with mock data
+// links is an array of Link entities, populated with mock data
+// — call links[0].data() for the record itself
 console.log(links)
 ```
 
@@ -112,7 +121,7 @@ const client = new OgliLinkShortenerSDK({
   apikey: process.env.OGLI_LINK_SHORTENER_APIKEY,
 })
 
-// List all links (returns Link[])
+// List all links (returns LinkEntity[] — .data() for the record)
 const links = await client.Link().list()
 for (const link of links) {
   console.log(link)
@@ -199,7 +208,7 @@ $client = new OgliLinkShortenerSDK([
 $links = $client->Link()->list();
 print_r($links);
 
-// Load a specific link (returns the bare record; throws on error)
+// Load a specific link (returns the ENTITY; call data_get() for the record; throws on error)
 $link = $client->Link()->load(["id" => "example_id"]);
 print_r($link);
 ```
@@ -234,7 +243,7 @@ client = OgliLinkShortenerSDK.new({
 links = client.Link.list
 puts links
 
-# Load a specific link (returns the bare record; raises on error)
+# Load a specific link (returns the ENTITY; call data_get for the record)
 link = client.Link.load({ "id" => "example_id" })
 puts link
 ```
@@ -373,6 +382,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://app.ogli.sh](https://app.ogli.sh)
 

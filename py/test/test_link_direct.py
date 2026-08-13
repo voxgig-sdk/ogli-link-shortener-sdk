@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from oglilinkshortener_sdk.utility.voxgig_struct import voxgig_struct as vs
 from oglilinkshortener_sdk import OgliLinkShortenerSDK
-from core import helpers
+from oglilinkshortener_sdk.core import helpers
 from test import runner
 
 
@@ -105,16 +105,16 @@ def _link_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "OGLILINKSHORTENER_TEST_LINK_ENTID": {},
-        "OGLILINKSHORTENER_TEST_LIVE": "FALSE",
-        "OGLILINKSHORTENER_APIKEY": "NONE",
+        "OGLI_LINK_SHORTENER_TEST_LINK_ENTID": {},
+        "OGLI_LINK_SHORTENER_TEST_LIVE": "FALSE",
+        "OGLI_LINK_SHORTENER_APIKEY": "NONE",
     })
 
-    live = env.get("OGLILINKSHORTENER_TEST_LIVE") == "TRUE"
+    live = env.get("OGLI_LINK_SHORTENER_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("OGLILINKSHORTENER_APIKEY"),
+            "apikey": env.get("OGLI_LINK_SHORTENER_APIKEY"),
         }
         client = OgliLinkShortenerSDK(merged_opts)
         return {

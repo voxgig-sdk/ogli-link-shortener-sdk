@@ -72,7 +72,7 @@ class LinkStatEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set OGLILINKSHORTENER_TEST_LINK_STAT_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -119,39 +119,39 @@ function link_stat_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("OGLILINKSHORTENER_TEST_LINK_STAT_ENTID");
+    $entid_env_raw = getenv("OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "OGLILINKSHORTENER_TEST_LINK_STAT_ENTID" => $idmap,
-        "OGLILINKSHORTENER_TEST_LIVE" => "FALSE",
-        "OGLILINKSHORTENER_TEST_EXPLAIN" => "FALSE",
-        "OGLILINKSHORTENER_APIKEY" => "NONE",
+        "OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID" => $idmap,
+        "OGLI_LINK_SHORTENER_TEST_LIVE" => "FALSE",
+        "OGLI_LINK_SHORTENER_TEST_EXPLAIN" => "FALSE",
+        "OGLI_LINK_SHORTENER_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["OGLILINKSHORTENER_TEST_LINK_STAT_ENTID"]);
+        $env["OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["OGLILINKSHORTENER_TEST_LIVE"] === "TRUE") {
+    if ($env["OGLI_LINK_SHORTENER_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["OGLILINKSHORTENER_APIKEY"],
+                "apikey" => $env["OGLI_LINK_SHORTENER_APIKEY"],
             ],
             $extra ?? [],
         ]);
         $client = new OgliLinkShortenerSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["OGLILINKSHORTENER_TEST_LIVE"] === "TRUE";
+    $live = $env["OGLI_LINK_SHORTENER_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["OGLILINKSHORTENER_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["OGLI_LINK_SHORTENER_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

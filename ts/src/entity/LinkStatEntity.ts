@@ -37,7 +37,7 @@ class LinkStatEntity extends OgliLinkShortenerEntityBase<LinkStat> {
 
 
 
-  async list(this: any, reqmatch?: LinkStatListMatch, ctrl?: Control): Promise<LinkStat[]> {
+  async list(this: any, reqmatch?: LinkStatListMatch, ctrl?: Control): Promise<LinkStatEntity[]> {
 
     const utility = this._utility
 

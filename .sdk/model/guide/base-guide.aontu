@@ -9,6 +9,7 @@ guide: {
     path: "/links": {
       op: create: method: *POST
       op: list: method: *GET
+      op: list: transform: res: *("`body.links`")|top
     }
     path: "/links/{linkId}": {
       rename: param: "linkId": *"id"

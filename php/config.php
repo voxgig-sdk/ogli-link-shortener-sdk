@@ -36,14 +36,14 @@ class OgliLinkShortenerConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'click_count',
+              'name' => 'clickCount',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'created_at',
+              'name' => 'createdAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
@@ -71,7 +71,7 @@ class OgliLinkShortenerConfig
             ],
             [
               'active' => true,
-              'name' => 'short_url',
+              'name' => 'shortUrl',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 5,
@@ -92,7 +92,7 @@ class OgliLinkShortenerConfig
             ],
             [
               'active' => true,
-              'name' => 'updated_at',
+              'name' => 'updatedAt',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 8,
@@ -120,6 +120,7 @@ class OgliLinkShortenerConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/links',
                   'parts' => [
@@ -163,6 +164,7 @@ class OgliLinkShortenerConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/links',
                   'parts' => [
@@ -176,7 +178,7 @@ class OgliLinkShortenerConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.links`',
                   ],
                   'index$' => 0,
                 ],
@@ -202,6 +204,7 @@ class OgliLinkShortenerConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/links/{linkId}',
                   'parts' => [
@@ -246,6 +249,7 @@ class OgliLinkShortenerConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'DELETE',
                   'orig' => '/links/{linkId}',
                   'parts' => [
@@ -290,6 +294,7 @@ class OgliLinkShortenerConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'PUT',
                   'orig' => '/links/{linkId}',
                   'parts' => [
@@ -324,49 +329,49 @@ class OgliLinkShortenerConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'clicks_by_country',
+              'name' => 'clicksByCountry',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'clicks_by_date',
+              'name' => 'clicksByDate',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 1,
             ],
             [
               'active' => true,
-              'name' => 'clicks_by_device',
+              'name' => 'clicksByDevice',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 2,
             ],
             [
               'active' => true,
-              'name' => 'clicks_by_referrer',
+              'name' => 'clicksByReferrer',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 3,
             ],
             [
               'active' => true,
-              'name' => 'link_id',
+              'name' => 'linkId',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 4,
             ],
             [
               'active' => true,
-              'name' => 'total_click',
+              'name' => 'totalClicks',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 5,
             ],
             [
               'active' => true,
-              'name' => 'unique_click',
+              'name' => 'uniqueClicks',
               'req' => false,
               'type' => '`$INTEGER`',
               'index$' => 6,
@@ -411,6 +416,7 @@ class OgliLinkShortenerConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/links/{linkId}/stats',
                   'parts' => [

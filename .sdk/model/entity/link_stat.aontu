@@ -6,37 +6,37 @@ main: kit: entity: link_stat: {
 
   fields: [
     {
-      name: "clicks_by_country"
+      name: "clicksByCountry"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "clicks_by_date"
+      name: "clicksByDate"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "clicks_by_device"
+      name: "clicksByDevice"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "clicks_by_referrer"
+      name: "clicksByReferrer"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "link_id"
+      name: "linkId"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "total_click"
+      name: "totalClicks"
       req: false
       type: "`$INTEGER`"
     }
     {
-      name: "unique_click"
+      name: "uniqueClicks"
       req: false
       type: "`$INTEGER`"
     }

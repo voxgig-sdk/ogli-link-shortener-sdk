@@ -39,7 +39,7 @@ begin
   # list returns an Array of Link records — iterate directly.
   links = client.Link.list
   links.each do |item|
-    puts "#{item["id"]} #{item["click_count"]}"
+    puts "#{item["id"]} #{item["clickCount"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -50,7 +50,7 @@ end
 
 ```ruby
 begin
-  # load returns the bare Link record (raises on error).
+  # load returns the ENTITY — call data_get for the Link record (raises on error).
   link = client.Link.load({ "id" => "example_id" })
   puts link
 rescue => err
@@ -61,14 +61,14 @@ end
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Link record.
-created = client.Link.create({ "click_count" => 1, "created_at" => "example_created_at" })
+# create returns the ENTITY — call data_get for the created Link record.
+created = client.Link.create({ "clickCount" => 1, "createdAt" => "example_createdAt" })
 
-# Update — index the bare record directly (created["id"]).
-client.Link.update({ "id" => created["id"] })
+# Update — index the record via data_get (created.data_get["id"]).
+client.Link.update({ "id" => created.data_get["id"], "clickCount" => 1, "createdAt" => "example_createdAt" })
 
 # Remove
-client.Link.remove({ "id" => created["id"] })
+client.Link.remove({ "id" => created.data_get["id"] })
 ```
 
 
@@ -149,7 +149,8 @@ client = OgliLinkShortenerSDK.test({
   "entity" => { "link" => { "test01" => { "id" => "test01" } } },
 })
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 link = client.Link.list()
 puts link
 ```
@@ -273,15 +274,15 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `click_count` |  |
-| `created_at` |  |
+| `clickCount` |  |
+| `createdAt` |  |
 | `description` |  |
 | `id` |  |
 | `image` |  |
-| `short_url` |  |
+| `shortUrl` |  |
 | `slug` |  |
 | `title` |  |
-| `updated_at` |  |
+| `updatedAt` |  |
 | `url` |  |
 
 Operations: Create, List, Load, Remove, Update.
@@ -292,13 +293,13 @@ API path: `/links`
 
 | Field | Description |
 | --- | --- |
-| `clicks_by_country` |  |
-| `clicks_by_date` |  |
-| `clicks_by_device` |  |
-| `clicks_by_referrer` |  |
-| `link_id` |  |
-| `total_click` |  |
-| `unique_click` |  |
+| `clicksByCountry` |  |
+| `clicksByDate` |  |
+| `clicksByDevice` |  |
+| `clicksByReferrer` |  |
+| `linkId` |  |
+| `totalClicks` |  |
+| `uniqueClicks` |  |
 
 Operations: List.
 
@@ -327,21 +328,21 @@ Create an instance: `link = client.Link`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `click_count` | `Integer` |  |
-| `created_at` | `String` |  |
+| `clickCount` | `Integer` |  |
+| `createdAt` | `String` |  |
 | `description` | `String` |  |
 | `id` | `String` |  |
 | `image` | `String` |  |
-| `short_url` | `String` |  |
+| `shortUrl` | `String` |  |
 | `slug` | `String` |  |
 | `title` | `String` |  |
-| `updated_at` | `String` |  |
+| `updatedAt` | `String` |  |
 | `url` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Link record (raises on error).
+# load returns the ENTITY — call data_get for the Link record (raises on error).
 link = client.Link.load({ "id" => "link_id" })
 ```
 
@@ -374,13 +375,13 @@ Create an instance: `link_stat = client.LinkStat`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clicks_by_country` | `Array` |  |
-| `clicks_by_date` | `Array` |  |
-| `clicks_by_device` | `Array` |  |
-| `clicks_by_referrer` | `Array` |  |
-| `link_id` | `String` |  |
-| `total_click` | `Integer` |  |
-| `unique_click` | `Integer` |  |
+| `clicksByCountry` | `Array` |  |
+| `clicksByDate` | `Array` |  |
+| `clicksByDevice` | `Array` |  |
+| `clicksByReferrer` | `Array` |  |
+| `linkId` | `String` |  |
+| `totalClicks` | `Integer` |  |
+| `uniqueClicks` | `Integer` |  |
 
 #### Example: List
 

@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ OgliLinkShortenerUtility.registrar = ->(u) {
   u.prepare_params = OgliLinkShortenerUtilities::PrepareParams
   u.prepare_path = OgliLinkShortenerUtilities::PreparePath
   u.prepare_query = OgliLinkShortenerUtilities::PrepareQuery
+  u.graphql_body = OgliLinkShortenerUtilities::GraphqlBody
+  u.graphql_errors = OgliLinkShortenerUtilities::GraphqlErrors
   u.result_basic = OgliLinkShortenerUtilities::ResultBasic
   u.result_body = OgliLinkShortenerUtilities::ResultBody
   u.result_headers = OgliLinkShortenerUtilities::ResultHeaders
