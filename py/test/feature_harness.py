@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from oglilinkshortener_sdk.config import make_config
+from oglilinkshortener_sdk.config import shared_config
 from oglilinkshortener_sdk.features import _make_feature
 from oglilinkshortener_sdk.core.control import OgliLinkShortenerControl
 from oglilinkshortener_sdk.core.error import OgliLinkShortenerError
@@ -24,7 +24,7 @@ from oglilinkshortener_sdk.core.spec import OgliLinkShortenerSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

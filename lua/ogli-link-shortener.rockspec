@@ -23,6 +23,7 @@ build = {
   modules = {
     ["ogli-link-shortener_sdk"] = "ogli-link-shortener_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }

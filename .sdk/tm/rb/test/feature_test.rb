@@ -15,7 +15,7 @@ require_relative "../OgliLinkShortener_sdk"
 module OgliLinkShortenerFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = OgliLinkShortenerConfig.make_config["feature"]
+    f = OgliLinkShortenerConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 

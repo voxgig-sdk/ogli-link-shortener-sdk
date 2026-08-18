@@ -28,7 +28,7 @@ class OgliLinkShortenerSDK
     utility = OgliLinkShortenerUtility.new
     @_utility = utility
 
-    config = OgliLinkShortenerConfig.make_config
+    config = OgliLinkShortenerConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
