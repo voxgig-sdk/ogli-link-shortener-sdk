@@ -274,16 +274,16 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `clickCount` |  |
-| `createdAt` |  |
-| `description` |  |
-| `id` |  |
-| `image` |  |
-| `shortUrl` |  |
-| `slug` |  |
-| `title` |  |
-| `updatedAt` |  |
-| `url` |  |
+| `clickCount` | Total number of clicks on the link |
+| `createdAt` | Timestamp when the link was created |
+| `description` | Open Graph description |
+| `id` | Unique identifier for the link |
+| `image` | Open Graph image URL |
+| `shortUrl` | The shortened URL |
+| `slug` | The short code used in the URL |
+| `title` | Open Graph title |
+| `updatedAt` | Timestamp when the link was last updated |
+| `url` | The destination URL |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -297,9 +297,9 @@ API path: `/links`
 | `clicksByDate` |  |
 | `clicksByDevice` |  |
 | `clicksByReferrer` |  |
-| `linkId` |  |
-| `totalClicks` |  |
-| `uniqueClicks` |  |
+| `linkId` | The link identifier |
+| `totalClicks` | Total number of clicks |
+| `uniqueClicks` | Number of unique visitors |
 
 Operations: List.
 
@@ -328,16 +328,16 @@ Create an instance: `link = client.Link`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clickCount` | `Integer` |  |
-| `createdAt` | `String` |  |
-| `description` | `String` |  |
-| `id` | `String` |  |
-| `image` | `String` |  |
-| `shortUrl` | `String` |  |
-| `slug` | `String` |  |
-| `title` | `String` |  |
-| `updatedAt` | `String` |  |
-| `url` | `String` |  |
+| `clickCount` | `Integer` | Total number of clicks on the link |
+| `createdAt` | `String` | Timestamp when the link was created |
+| `description` | `String` | Open Graph description |
+| `id` | `String` | Unique identifier for the link |
+| `image` | `String` | Open Graph image URL |
+| `shortUrl` | `String` | The shortened URL |
+| `slug` | `String` | The short code used in the URL |
+| `title` | `String` | Open Graph title |
+| `updatedAt` | `String` | Timestamp when the link was last updated |
+| `url` | `String` | The destination URL |
 
 #### Example: Load
 
@@ -379,9 +379,9 @@ Create an instance: `link_stat = client.LinkStat`
 | `clicksByDate` | `Array` |  |
 | `clicksByDevice` | `Array` |  |
 | `clicksByReferrer` | `Array` |  |
-| `linkId` | `String` |  |
-| `totalClicks` | `Integer` |  |
-| `uniqueClicks` | `Integer` |  |
+| `linkId` | `String` | The link identifier |
+| `totalClicks` | `Integer` | Total number of clicks |
+| `uniqueClicks` | `Integer` | Number of unique visitors |
 
 #### Example: List
 

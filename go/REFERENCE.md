@@ -103,16 +103,16 @@ fmt.Println(link.GetName()) // "link"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clickCount` | `int` | No |  |
-| `createdAt` | `string` | No |  |
-| `description` | `string` | No |  |
-| `id` | `string` | No |  |
-| `image` | `string` | No |  |
-| `shortUrl` | `string` | No |  |
-| `slug` | `string` | No |  |
-| `title` | `string` | No |  |
-| `updatedAt` | `string` | No |  |
-| `url` | `string` | No |  |
+| `clickCount` | `int` | No | Total number of clicks on the link |
+| `createdAt` | `string` | No | Timestamp when the link was created |
+| `description` | `string` | No | Open Graph description |
+| `id` | `string` | No | Unique identifier for the link |
+| `image` | `string` | No | Open Graph image URL |
+| `shortUrl` | `string` | No | The shortened URL |
+| `slug` | `string` | No | The short code used in the URL |
+| `title` | `string` | No | Open Graph title |
+| `updatedAt` | `string` | No | Timestamp when the link was last updated |
+| `url` | `string` | No | The destination URL |
 
 ### Field Usage by Operation
 
@@ -234,9 +234,9 @@ fmt.Println(linkStat.GetName()) // "link_stat"
 | `clicksByDate` | `[]any` | No |  |
 | `clicksByDevice` | `[]any` | No |  |
 | `clicksByReferrer` | `[]any` | No |  |
-| `linkId` | `string` | No |  |
-| `totalClicks` | `int` | No |  |
-| `uniqueClicks` | `int` | No |  |
+| `linkId` | `string` | No | The link identifier |
+| `totalClicks` | `int` | No | Total number of clicks |
+| `uniqueClicks` | `int` | No | Number of unique visitors |
 
 ### Operations
 

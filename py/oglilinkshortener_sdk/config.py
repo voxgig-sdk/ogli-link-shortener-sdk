@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "OgliLinkShortener",
+            "slug": "ogli-link-shortener",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -54,38 +57,47 @@ def make_config():
         "fields": [
           {
             "name": "clickCount",
+            "short": "Total number of clicks on the link",
             "type": "`$INTEGER`",
           },
           {
             "name": "createdAt",
+            "short": "Timestamp when the link was created",
             "type": "`$STRING`",
           },
           {
             "name": "description",
+            "short": "Open Graph description",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "short": "Unique identifier for the link",
             "type": "`$STRING`",
           },
           {
             "name": "image",
+            "short": "Open Graph image URL",
             "type": "`$STRING`",
           },
           {
             "name": "shortUrl",
+            "short": "The shortened URL",
             "type": "`$STRING`",
           },
           {
             "name": "slug",
+            "short": "The short code used in the URL",
             "type": "`$STRING`",
           },
           {
             "name": "title",
+            "short": "Open Graph title",
             "type": "`$STRING`",
           },
           {
             "name": "updatedAt",
+            "short": "Timestamp when the link was last updated",
             "type": "`$STRING`",
           },
           {
@@ -96,6 +108,7 @@ def make_config():
                 "type": "`$STRING`",
               },
             },
+            "short": "The destination URL",
             "type": "`$STRING`",
           },
         ],
@@ -308,14 +321,17 @@ def make_config():
           },
           {
             "name": "linkId",
+            "short": "The link identifier",
             "type": "`$STRING`",
           },
           {
             "name": "totalClicks",
+            "short": "Total number of clicks",
             "type": "`$INTEGER`",
           },
           {
             "name": "uniqueClicks",
+            "short": "Number of unique visitors",
             "type": "`$INTEGER`",
           },
         ],

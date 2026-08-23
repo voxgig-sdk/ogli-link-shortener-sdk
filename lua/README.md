@@ -263,16 +263,16 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `clickCount` |  |
-| `createdAt` |  |
-| `description` |  |
-| `id` |  |
-| `image` |  |
-| `shortUrl` |  |
-| `slug` |  |
-| `title` |  |
-| `updatedAt` |  |
-| `url` |  |
+| `clickCount` | Total number of clicks on the link |
+| `createdAt` | Timestamp when the link was created |
+| `description` | Open Graph description |
+| `id` | Unique identifier for the link |
+| `image` | Open Graph image URL |
+| `shortUrl` | The shortened URL |
+| `slug` | The short code used in the URL |
+| `title` | Open Graph title |
+| `updatedAt` | Timestamp when the link was last updated |
+| `url` | The destination URL |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -286,9 +286,9 @@ API path: `/links`
 | `clicksByDate` |  |
 | `clicksByDevice` |  |
 | `clicksByReferrer` |  |
-| `linkId` |  |
-| `totalClicks` |  |
-| `uniqueClicks` |  |
+| `linkId` | The link identifier |
+| `totalClicks` | Total number of clicks |
+| `uniqueClicks` | Number of unique visitors |
 
 Operations: List.
 
@@ -317,16 +317,16 @@ Create an instance: `local link = client:Link(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clickCount` | `number` |  |
-| `createdAt` | `string` |  |
-| `description` | `string` |  |
-| `id` | `string` |  |
-| `image` | `string` |  |
-| `shortUrl` | `string` |  |
-| `slug` | `string` |  |
-| `title` | `string` |  |
-| `updatedAt` | `string` |  |
-| `url` | `string` |  |
+| `clickCount` | `number` | Total number of clicks on the link |
+| `createdAt` | `string` | Timestamp when the link was created |
+| `description` | `string` | Open Graph description |
+| `id` | `string` | Unique identifier for the link |
+| `image` | `string` | Open Graph image URL |
+| `shortUrl` | `string` | The shortened URL |
+| `slug` | `string` | The short code used in the URL |
+| `title` | `string` | Open Graph title |
+| `updatedAt` | `string` | Timestamp when the link was last updated |
+| `url` | `string` | The destination URL |
 
 #### Example: Load
 
@@ -366,9 +366,9 @@ Create an instance: `local link_stat = client:LinkStat(nil)`
 | `clicksByDate` | `table` |  |
 | `clicksByDevice` | `table` |  |
 | `clicksByReferrer` | `table` |  |
-| `linkId` | `string` |  |
-| `totalClicks` | `number` |  |
-| `uniqueClicks` | `number` |  |
+| `linkId` | `string` | The link identifier |
+| `totalClicks` | `number` | Total number of clicks |
+| `uniqueClicks` | `number` | Number of unique visitors |
 
 #### Example: List
 

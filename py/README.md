@@ -278,16 +278,16 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `clickCount` |  |
-| `createdAt` |  |
-| `description` |  |
-| `id` |  |
-| `image` |  |
-| `shortUrl` |  |
-| `slug` |  |
-| `title` |  |
-| `updatedAt` |  |
-| `url` |  |
+| `clickCount` | Total number of clicks on the link |
+| `createdAt` | Timestamp when the link was created |
+| `description` | Open Graph description |
+| `id` | Unique identifier for the link |
+| `image` | Open Graph image URL |
+| `shortUrl` | The shortened URL |
+| `slug` | The short code used in the URL |
+| `title` | Open Graph title |
+| `updatedAt` | Timestamp when the link was last updated |
+| `url` | The destination URL |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -301,9 +301,9 @@ API path: `/links`
 | `clicksByDate` |  |
 | `clicksByDevice` |  |
 | `clicksByReferrer` |  |
-| `linkId` |  |
-| `totalClicks` |  |
-| `uniqueClicks` |  |
+| `linkId` | The link identifier |
+| `totalClicks` | Total number of clicks |
+| `uniqueClicks` | Number of unique visitors |
 
 Operations: List.
 
@@ -332,16 +332,16 @@ Create an instance: `link = client.Link()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clickCount` | `int` |  |
-| `createdAt` | `str` |  |
-| `description` | `str` |  |
-| `id` | `str` |  |
-| `image` | `str` |  |
-| `shortUrl` | `str` |  |
-| `slug` | `str` |  |
-| `title` | `str` |  |
-| `updatedAt` | `str` |  |
-| `url` | `str` |  |
+| `clickCount` | `int` | Total number of clicks on the link |
+| `createdAt` | `str` | Timestamp when the link was created |
+| `description` | `str` | Open Graph description |
+| `id` | `str` | Unique identifier for the link |
+| `image` | `str` | Open Graph image URL |
+| `shortUrl` | `str` | The shortened URL |
+| `slug` | `str` | The short code used in the URL |
+| `title` | `str` | Open Graph title |
+| `updatedAt` | `str` | Timestamp when the link was last updated |
+| `url` | `str` | The destination URL |
 
 #### Example: Load
 
@@ -381,9 +381,9 @@ Create an instance: `link_stat = client.LinkStat()`
 | `clicksByDate` | `list` |  |
 | `clicksByDevice` | `list` |  |
 | `clicksByReferrer` | `list` |  |
-| `linkId` | `str` |  |
-| `totalClicks` | `int` |  |
-| `uniqueClicks` | `int` |  |
+| `linkId` | `str` | The link identifier |
+| `totalClicks` | `int` | Total number of clicks |
+| `uniqueClicks` | `int` | Number of unique visitors |
 
 #### Example: List
 

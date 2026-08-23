@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'OgliLinkShortener',
+        slug: "ogli-link-shortener",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -63,38 +74,47 @@ class Config {
       "fields": [
         {
           "name": "clickCount",
+          "short": "Total number of clicks on the link",
           "type": "`$INTEGER`"
         },
         {
           "name": "createdAt",
+          "short": "Timestamp when the link was created",
           "type": "`$STRING`"
         },
         {
           "name": "description",
+          "short": "Open Graph description",
           "type": "`$STRING`"
         },
         {
           "name": "id",
+          "short": "Unique identifier for the link",
           "type": "`$STRING`"
         },
         {
           "name": "image",
+          "short": "Open Graph image URL",
           "type": "`$STRING`"
         },
         {
           "name": "shortUrl",
+          "short": "The shortened URL",
           "type": "`$STRING`"
         },
         {
           "name": "slug",
+          "short": "The short code used in the URL",
           "type": "`$STRING`"
         },
         {
           "name": "title",
+          "short": "Open Graph title",
           "type": "`$STRING`"
         },
         {
           "name": "updatedAt",
+          "short": "Timestamp when the link was last updated",
           "type": "`$STRING`"
         },
         {
@@ -105,6 +125,7 @@ class Config {
               "type": "`$STRING`"
             }
           },
+          "short": "The destination URL",
           "type": "`$STRING`"
         }
       ],
@@ -317,14 +338,17 @@ class Config {
         },
         {
           "name": "linkId",
+          "short": "The link identifier",
           "type": "`$STRING`"
         },
         {
           "name": "totalClicks",
+          "short": "Total number of clicks",
           "type": "`$INTEGER`"
         },
         {
           "name": "uniqueClicks",
+          "short": "Number of unique visitors",
           "type": "`$INTEGER`"
         }
       ],

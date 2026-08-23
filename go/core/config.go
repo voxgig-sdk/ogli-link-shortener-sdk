@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "OgliLinkShortener",
+			"slug": "ogli-link-shortener",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -37,38 +40,47 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "clickCount",
+						"short": "Total number of clicks on the link",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "createdAt",
+						"short": "Timestamp when the link was created",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "description",
+						"short": "Open Graph description",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the link",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "image",
+						"short": "Open Graph image URL",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "shortUrl",
+						"short": "The shortened URL",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "slug",
+						"short": "The short code used in the URL",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "title",
+						"short": "Open Graph title",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "updatedAt",
+						"short": "Timestamp when the link was last updated",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -79,6 +91,7 @@ func MakeConfig() map[string]any {
 								"type": "`$STRING`",
 							},
 						},
+						"short": "The destination URL",
 						"type": "`$STRING`",
 					},
 				},
@@ -291,14 +304,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "linkId",
+						"short": "The link identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "totalClicks",
+						"short": "Total number of clicks",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "uniqueClicks",
+						"short": "Number of unique visitors",
 						"type": "`$INTEGER`",
 					},
 				},

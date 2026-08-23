@@ -284,16 +284,16 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `clickCount` |  |
-| `createdAt` |  |
-| `description` |  |
-| `id` |  |
-| `image` |  |
-| `shortUrl` |  |
-| `slug` |  |
-| `title` |  |
-| `updatedAt` |  |
-| `url` |  |
+| `clickCount` | Total number of clicks on the link |
+| `createdAt` | Timestamp when the link was created |
+| `description` | Open Graph description |
+| `id` | Unique identifier for the link |
+| `image` | Open Graph image URL |
+| `shortUrl` | The shortened URL |
+| `slug` | The short code used in the URL |
+| `title` | Open Graph title |
+| `updatedAt` | Timestamp when the link was last updated |
+| `url` | The destination URL |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -307,9 +307,9 @@ API path: `/links`
 | `clicksByDate` |  |
 | `clicksByDevice` |  |
 | `clicksByReferrer` |  |
-| `linkId` |  |
-| `totalClicks` |  |
-| `uniqueClicks` |  |
+| `linkId` | The link identifier |
+| `totalClicks` | Total number of clicks |
+| `uniqueClicks` | Number of unique visitors |
 
 Operations: List.
 
@@ -338,16 +338,16 @@ Create an instance: `$link = $client->Link();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clickCount` | `int` |  |
-| `createdAt` | `string` |  |
-| `description` | `string` |  |
-| `id` | `string` |  |
-| `image` | `string` |  |
-| `shortUrl` | `string` |  |
-| `slug` | `string` |  |
-| `title` | `string` |  |
-| `updatedAt` | `string` |  |
-| `url` | `string` |  |
+| `clickCount` | `int` | Total number of clicks on the link |
+| `createdAt` | `string` | Timestamp when the link was created |
+| `description` | `string` | Open Graph description |
+| `id` | `string` | Unique identifier for the link |
+| `image` | `string` | Open Graph image URL |
+| `shortUrl` | `string` | The shortened URL |
+| `slug` | `string` | The short code used in the URL |
+| `title` | `string` | Open Graph title |
+| `updatedAt` | `string` | Timestamp when the link was last updated |
+| `url` | `string` | The destination URL |
 
 #### Example: Load
 
@@ -389,9 +389,9 @@ Create an instance: `$link_stat = $client->LinkStat();`
 | `clicksByDate` | `array` |  |
 | `clicksByDevice` | `array` |  |
 | `clicksByReferrer` | `array` |  |
-| `linkId` | `string` |  |
-| `totalClicks` | `int` |  |
-| `uniqueClicks` | `int` |  |
+| `linkId` | `string` | The link identifier |
+| `totalClicks` | `int` | Total number of clicks |
+| `uniqueClicks` | `int` | Number of unique visitors |
 
 #### Example: List
 

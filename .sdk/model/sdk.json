@@ -36,54 +36,63 @@
               "active": true,
               "name": "clickCount",
               "req": false,
+              "short": "Total number of clicks on the link",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "createdAt",
               "req": false,
+              "short": "Timestamp when the link was created",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "description",
               "req": false,
+              "short": "Open Graph description",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the link",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "image",
               "req": false,
+              "short": "Open Graph image URL",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "shortUrl",
               "req": false,
+              "short": "The shortened URL",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "slug",
               "req": false,
+              "short": "The short code used in the URL",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "title",
               "req": false,
+              "short": "Open Graph title",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "updatedAt",
               "req": false,
+              "short": "Timestamp when the link was last updated",
               "type": "`$STRING`"
             },
             {
@@ -96,6 +105,7 @@
                 }
               },
               "req": false,
+              "short": "The destination URL",
               "type": "`$STRING`"
             }
           ],
@@ -338,18 +348,21 @@
               "active": true,
               "name": "linkId",
               "req": false,
+              "short": "The link identifier",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "totalClicks",
               "req": false,
+              "short": "Total number of clicks",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "uniqueClicks",
               "req": false,
+              "short": "Number of unique visitors",
               "type": "`$INTEGER`"
             }
           ],

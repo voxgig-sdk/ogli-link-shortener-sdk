@@ -98,16 +98,16 @@ link = client.Link
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clickCount` | `Integer` | No |  |
-| `createdAt` | `String` | No |  |
-| `description` | `String` | No |  |
-| `id` | `String` | No |  |
-| `image` | `String` | No |  |
-| `shortUrl` | `String` | No |  |
-| `slug` | `String` | No |  |
-| `title` | `String` | No |  |
-| `updatedAt` | `String` | No |  |
-| `url` | `String` | No |  |
+| `clickCount` | `Integer` | No | Total number of clicks on the link |
+| `createdAt` | `String` | No | Timestamp when the link was created |
+| `description` | `String` | No | Open Graph description |
+| `id` | `String` | No | Unique identifier for the link |
+| `image` | `String` | No | Open Graph image URL |
+| `shortUrl` | `String` | No | The shortened URL |
+| `slug` | `String` | No | The short code used in the URL |
+| `title` | `String` | No | Open Graph title |
+| `updatedAt` | `String` | No | Timestamp when the link was last updated |
+| `url` | `String` | No | The destination URL |
 
 ### Field Usage by Operation
 
@@ -214,9 +214,9 @@ link_stat = client.LinkStat
 | `clicksByDate` | `Array` | No |  |
 | `clicksByDevice` | `Array` | No |  |
 | `clicksByReferrer` | `Array` | No |  |
-| `linkId` | `String` | No |  |
-| `totalClicks` | `Integer` | No |  |
-| `uniqueClicks` | `Integer` | No |  |
+| `linkId` | `String` | No | The link identifier |
+| `totalClicks` | `Integer` | No | Total number of clicks |
+| `uniqueClicks` | `Integer` | No | Number of unique visitors |
 
 ### Operations
 

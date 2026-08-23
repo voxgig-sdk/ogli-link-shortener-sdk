@@ -6,7 +6,7 @@ The Golang SDK for the OgliLinkShortener API — an entity-oriented client using
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Link(nil)` — each with the same small set of operations (`List`, `Load`, `Create`, `Update`, `Remove`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -299,16 +299,16 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"clickCount"` |  |
-| `"createdAt"` |  |
-| `"description"` |  |
-| `"id"` |  |
-| `"image"` |  |
-| `"shortUrl"` |  |
-| `"slug"` |  |
-| `"title"` |  |
-| `"updatedAt"` |  |
-| `"url"` |  |
+| `"clickCount"` | Total number of clicks on the link |
+| `"createdAt"` | Timestamp when the link was created |
+| `"description"` | Open Graph description |
+| `"id"` | Unique identifier for the link |
+| `"image"` | Open Graph image URL |
+| `"shortUrl"` | The shortened URL |
+| `"slug"` | The short code used in the URL |
+| `"title"` | Open Graph title |
+| `"updatedAt"` | Timestamp when the link was last updated |
+| `"url"` | The destination URL |
 
 Operations: Create, List, Load, Remove, Update.
 
@@ -322,9 +322,9 @@ API path: `/links`
 | `"clicksByDate"` |  |
 | `"clicksByDevice"` |  |
 | `"clicksByReferrer"` |  |
-| `"linkId"` |  |
-| `"totalClicks"` |  |
-| `"uniqueClicks"` |  |
+| `"linkId"` | The link identifier |
+| `"totalClicks"` | Total number of clicks |
+| `"uniqueClicks"` | Number of unique visitors |
 
 Operations: List.
 
@@ -353,16 +353,16 @@ Create an instance: `link := client.Link(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `clickCount` | `int` |  |
-| `createdAt` | `string` |  |
-| `description` | `string` |  |
-| `id` | `string` |  |
-| `image` | `string` |  |
-| `shortUrl` | `string` |  |
-| `slug` | `string` |  |
-| `title` | `string` |  |
-| `updatedAt` | `string` |  |
-| `url` | `string` |  |
+| `clickCount` | `int` | Total number of clicks on the link |
+| `createdAt` | `string` | Timestamp when the link was created |
+| `description` | `string` | Open Graph description |
+| `id` | `string` | Unique identifier for the link |
+| `image` | `string` | Open Graph image URL |
+| `shortUrl` | `string` | The shortened URL |
+| `slug` | `string` | The short code used in the URL |
+| `title` | `string` | Open Graph title |
+| `updatedAt` | `string` | Timestamp when the link was last updated |
+| `url` | `string` | The destination URL |
 
 #### Example: Load
 
@@ -414,9 +414,9 @@ Create an instance: `linkStat := client.LinkStat(nil)`
 | `clicksByDate` | `[]any` |  |
 | `clicksByDevice` | `[]any` |  |
 | `clicksByReferrer` | `[]any` |  |
-| `linkId` | `string` |  |
-| `totalClicks` | `int` |  |
-| `uniqueClicks` | `int` |  |
+| `linkId` | `string` | The link identifier |
+| `totalClicks` | `int` | Total number of clicks |
+| `uniqueClicks` | `int` | Number of unique visitors |
 
 #### Example: List
 

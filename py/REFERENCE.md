@@ -92,16 +92,16 @@ link = client.Link()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `clickCount` | `int` | No |  |
-| `createdAt` | `str` | No |  |
-| `description` | `str` | No |  |
-| `id` | `str` | No |  |
-| `image` | `str` | No |  |
-| `shortUrl` | `str` | No |  |
-| `slug` | `str` | No |  |
-| `title` | `str` | No |  |
-| `updatedAt` | `str` | No |  |
-| `url` | `str` | No |  |
+| `clickCount` | `int` | No | Total number of clicks on the link |
+| `createdAt` | `str` | No | Timestamp when the link was created |
+| `description` | `str` | No | Open Graph description |
+| `id` | `str` | No | Unique identifier for the link |
+| `image` | `str` | No | Open Graph image URL |
+| `shortUrl` | `str` | No | The shortened URL |
+| `slug` | `str` | No | The short code used in the URL |
+| `title` | `str` | No | Open Graph title |
+| `updatedAt` | `str` | No | Timestamp when the link was last updated |
+| `url` | `str` | No | The destination URL |
 
 ### Field Usage by Operation
 
@@ -209,9 +209,9 @@ link_stat = client.LinkStat()
 | `clicksByDate` | `list` | No |  |
 | `clicksByDevice` | `list` | No |  |
 | `clicksByReferrer` | `list` | No |  |
-| `linkId` | `str` | No |  |
-| `totalClicks` | `int` | No |  |
-| `uniqueClicks` | `int` | No |  |
+| `linkId` | `str` | No | The link identifier |
+| `totalClicks` | `int` | No | Total number of clicks |
+| `uniqueClicks` | `int` | No | Number of unique visitors |
 
 ### Operations
 

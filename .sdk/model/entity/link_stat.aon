@@ -28,16 +28,19 @@ main: kit: entity: link_stat: {
     {
       name: "linkId"
       req: false
+      short: "The link identifier"
       type: "`$STRING`"
     }
     {
       name: "totalClicks"
       req: false
+      short: "Total number of clicks"
       type: "`$INTEGER`"
     }
     {
       name: "uniqueClicks"
       req: false
+      short: "Number of unique visitors"
       type: "`$INTEGER`"
     }
   ]
