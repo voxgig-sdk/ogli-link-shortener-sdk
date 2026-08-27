@@ -26,6 +26,11 @@ main: kit: entity: link_stat: {
       type: "`$ARRAY`"
     }
     {
+      name: "id"
+      req: false
+      type: "`$STRING`"
+    }
+    {
       name: "linkId"
       req: false
       short: "The link identifier"
@@ -44,6 +49,11 @@ main: kit: entity: link_stat: {
       type: "`$INTEGER`"
     }
   ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
 
   name: "link_stat"
   op: {

@@ -243,6 +243,7 @@ const link_stat = client.LinkStat()
 | `clicksByDate` | `any[]` | No |  |
 | `clicksByDevice` | `any[]` | No |  |
 | `clicksByReferrer` | `any[]` | No |  |
+| `id` | `string` | No |  |
 | `linkId` | `string` | No | The link identifier |
 | `totalClicks` | `number` | No | Total number of clicks |
 | `uniqueClicks` | `number` | No | Number of unique visitors |

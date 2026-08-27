@@ -322,6 +322,7 @@ API path: `/links`
 | `"clicksByDate"` |  |
 | `"clicksByDevice"` |  |
 | `"clicksByReferrer"` |  |
+| `"id"` |  |
 | `"linkId"` | The link identifier |
 | `"totalClicks"` | Total number of clicks |
 | `"uniqueClicks"` | Number of unique visitors |
@@ -414,6 +415,7 @@ Create an instance: `linkStat := client.LinkStat(nil)`
 | `clicksByDate` | `[]any` |  |
 | `clicksByDevice` | `[]any` |  |
 | `clicksByReferrer` | `[]any` |  |
+| `id` | `string` |  |
 | `linkId` | `string` | The link identifier |
 | `totalClicks` | `int` | Total number of clicks |
 | `uniqueClicks` | `int` | Number of unique visitors |

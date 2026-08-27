@@ -84,6 +84,7 @@ class LinkStat(TypedDict, total=False):
     clicksByDate: list
     clicksByDevice: list
     clicksByReferrer: list
+    id: str
     linkId: str
     totalClicks: int
     uniqueClicks: int

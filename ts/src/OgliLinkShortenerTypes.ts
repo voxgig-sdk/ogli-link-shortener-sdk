@@ -70,6 +70,7 @@ export interface LinkStat {
   clicksByDate?: any[]
   clicksByDevice?: any[]
   clicksByReferrer?: any[]
+  id?: string
   linkId?: string
   totalClicks?: number
   uniqueClicks?: number

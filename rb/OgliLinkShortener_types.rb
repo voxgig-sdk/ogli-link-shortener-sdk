@@ -220,6 +220,9 @@ LinkRemoveMatch = Struct.new(
 # @!attribute [rw] clicksByReferrer
 #   @return [Array, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] linkId
 #   @return [String, nil]
 #
@@ -233,6 +236,7 @@ LinkStat = Struct.new(
   :clicksByDate,
   :clicksByDevice,
   :clicksByReferrer,
+  :id,
   :linkId,
   :totalClicks,
   :uniqueClicks,

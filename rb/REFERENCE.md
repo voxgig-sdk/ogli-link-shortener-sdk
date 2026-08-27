@@ -214,6 +214,7 @@ link_stat = client.LinkStat
 | `clicksByDate` | `Array` | No |  |
 | `clicksByDevice` | `Array` | No |  |
 | `clicksByReferrer` | `Array` | No |  |
+| `id` | `String` | No |  |
 | `linkId` | `String` | No | The link identifier |
 | `totalClicks` | `Integer` | No | Total number of clicks |
 | `uniqueClicks` | `Integer` | No | Number of unique visitors |

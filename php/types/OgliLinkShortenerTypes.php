@@ -91,6 +91,7 @@ class LinkStat
     public ?array $clicksByDate = null;
     public ?array $clicksByDevice = null;
     public ?array $clicksByReferrer = null;
+    public ?string $id = null;
     public ?string $linkId = null;
     public ?int $totalClicks = null;
     public ?int $uniqueClicks = null;

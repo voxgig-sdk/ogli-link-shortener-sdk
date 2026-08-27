@@ -286,6 +286,7 @@ API path: `/links`
 | `clicksByDate` |  |
 | `clicksByDevice` |  |
 | `clicksByReferrer` |  |
+| `id` |  |
 | `linkId` | The link identifier |
 | `totalClicks` | Total number of clicks |
 | `uniqueClicks` | Number of unique visitors |
@@ -366,6 +367,7 @@ Create an instance: `local link_stat = client:LinkStat(nil)`
 | `clicksByDate` | `table` |  |
 | `clicksByDevice` | `table` |  |
 | `clicksByReferrer` | `table` |  |
+| `id` | `string` |  |
 | `linkId` | `string` | The link identifier |
 | `totalClicks` | `number` | Total number of clicks |
 | `uniqueClicks` | `number` | Number of unique visitors |

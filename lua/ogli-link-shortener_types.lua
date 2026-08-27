@@ -65,6 +65,7 @@
 ---@field clicksByDate? table
 ---@field clicksByDevice? table
 ---@field clicksByReferrer? table
+---@field id? string
 ---@field linkId? string
 ---@field totalClicks? number
 ---@field uniqueClicks? number

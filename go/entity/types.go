@@ -84,6 +84,7 @@ type LinkStat struct {
 	ClicksByDate *[]any `json:"clicksByDate,omitempty"`
 	ClicksByDevice *[]any `json:"clicksByDevice,omitempty"`
 	ClicksByReferrer *[]any `json:"clicksByReferrer,omitempty"`
+	Id *string `json:"id,omitempty"`
 	LinkId *string `json:"linkId,omitempty"`
 	TotalClicks *int `json:"totalClicks,omitempty"`
 	UniqueClicks *int `json:"uniqueClicks,omitempty"`

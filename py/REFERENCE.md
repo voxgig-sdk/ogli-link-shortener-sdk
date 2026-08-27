@@ -209,6 +209,7 @@ link_stat = client.LinkStat()
 | `clicksByDate` | `list` | No |  |
 | `clicksByDevice` | `list` | No |  |
 | `clicksByReferrer` | `list` | No |  |
+| `id` | `str` | No |  |
 | `linkId` | `str` | No | The link identifier |
 | `totalClicks` | `int` | No | Total number of clicks |
 | `uniqueClicks` | `int` | No | Number of unique visitors |

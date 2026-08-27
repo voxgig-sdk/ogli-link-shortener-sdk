@@ -234,6 +234,7 @@ fmt.Println(linkStat.GetName()) // "link_stat"
 | `clicksByDate` | `[]any` | No |  |
 | `clicksByDevice` | `[]any` | No |  |
 | `clicksByReferrer` | `[]any` | No |  |
+| `id` | `string` | No |  |
 | `linkId` | `string` | No | The link identifier |
 | `totalClicks` | `int` | No | Total number of clicks |
 | `uniqueClicks` | `int` | No | Number of unique visitors |

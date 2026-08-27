@@ -301,6 +301,7 @@ API path: `/links`
 | `clicksByDate` |  |
 | `clicksByDevice` |  |
 | `clicksByReferrer` |  |
+| `id` |  |
 | `linkId` | The link identifier |
 | `totalClicks` | Total number of clicks |
 | `uniqueClicks` | Number of unique visitors |
@@ -381,6 +382,7 @@ Create an instance: `link_stat = client.LinkStat()`
 | `clicksByDate` | `list` |  |
 | `clicksByDevice` | `list` |  |
 | `clicksByReferrer` | `list` |  |
+| `id` | `str` |  |
 | `linkId` | `str` | The link identifier |
 | `totalClicks` | `int` | Total number of clicks |
 | `uniqueClicks` | `int` | Number of unique visitors |

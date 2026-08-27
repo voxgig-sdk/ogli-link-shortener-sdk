@@ -28,6 +28,7 @@ module OgliLinkShortenerConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -309,6 +310,10 @@ module OgliLinkShortenerConfig
             {
               "name" => "clicksByReferrer",
               "type" => "`$ARRAY`",
+            },
+            {
+              "name" => "id",
+              "type" => "`$STRING`",
             },
             {
               "name" => "linkId",

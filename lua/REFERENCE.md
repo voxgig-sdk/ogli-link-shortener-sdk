@@ -211,6 +211,7 @@ local link_stat = client:LinkStat(nil)
 | `clicksByDate` | `table` | No |  |
 | `clicksByDevice` | `table` | No |  |
 | `clicksByReferrer` | `table` | No |  |
+| `id` | `string` | No |  |
 | `linkId` | `string` | No | The link identifier |
 | `totalClicks` | `number` | No | Total number of clicks |
 | `uniqueClicks` | `number` | No | Number of unique visitors |

@@ -213,6 +213,7 @@ $link_stat = $client->LinkStat();
 | `clicksByDate` | `array` | No |  |
 | `clicksByDevice` | `array` | No |  |
 | `clicksByReferrer` | `array` | No |  |
+| `id` | `string` | No |  |
 | `linkId` | `string` | No | The link identifier |
 | `totalClicks` | `int` | No | Total number of clicks |
 | `uniqueClicks` | `int` | No | Number of unique visitors |

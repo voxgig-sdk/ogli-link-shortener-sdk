@@ -40,7 +40,8 @@ class Config {
      test:     {
       "options": {
         "active": false
-      }
+      },
+      "transport": "base"
     },
 
   }
@@ -335,6 +336,10 @@ class Config {
         {
           "name": "clicksByReferrer",
           "type": "`$ARRAY`"
+        },
+        {
+          "name": "id",
+          "type": "`$STRING`"
         },
         {
           "name": "linkId",

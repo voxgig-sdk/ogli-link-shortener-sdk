@@ -6,27 +6,30 @@
         "clicksByDate": [],
         "clicksByDevice": [],
         "clicksByReferrer": [],
-        "linkId": "s4a",
-        "totalClicks": "s4b",
-        "uniqueClicks": "s4c"
+        "id": "LINK_STAT00",
+        "linkId": "s55",
+        "totalClicks": "s56",
+        "uniqueClicks": "s57"
       },
       "LINK_STAT01": {
         "clicksByCountry": [],
         "clicksByDate": [],
         "clicksByDevice": [],
         "clicksByReferrer": [],
-        "linkId": "s90",
-        "totalClicks": "s91",
-        "uniqueClicks": "s92"
+        "id": "LINK_STAT01",
+        "linkId": "sa5",
+        "totalClicks": "sa6",
+        "uniqueClicks": "sa7"
       },
       "LINK_STAT02": {
         "clicksByCountry": [],
         "clicksByDate": [],
         "clicksByDevice": [],
         "clicksByReferrer": [],
-        "linkId": "sd6",
-        "totalClicks": "sd7",
-        "uniqueClicks": "sd8"
+        "id": "LINK_STAT02",
+        "linkId": "sf5",
+        "totalClicks": "sf6",
+        "uniqueClicks": "sf7"
       }
     }
   },
@@ -37,9 +40,9 @@
         "clicksByDate": [],
         "clicksByDevice": [],
         "clicksByReferrer": [],
-        "linkId": "s11c",
-        "totalClicks": "s11d",
-        "uniqueClicks": "s11e"
+        "linkId": "s145",
+        "totalClicks": "s146",
+        "uniqueClicks": "s147"
       }
     }
   }

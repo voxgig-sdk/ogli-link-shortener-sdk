@@ -42,6 +42,7 @@ class OgliLinkShortenerConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -323,6 +324,10 @@ class OgliLinkShortenerConfig
             [
               'name' => 'clicksByReferrer',
               'type' => '`$ARRAY`',
+            ],
+            [
+              'name' => 'id',
+              'type' => '`$STRING`',
             ],
             [
               'name' => 'linkId',
