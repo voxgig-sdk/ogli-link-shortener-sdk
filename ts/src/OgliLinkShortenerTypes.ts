@@ -23,16 +23,8 @@ export interface LinkLoadMatch {
 }
 
 export interface LinkListMatch {
-  clickCount?: number
-  createdAt?: string
-  description?: string
-  id?: string
-  image?: string
-  shortUrl?: string
-  slug?: string
-  title?: string
-  updatedAt?: string
-  url?: string
+  limit?: number
+  offset?: number
 }
 
 export interface LinkCreateData {
@@ -78,5 +70,7 @@ export interface LinkStat {
 
 export interface LinkStatListMatch {
   id: string
+  end_date?: string
+  start_date?: string
 }
 

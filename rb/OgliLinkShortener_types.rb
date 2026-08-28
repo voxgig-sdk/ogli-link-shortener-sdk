@@ -64,46 +64,14 @@ LinkLoadMatch = Struct.new(
 
 # Request payload for Link#list.
 #
-# @!attribute [rw] clickCount
+# @!attribute [rw] limit
 #   @return [Integer, nil]
 #
-# @!attribute [rw] createdAt
-#   @return [String, nil]
-#
-# @!attribute [rw] description
-#   @return [String, nil]
-#
-# @!attribute [rw] id
-#   @return [String, nil]
-#
-# @!attribute [rw] image
-#   @return [String, nil]
-#
-# @!attribute [rw] shortUrl
-#   @return [String, nil]
-#
-# @!attribute [rw] slug
-#   @return [String, nil]
-#
-# @!attribute [rw] title
-#   @return [String, nil]
-#
-# @!attribute [rw] updatedAt
-#   @return [String, nil]
-#
-# @!attribute [rw] url
-#   @return [String, nil]
+# @!attribute [rw] offset
+#   @return [Integer, nil]
 LinkListMatch = Struct.new(
-  :clickCount,
-  :createdAt,
-  :description,
-  :id,
-  :image,
-  :shortUrl,
-  :slug,
-  :title,
-  :updatedAt,
-  :url,
+  :limit,
+  :offset,
   keyword_init: true
 )
 
@@ -247,8 +215,16 @@ LinkStat = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
+#
+# @!attribute [rw] end_date
+#   @return [String, nil]
+#
+# @!attribute [rw] start_date
+#   @return [String, nil]
 LinkStatListMatch = Struct.new(
   :id,
+  :end_date,
+  :start_date,
   keyword_init: true
 )
 

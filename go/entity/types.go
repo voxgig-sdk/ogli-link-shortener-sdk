@@ -33,16 +33,8 @@ type LinkLoadMatch struct {
 
 // LinkListMatch is the typed request payload for Link.ListTyped.
 type LinkListMatch struct {
-	ClickCount *int `json:"clickCount,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Image *string `json:"image,omitempty"`
-	ShortUrl *string `json:"shortUrl,omitempty"`
-	Slug *string `json:"slug,omitempty"`
-	Title *string `json:"title,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	Url *string `json:"url,omitempty"`
+	Limit *int `json:"limit,omitempty"`
+	Offset *int `json:"offset,omitempty"`
 }
 
 // LinkCreateData is the typed request payload for Link.CreateTyped.
@@ -93,6 +85,8 @@ type LinkStat struct {
 // LinkStatListMatch is the typed request payload for LinkStat.ListTyped.
 type LinkStatListMatch struct {
 	Id string `json:"id"`
+	EndDate *string `json:"end_date,omitempty"`
+	StartDate *string `json:"start_date,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

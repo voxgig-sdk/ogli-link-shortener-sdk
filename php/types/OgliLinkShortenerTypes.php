@@ -36,16 +36,8 @@ class LinkLoadMatch
 /** Request payload for Link#list. */
 class LinkListMatch
 {
-    public ?int $clickCount = null;
-    public ?string $createdAt = null;
-    public ?string $description = null;
-    public ?string $id = null;
-    public ?string $image = null;
-    public ?string $shortUrl = null;
-    public ?string $slug = null;
-    public ?string $title = null;
-    public ?string $updatedAt = null;
-    public ?string $url = null;
+    public ?int $limit = null;
+    public ?int $offset = null;
 }
 
 /** Request payload for Link#create. */
@@ -101,5 +93,7 @@ class LinkStat
 class LinkStatListMatch
 {
     public string $id;
+    public ?string $end_date = null;
+    public ?string $start_date = null;
 }
 

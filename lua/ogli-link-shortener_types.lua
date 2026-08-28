@@ -22,16 +22,8 @@
 ---@field id string
 
 ---@class LinkListMatch
----@field clickCount? number
----@field createdAt? string
----@field description? string
----@field id? string
----@field image? string
----@field shortUrl? string
----@field slug? string
----@field title? string
----@field updatedAt? string
----@field url? string
+---@field limit? number
+---@field offset? number
 
 ---@class LinkCreateData
 ---@field clickCount? number
@@ -72,6 +64,8 @@
 
 ---@class LinkStatListMatch
 ---@field id string
+---@field end_date? string
+---@field start_date? string
 
 local M = {}
 

@@ -34,16 +34,8 @@ class LinkLoadMatch(TypedDict):
 
 
 class LinkListMatch(TypedDict, total=False):
-    clickCount: int
-    createdAt: str
-    description: str
-    id: str
-    image: str
-    shortUrl: str
-    slug: str
-    title: str
-    updatedAt: str
-    url: str
+    limit: int
+    offset: int
 
 
 class LinkCreateData(TypedDict, total=False):
@@ -90,5 +82,10 @@ class LinkStat(TypedDict, total=False):
     uniqueClicks: int
 
 
-class LinkStatListMatch(TypedDict):
+class LinkStatListMatchRequired(TypedDict):
     id: str
+
+
+class LinkStatListMatch(LinkStatListMatchRequired, total=False):
+    end_date: str
+    start_date: str
