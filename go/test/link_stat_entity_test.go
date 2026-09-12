@@ -98,7 +98,7 @@ func TestLinkStatEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		linkStatRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.link_stat", setup.data)))
+		linkStatRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.link_stat")))
 		var linkStatRef01Data map[string]any
 		if len(linkStatRef01DataRaw) > 0 {
 			linkStatRef01Data = core.ToMapAny(linkStatRef01DataRaw[0][1])
@@ -149,7 +149,7 @@ func link_statBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"link_stat01", "link_stat02", "link_stat03", "link01"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -169,7 +169,7 @@ func link_statBasicSetup(extra map[string]any) *entityTestSetup {
 		"OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID": idmap,
 		"OGLI_LINK_SHORTENER_TEST_LIVE":      "FALSE",
 		"OGLI_LINK_SHORTENER_TEST_EXPLAIN":   "FALSE",
-		"OGLI_LINK_SHORTENER_APIKEY":         "NONE",
+		"OGLI_LINK_SHORTENER_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID"])
@@ -178,11 +178,23 @@ func link_statBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["OGLI_LINK_SHORTENER_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["OGLI_LINK_SHORTENER_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewOgliLinkShortenerSDK(core.ToMapAny(mergedOpts))
 	}

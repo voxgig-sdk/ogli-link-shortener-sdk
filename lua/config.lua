@@ -41,6 +41,7 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "createdAt",
             ["short"] = "Timestamp when the link was created",
             ["type"] = "`$STRING`",
@@ -56,11 +57,13 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "image",
             ["short"] = "Open Graph image URL",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "shortUrl",
             ["short"] = "The shortened URL",
             ["type"] = "`$STRING`",
@@ -76,11 +79,13 @@ local function make_config()
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "date-time",
             ["name"] = "updatedAt",
             ["short"] = "Timestamp when the link was last updated",
             ["type"] = "`$STRING`",
           },
           {
+            ["format"] = "uri",
             ["name"] = "url",
             ["op"] = {
               ["create"] = {
@@ -91,6 +96,10 @@ local function make_config()
             ["short"] = "The destination URL",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "link",
         ["op"] = {
@@ -103,13 +112,18 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/links",
-                ["parts"] = {
-                  "links",
+                ["segments"] = {
+                  {
+                    ["lit"] = "links",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "links",
                 },
               },
             },
@@ -140,8 +154,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/links",
-                ["parts"] = {
-                  "links",
+                ["segments"] = {
+                  {
+                    ["lit"] = "links",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -152,6 +168,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.links`",
+                },
+                ["parts"] = {
+                  "links",
                 },
               },
             },
@@ -175,13 +194,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/links/{linkId}",
-                ["parts"] = {
-                  "links",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["linkId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "links",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -192,6 +215,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "links",
+                  "{id}",
                 },
               },
             },
@@ -215,13 +242,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/links/{linkId}",
-                ["parts"] = {
-                  "links",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["linkId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "links",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -232,6 +263,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "links",
+                  "{id}",
                 },
               },
             },
@@ -255,13 +290,17 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/links/{linkId}",
-                ["parts"] = {
-                  "links",
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["linkId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "links",
+                  },
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -272,6 +311,10 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "links",
+                  "{id}",
                 },
               },
             },
@@ -319,6 +362,10 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "link_stat",
         ["op"] = {
           ["list"] = {
@@ -354,14 +401,20 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/links/{linkId}/stats",
-                ["parts"] = {
-                  "links",
-                  "{id}",
-                  "stats",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["linkId"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["lit"] = "links",
+                  },
+                  {
+                    ["var"] = "id",
+                  },
+                  {
+                    ["lit"] = "stats",
                   },
                 },
                 ["select"] = {
@@ -374,6 +427,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "links",
+                  "{id}",
+                  "stats",
                 },
               },
             },

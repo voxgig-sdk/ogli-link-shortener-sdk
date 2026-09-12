@@ -127,7 +127,7 @@ def _link_stat_basic_setup(extra):
         "OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID": idmap,
         "OGLI_LINK_SHORTENER_TEST_LIVE": "FALSE",
         "OGLI_LINK_SHORTENER_TEST_EXPLAIN": "FALSE",
-        "OGLI_LINK_SHORTENER_APIKEY": "NONE",
+        "OGLI_LINK_SHORTENER_APIKEY": "",
     })
 
     idmap_resolved = helpers.to_map(
@@ -137,6 +137,10 @@ def _link_stat_basic_setup(extra):
 
     if env.get("OGLI_LINK_SHORTENER_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
+            # FIRST, so the generated fields below win: sdk-test-control.json's
+            # test.client.options adds to the live client, it does not
+            # redirect it.
+            runner.live_client_options(),
             {
                 "apikey": env.get("OGLI_LINK_SHORTENER_APIKEY"),
             },

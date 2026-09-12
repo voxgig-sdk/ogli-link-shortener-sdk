@@ -101,7 +101,7 @@ func TestLinkEntity(t *testing.T) {
 		// CREATE
 		linkRef01Ent := client.Link(nil)
 		linkRef01Data := core.ToMapAny(vs.GetProp(
-			vs.GetPath([]any{"new", "link"}, setup.data), "link_ref01"))
+			vs.GetPath(setup.data, []any{"new", "link"}), "link_ref01"))
 
 		linkRef01DataResult, err := linkRef01Ent.Create(linkRef01Data, nil)
 		if err != nil {
@@ -225,7 +225,7 @@ func linkBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"link01", "link02", "link03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -245,7 +245,7 @@ func linkBasicSetup(extra map[string]any) *entityTestSetup {
 		"OGLI_LINK_SHORTENER_TEST_LINK_ENTID": idmap,
 		"OGLI_LINK_SHORTENER_TEST_LIVE":      "FALSE",
 		"OGLI_LINK_SHORTENER_TEST_EXPLAIN":   "FALSE",
-		"OGLI_LINK_SHORTENER_APIKEY":         "NONE",
+		"OGLI_LINK_SHORTENER_APIKEY":         "",
 	})
 
 	idmapResolved := core.ToMapAny(env["OGLI_LINK_SHORTENER_TEST_LINK_ENTID"])
@@ -254,11 +254,23 @@ func linkBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["OGLI_LINK_SHORTENER_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 				"apikey": env["OGLI_LINK_SHORTENER_APIKEY"],
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewOgliLinkShortenerSDK(core.ToMapAny(mergedOpts))
 	}

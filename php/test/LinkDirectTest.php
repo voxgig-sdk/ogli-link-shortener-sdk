@@ -123,15 +123,17 @@ function link_direct_setup($mockres)
     $env = Runner::env_override([
         "OGLI_LINK_SHORTENER_TEST_LINK_ENTID" => [],
         "OGLI_LINK_SHORTENER_TEST_LIVE" => "FALSE",
-        "OGLI_LINK_SHORTENER_APIKEY" => "NONE",
+        "OGLI_LINK_SHORTENER_APIKEY" => "",
     ]);
 
     $live = $env["OGLI_LINK_SHORTENER_TEST_LIVE"] === "TRUE";
 
     if ($live) {
-        $merged_opts = [
+        // Merged so the generated fields win: sdk-test-control.json's
+        // test.client.options adds to the live client, it does not redirect it.
+        $merged_opts = array_merge(Runner::live_client_options(), [
             "apikey" => $env["OGLI_LINK_SHORTENER_APIKEY"],
-        ];
+        ]);
         $client = new OgliLinkShortenerSDK($merged_opts);
         return [
             "client" => $client,

@@ -1,6 +1,14 @@
 # OgliLinkShortener SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -62,6 +70,7 @@ def make_config():
             "type": "`$INTEGER`",
           },
           {
+            "format": "date-time",
             "name": "createdAt",
             "short": "Timestamp when the link was created",
             "type": "`$STRING`",
@@ -77,11 +86,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "uri",
             "name": "image",
             "short": "Open Graph image URL",
             "type": "`$STRING`",
           },
           {
+            "format": "uri",
             "name": "shortUrl",
             "short": "The shortened URL",
             "type": "`$STRING`",
@@ -97,11 +108,13 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "updatedAt",
             "short": "Timestamp when the link was last updated",
             "type": "`$STRING`",
           },
           {
+            "format": "uri",
             "name": "url",
             "op": {
               "create": {
@@ -113,6 +126,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "link",
         "op": {
           "create": {
@@ -124,14 +141,19 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/links",
-                "parts": [
-                  "links",
+                "segments": [
+                  {
+                    "lit": "links",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "links",
+                ],
               },
             ],
           },
@@ -161,8 +183,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/links",
-                "parts": [
-                  "links",
+                "segments": [
+                  {
+                    "lit": "links",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -174,6 +198,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.links`",
                 },
+                "parts": [
+                  "links",
+                ],
               },
             ],
           },
@@ -196,15 +223,19 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/links/{linkId}",
-                "parts": [
-                  "links",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "linkId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "links",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -214,6 +245,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "links",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -236,15 +271,19 @@ def make_config():
                 "kind": "http",
                 "method": "DELETE",
                 "orig": "/links/{linkId}",
-                "parts": [
-                  "links",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "linkId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "links",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -254,6 +293,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "links",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -276,15 +319,19 @@ def make_config():
                 "kind": "http",
                 "method": "PUT",
                 "orig": "/links/{linkId}",
-                "parts": [
-                  "links",
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "linkId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "links",
+                  },
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -294,6 +341,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "links",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -340,6 +391,10 @@ def make_config():
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "link_stat",
         "op": {
           "list": {
@@ -375,16 +430,22 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/links/{linkId}/stats",
-                "parts": [
-                  "links",
-                  "{id}",
-                  "stats",
-                ],
                 "rename": {
                   "param": {
                     "linkId": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "links",
+                  },
+                  {
+                    "var": "id",
+                  },
+                  {
+                    "lit": "stats",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "end_date",
@@ -396,6 +457,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "links",
+                  "{id}",
+                  "stats",
+                ],
               },
             ],
           },

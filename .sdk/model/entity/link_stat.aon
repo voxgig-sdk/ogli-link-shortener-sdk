@@ -90,16 +90,22 @@ main: kit: entity: link_stat: {
           }
           method: "GET"
           orig: "/links/{linkId}/stats"
-          parts: [
-            "links"
-            "{id}"
-            "stats"
-          ]
           rename: {
             param: {
               linkId: "id"
             }
           }
+          segments: [
+            {
+              lit: "links"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "stats"
+            }
+          ]
           select: {
             exist: [
               "end_date"

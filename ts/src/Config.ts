@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -79,6 +90,7 @@ class Config {
           "type": "`$INTEGER`"
         },
         {
+          "format": "date-time",
           "name": "createdAt",
           "short": "Timestamp when the link was created",
           "type": "`$STRING`"
@@ -94,11 +106,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "uri",
           "name": "image",
           "short": "Open Graph image URL",
           "type": "`$STRING`"
         },
         {
+          "format": "uri",
           "name": "shortUrl",
           "short": "The shortened URL",
           "type": "`$STRING`"
@@ -114,11 +128,13 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "updatedAt",
           "short": "Timestamp when the link was last updated",
           "type": "`$STRING`"
         },
         {
+          "format": "uri",
           "name": "url",
           "op": {
             "create": {
@@ -130,6 +146,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "link",
       "op": {
         "create": {
@@ -141,14 +161,19 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/links",
-              "parts": [
-                "links"
+              "segments": [
+                {
+                  "lit": "links"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "links"
+              ]
             }
           ]
         },
@@ -178,8 +203,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/links",
-              "parts": [
-                "links"
+              "segments": [
+                {
+                  "lit": "links"
+                }
               ],
               "select": {
                 "exist": [
@@ -190,7 +217,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.links`"
-              }
+              },
+              "parts": [
+                "links"
+              ]
             }
           ]
         },
@@ -213,15 +243,19 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/links/{linkId}",
-              "parts": [
-                "links",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "linkId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "links"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -230,7 +264,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "links",
+                "{id}"
+              ]
             }
           ]
         },
@@ -253,15 +291,19 @@ class Config {
               "kind": "http",
               "method": "DELETE",
               "orig": "/links/{linkId}",
-              "parts": [
-                "links",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "linkId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "links"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -270,7 +312,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "links",
+                "{id}"
+              ]
             }
           ]
         },
@@ -293,15 +339,19 @@ class Config {
               "kind": "http",
               "method": "PUT",
               "orig": "/links/{linkId}",
-              "parts": [
-                "links",
-                "{id}"
-              ],
               "rename": {
                 "param": {
                   "linkId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "links"
+                },
+                {
+                  "var": "id"
+                }
+              ],
               "select": {
                 "exist": [
                   "id"
@@ -310,7 +360,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "links",
+                "{id}"
+              ]
             }
           ]
         }
@@ -357,6 +411,10 @@ class Config {
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "link_stat",
       "op": {
         "list": {
@@ -392,16 +450,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/links/{linkId}/stats",
-              "parts": [
-                "links",
-                "{id}",
-                "stats"
-              ],
               "rename": {
                 "param": {
                   "linkId": "id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "links"
+                },
+                {
+                  "var": "id"
+                },
+                {
+                  "lit": "stats"
+                }
+              ],
               "select": {
                 "exist": [
                   "end_date",
@@ -412,7 +476,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "links",
+                "{id}",
+                "stats"
+              ]
             }
           ]
         }
@@ -428,6 +497,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

@@ -53,6 +53,7 @@ module OgliLinkShortenerConfig
               "type" => "`$INTEGER`",
             },
             {
+              "format" => "date-time",
               "name" => "createdAt",
               "short" => "Timestamp when the link was created",
               "type" => "`$STRING`",
@@ -68,11 +69,13 @@ module OgliLinkShortenerConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "uri",
               "name" => "image",
               "short" => "Open Graph image URL",
               "type" => "`$STRING`",
             },
             {
+              "format" => "uri",
               "name" => "shortUrl",
               "short" => "The shortened URL",
               "type" => "`$STRING`",
@@ -88,11 +91,13 @@ module OgliLinkShortenerConfig
               "type" => "`$STRING`",
             },
             {
+              "format" => "date-time",
               "name" => "updatedAt",
               "short" => "Timestamp when the link was last updated",
               "type" => "`$STRING`",
             },
             {
+              "format" => "uri",
               "name" => "url",
               "op" => {
                 "create" => {
@@ -104,6 +109,10 @@ module OgliLinkShortenerConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "link",
           "op" => {
             "create" => {
@@ -115,14 +124,19 @@ module OgliLinkShortenerConfig
                   "kind" => "http",
                   "method" => "POST",
                   "orig" => "/links",
-                  "parts" => [
-                    "links",
+                  "segments" => [
+                    {
+                      "lit" => "links",
+                    },
                   ],
                   "select" => {},
                   "transform" => {
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "links",
+                  ],
                 },
               ],
             },
@@ -152,8 +166,10 @@ module OgliLinkShortenerConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/links",
-                  "parts" => [
-                    "links",
+                  "segments" => [
+                    {
+                      "lit" => "links",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -165,6 +181,9 @@ module OgliLinkShortenerConfig
                     "req" => "`reqdata`",
                     "res" => "`body.links`",
                   },
+                  "parts" => [
+                    "links",
+                  ],
                 },
               ],
             },
@@ -187,15 +206,19 @@ module OgliLinkShortenerConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/links/{linkId}",
-                  "parts" => [
-                    "links",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "linkId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "links",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -205,6 +228,10 @@ module OgliLinkShortenerConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "links",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -227,15 +254,19 @@ module OgliLinkShortenerConfig
                   "kind" => "http",
                   "method" => "DELETE",
                   "orig" => "/links/{linkId}",
-                  "parts" => [
-                    "links",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "linkId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "links",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -245,6 +276,10 @@ module OgliLinkShortenerConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "links",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -267,15 +302,19 @@ module OgliLinkShortenerConfig
                   "kind" => "http",
                   "method" => "PUT",
                   "orig" => "/links/{linkId}",
-                  "parts" => [
-                    "links",
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "linkId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "links",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -285,6 +324,10 @@ module OgliLinkShortenerConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "links",
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -331,6 +374,10 @@ module OgliLinkShortenerConfig
               "type" => "`$INTEGER`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "link_stat",
           "op" => {
             "list" => {
@@ -366,16 +413,22 @@ module OgliLinkShortenerConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/links/{linkId}/stats",
-                  "parts" => [
-                    "links",
-                    "{id}",
-                    "stats",
-                  ],
                   "rename" => {
                     "param" => {
                       "linkId" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "lit" => "links",
+                    },
+                    {
+                      "var" => "id",
+                    },
+                    {
+                      "lit" => "stats",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "end_date",
@@ -387,6 +440,11 @@ module OgliLinkShortenerConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "links",
+                    "{id}",
+                    "stats",
+                  ],
                 },
               ],
             },

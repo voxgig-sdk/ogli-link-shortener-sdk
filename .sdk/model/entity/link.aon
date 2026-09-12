@@ -12,6 +12,7 @@ main: kit: entity: link: {
       type: "`$INTEGER`"
     }
     {
+      format: "date-time"
       name: "createdAt"
       req: false
       short: "Timestamp when the link was created"
@@ -30,12 +31,14 @@ main: kit: entity: link: {
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "image"
       req: false
       short: "Open Graph image URL"
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "shortUrl"
       req: false
       short: "The shortened URL"
@@ -54,12 +57,14 @@ main: kit: entity: link: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "updatedAt"
       req: false
       short: "Timestamp when the link was last updated"
       type: "`$STRING`"
     }
     {
+      format: "uri"
       name: "url"
       op: {
         create: {
@@ -86,8 +91,10 @@ main: kit: entity: link: {
         {
           method: "POST"
           orig: "/links"
-          parts: [
-            "links"
+          segments: [
+            {
+              lit: "links"
+            }
           ]
           transform: {
             req: "`reqdata`"
@@ -122,8 +129,10 @@ main: kit: entity: link: {
           }
           method: "GET"
           orig: "/links"
-          parts: [
-            "links"
+          segments: [
+            {
+              lit: "links"
+            }
           ]
           select: {
             exist: [
@@ -155,15 +164,19 @@ main: kit: entity: link: {
           }
           method: "GET"
           orig: "/links/{linkId}"
-          parts: [
-            "links"
-            "{id}"
-          ]
           rename: {
             param: {
               linkId: "id"
             }
           }
+          segments: [
+            {
+              lit: "links"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -193,15 +206,19 @@ main: kit: entity: link: {
           }
           method: "DELETE"
           orig: "/links/{linkId}"
-          parts: [
-            "links"
-            "{id}"
-          ]
           rename: {
             param: {
               linkId: "id"
             }
           }
+          segments: [
+            {
+              lit: "links"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
@@ -231,15 +248,19 @@ main: kit: entity: link: {
           }
           method: "PUT"
           orig: "/links/{linkId}"
-          parts: [
-            "links"
-            "{id}"
-          ]
           rename: {
             param: {
               linkId: "id"
             }
           }
+          segments: [
+            {
+              lit: "links"
+            }
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"
