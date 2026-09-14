@@ -105,7 +105,7 @@ local results, err = client:Link():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
+| TypeScript | `@voxgig-sdk/ogli-link-shortener-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
 | Python | `voxgig-sdk-ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
 | PHP | `voxgig-sdk/ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/ogli-link-shortener-sdk/go` | `go get github.com/voxgig-sdk/ogli-link-shortener-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Link():list()
 ### TypeScript
 
 ```ts
-import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener'
+import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener-sdk'
 
 const client = new OgliLinkShortenerSDK({
   apikey: process.env.OGLI_LINK_SHORTENER_APIKEY,

@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener'
+import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener-sdk'
 
 const client = new OgliLinkShortenerSDK({
   apikey: process.env.OGLI_LINK_SHORTENER_APIKEY,
@@ -533,7 +533,7 @@ ogli-link-shortener/
 Import the SDK from the package root:
 
 ```ts
-import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener'
+import { OgliLinkShortenerSDK } from '@voxgig-sdk/ogli-link-shortener-sdk'
 ```
 
 ### Entity state
