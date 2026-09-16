@@ -4,7 +4,10 @@ declare(strict_types=1);
 // OgliLinkShortener SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class OgliLinkShortenerFeatures
@@ -14,8 +17,14 @@ class OgliLinkShortenerFeatures
         switch ($name) {
             case "base":
                 return new OgliLinkShortenerBaseFeature();
+            case "ratelimit":
+                return new OgliLinkShortenerRatelimitFeature();
+            case "retry":
+                return new OgliLinkShortenerRetryFeature();
             case "test":
                 return new OgliLinkShortenerTestFeature();
+            case "timeout":
+                return new OgliLinkShortenerTimeoutFeature();
             default:
                 return new OgliLinkShortenerBaseFeature();
         }
@@ -31,7 +40,10 @@ class OgliLinkShortenerFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

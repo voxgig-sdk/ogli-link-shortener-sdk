@@ -5,6 +5,8 @@ import * as Fs from 'node:fs'
 
 import { test, describe, afterEach } from 'node:test'
 import assert from 'node:assert'
+import { createLiveTransport } from '../../live-runner'
+import { runLiveEntity } from '../../live-entity'
 
 
 import { OgliLinkShortenerSDK, BaseFeature, stdutil } from '../../..'
@@ -47,16 +49,13 @@ describe('LinkStatEntity', async () => {
 
     const live = 'TRUE' === process.env.OGLI_LINK_SHORTENER_TEST_LIVE
     for (const op of ['list']) {
-      if (maybeSkipControl(t, 'entityOp', 'link_stat.' + op, live)) return
+      if (!live && maybeSkipControl(t, 'entityOp', 'link_stat.' + op, live)) return
     }
 
+    
     const setup = basicSetup()
-    // The basic flow consumes synthetic IDs and field values from the
-    // fixture (entity TestData.json). Those don't exist on the live API.
-    // Skip live runs unless the user provided a real ENTID env override.
-    if (setup.syntheticOnly) {
-      t.skip('live entity test uses synthetic IDs from fixture — set OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID JSON to run live')
-      return
+    if (setup.live) {
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":[{"active":true,"name":"clicksByCountry","req":false,"type":"`$ARRAY`","index$":0},{"active":true,"name":"clicksByDate","req":false,"type":"`$ARRAY`","index$":1},{"active":true,"name":"clicksByDevice","req":false,"type":"`$ARRAY`","index$":2},{"active":true,"name":"clicksByReferrer","req":false,"type":"`$ARRAY`","index$":3},{"active":true,"name":"id","req":false,"type":"`$STRING`","index$":4},{"active":true,"name":"linkId","req":false,"short":"The link identifier","type":"`$STRING`","index$":5},{"active":true,"name":"totalClicks","req":false,"short":"Total number of clicks","type":"`$INTEGER`","index$":6},{"active":true,"name":"uniqueClicks","req":false,"short":"Number of unique visitors","type":"`$INTEGER`","index$":7}],"id":{"field":"id","name":"id"},"name":"link_stat","op":{"list":{"input":"data","name":"list","points":[{"active":true,"args":{"params":[{"active":true,"kind":"param","name":"id","orig":"link_id","reqd":true,"type":"`$STRING`","index$":0}],"query":[{"active":true,"kind":"query","name":"end_date","orig":"end_date","reqd":false,"type":"`$STRING`","index$":0},{"active":true,"kind":"query","name":"start_date","orig":"start_date","reqd":false,"type":"`$STRING`","index$":1}]},"contract":{"id":"GET /links/{linkId}/stats","json":"{\"operationId\":\"getLinkStats\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start date for statistics (ISO 8601 format)\",\"in\":\"query\",\"name\":\"startDate\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}},{\"description\":\"End date for statistics (ISO 8601 format)\",\"in\":\"query\",\"name\":\"endDate\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clicksByCountry\":{\"items\":{\"properties\":{\"clicks\":{\"example\":320,\"type\":\"integer\"},\"country\":{\"example\":\"US\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByDate\":{\"items\":{\"properties\":{\"clicks\":{\"example\":45,\"type\":\"integer\"},\"date\":{\"example\":\"2023-10-15\",\"format\":\"date\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByDevice\":{\"items\":{\"properties\":{\"clicks\":{\"example\":750,\"type\":\"integer\"},\"device\":{\"example\":\"mobile\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByReferrer\":{\"items\":{\"properties\":{\"clicks\":{\"example\":180,\"type\":\"integer\"},\"referrer\":{\"example\":\"twitter.com\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"linkId\":{\"description\":\"The link identifier\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"totalClicks\":{\"description\":\"Total number of clicks\",\"example\":1250,\"type\":\"integer\"},\"uniqueClicks\":{\"description\":\"Number of unique visitors\",\"example\":890,\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Statistics retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}","source":"openapi3","version":1},"kind":"http","method":"GET","orig":"/links/{linkId}/stats","rename":{"param":{"linkId":"id"}},"segments":[{"lit":"links"},{"var":"id"},{"lit":"stats"}],"select":{"exist":["end_date","id","start_date"]},"transform":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"link_stat","name__orig":"link_stat","Name":"LinkStat","name_":"link_stat","name-":"link-stat","NAME":"LINK_STAT","index$":1}, {"active":true,"entity":"link_stat","key$":"BasicLinkStatFlow","kind":"basic","name":"BasicLinkStatFlow","param":{},"step":[{"active":true,"data":{},"input":{},"match":{"link_id":"link01"},"op":"list","spec":[],"valid":[{"apply":"ItemExists","def":{"ref":"link_stat_ref01"}}],"index$":0}]}, 'LinkStat')
     }
     const client = setup.client
     const struct = setup.struct
@@ -110,13 +109,6 @@ function basicSetup(extra?: any) {
       }]
     })
 
-  // Detect whether the user provided a real ENTID JSON via env var. The
-  // basic flow consumes synthetic IDs from the fixture file; without an
-  // override those synthetic IDs reach the live API and 4xx. Surface this
-  // to the test so it can skip rather than fail.
-  const idmapEnvVal = process.env['OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID']
-  const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{')
-
   const env = envOverride({
     'OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID': idmap,
     'OGLI_LINK_SHORTENER_TEST_LIVE': 'FALSE',
@@ -128,7 +120,13 @@ function basicSetup(extra?: any) {
 
   const live = 'TRUE' === env.OGLI_LINK_SHORTENER_TEST_LIVE
 
+  const transport = createLiveTransport()
   if (live) {
+    const rawIds = process.env['OGLI_LINK_SHORTENER_TEST_LINK_STAT_ENTID']
+    idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {}
+    if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+      throw new Error('Live ENTID must be a JSON object')
+    }
     client = new OgliLinkShortenerSDK(merge([
       // FIRST, so the generated fields below win: sdk-test-control.json's
       // test.client.options adds to the live client, it does not redirect it.
@@ -141,7 +139,8 @@ function basicSetup(extra?: any) {
       // argument at all - so a bare 'extra' silently discarded the apikey
       // and server values above and handed the SDK undefined. Harmless
       // while there was nothing in that object; not harmless now.
-      extra || {}
+      extra || {},
+      { system: { fetch: transport.fetch } }
     ]))
   }
 
@@ -154,7 +153,7 @@ function basicSetup(extra?: any) {
     data: entityData,
     explain: 'TRUE' === env.OGLI_LINK_SHORTENER_TEST_EXPLAIN,
     live,
-    syntheticOnly: live && !idmapOverridden,
+    transport,
     now: Date.now(),
   }
 

@@ -1,12 +1,18 @@
 # OgliLinkShortener SDK feature factory
 
 from oglilinkshortener_sdk.feature.base_feature import OgliLinkShortenerBaseFeature
+from oglilinkshortener_sdk.feature.ratelimit_feature import OgliLinkShortenerRatelimitFeature
+from oglilinkshortener_sdk.feature.retry_feature import OgliLinkShortenerRetryFeature
 from oglilinkshortener_sdk.feature.test_feature import OgliLinkShortenerTestFeature
+from oglilinkshortener_sdk.feature.timeout_feature import OgliLinkShortenerTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: OgliLinkShortenerBaseFeature(),
+    "ratelimit": lambda: OgliLinkShortenerRatelimitFeature(),
+    "retry": lambda: OgliLinkShortenerRetryFeature(),
     "test": lambda: OgliLinkShortenerTestFeature(),
+    "timeout": lambda: OgliLinkShortenerTimeoutFeature(),
 }
 
 

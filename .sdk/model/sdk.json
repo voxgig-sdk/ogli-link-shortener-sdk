@@ -24,7 +24,71 @@
         "repr": "auto"
       },
       "contributor": {},
-      "docs": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "link": {
           "active": true,
@@ -127,6 +191,12 @@
                 {
                   "active": true,
                   "args": {},
+                  "contract": {
+                    "id": "POST /links",
+                    "json": "{\"operationId\":\"createLink\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"description\":\"Open Graph description for social media previews\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL for social media previews\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"Custom short code for the link (optional, auto-generated if not provided)\",\"example\":\"my-custom-link\",\"pattern\":\"^[a-zA-Z0-9-_]+$\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title for social media previews\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL to shorten\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"required\":[\"url\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link created successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad request - Invalid input\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "POST",
                   "orig": "/links",
@@ -171,6 +241,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /links",
+                    "json": "{\"operationId\":\"listLinks\",\"parameters\":[{\"description\":\"Maximum number of links to return\",\"in\":\"query\",\"name\":\"limit\",\"schema\":{\"default\":20,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Number of links to skip for pagination\",\"in\":\"query\",\"name\":\"offset\",\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"limit\":{\"description\":\"Maximum number of links returned\",\"example\":20,\"type\":\"integer\"},\"links\":{\"items\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"offset\":{\"description\":\"Number of links skipped\",\"example\":0,\"type\":\"integer\"},\"total\":{\"description\":\"Total number of links available\",\"example\":50,\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"List of links retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/links",
@@ -209,6 +285,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "GET /links/{linkId}",
+                    "json": "{\"operationId\":\"getLink\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "GET",
@@ -256,6 +338,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "DELETE /links/{linkId}",
+                    "json": "{\"operationId\":\"deleteLink\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"204\":{\"description\":\"Link deleted successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "DELETE",
                   "orig": "/links/{linkId}",
@@ -301,6 +389,12 @@
                         "type": "`$STRING`"
                       }
                     ]
+                  },
+                  "contract": {
+                    "id": "PUT /links/{linkId}",
+                    "json": "{\"operationId\":\"updateLink\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"description\":\"Open Graph description for social media previews\",\"example\":\"Updated description\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL for social media previews\",\"example\":\"https://example.com/new-image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title for social media previews\",\"example\":\"Updated Title\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/updated-url\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link updated successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad request - Invalid input\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
                   },
                   "kind": "http",
                   "method": "PUT",
@@ -435,6 +529,12 @@
                       }
                     ]
                   },
+                  "contract": {
+                    "id": "GET /links/{linkId}/stats",
+                    "json": "{\"operationId\":\"getLinkStats\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start date for statistics (ISO 8601 format)\",\"in\":\"query\",\"name\":\"startDate\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}},{\"description\":\"End date for statistics (ISO 8601 format)\",\"in\":\"query\",\"name\":\"endDate\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clicksByCountry\":{\"items\":{\"properties\":{\"clicks\":{\"example\":320,\"type\":\"integer\"},\"country\":{\"example\":\"US\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByDate\":{\"items\":{\"properties\":{\"clicks\":{\"example\":45,\"type\":\"integer\"},\"date\":{\"example\":\"2023-10-15\",\"format\":\"date\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByDevice\":{\"items\":{\"properties\":{\"clicks\":{\"example\":750,\"type\":\"integer\"},\"device\":{\"example\":\"mobile\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByReferrer\":{\"items\":{\"properties\":{\"clicks\":{\"example\":180,\"type\":\"integer\"},\"referrer\":{\"example\":\"twitter.com\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"linkId\":{\"description\":\"The link identifier\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"totalClicks\":{\"description\":\"Total number of clicks\",\"example\":1250,\"type\":\"integer\"},\"uniqueClicks\":{\"description\":\"Number of unique visitors\",\"example\":890,\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Statistics retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
+                    "source": "openapi3",
+                    "version": 1
+                  },
                   "kind": "http",
                   "method": "GET",
                   "orig": "/links/{linkId}/stats",
@@ -475,13 +575,223 @@
         }
       },
       "feature": {
+        "ratelimit": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "burst": 5,
+              "rate": 5
+            },
+            "optspec": {
+              "now": "`$FUNCTION`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "ratelimit",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Client-side rate limiting via a token bucket",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
+        "retry": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "factor": 2,
+              "maxDelay": 2000,
+              "minDelay": 50,
+              "retries": 2,
+              "statuses": [
+                408,
+                425,
+                429,
+                500,
+                502,
+                503,
+                504
+              ]
+            },
+            "optspec": {
+              "jitter": "`$BOOLEAN`",
+              "sleep": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "retry",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Automatic retry of transient failures with exponential backoff",
+          "transport": "wrap",
+          "version": "0.0.1"
+        },
         "test": {
           "active": true,
           "base": "node_modules/@voxgig/sdkgen/project/.sdk",
           "config": {
             "options": {
               "active": false
-            }
+            },
+            "optspec": {
+              "entity": "`$MAP`",
+              "net": "`$MAP`"
+            },
+            "strict": false
           },
           "hook": {
             "GetData": {
@@ -571,6 +881,102 @@
           },
           "title": "In-memory mock transport for testing without a live server",
           "transport": "base",
+          "version": "0.0.1"
+        },
+        "timeout": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "config": {
+            "options": {
+              "active": false,
+              "ms": 30000
+            },
+            "optspec": {
+              "clearTimer": "`$FUNCTION`",
+              "setTimer": "`$FUNCTION`"
+            },
+            "strict": false
+          },
+          "hook": {
+            "GetData": {
+              "active": false,
+              "await": false
+            },
+            "GetMatch": {
+              "active": false,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": false,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": false,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PreRequest": {
+              "active": false,
+              "await": false
+            },
+            "PreResponse": {
+              "active": false,
+              "await": false
+            },
+            "PreResult": {
+              "active": false,
+              "await": false
+            },
+            "PreSpec": {
+              "active": false,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": false,
+              "await": false
+            }
+          },
+          "name": "timeout",
+          "needs": {},
+          "origname": "",
+          "package": "@voxgig/sdkgen",
+          "plugin": {},
+          "spec": {},
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "Per-request timeout with transport abort",
+          "transport": "wrap",
           "version": "0.0.1"
         }
       },
@@ -741,6 +1147,48 @@
         "website": "https://app.ogli.sh"
       },
       "option": {},
+      "optspec": {
+        "allow": {
+          "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
+          "op": "create,update,load,list,remove,command,direct,graphql"
+        },
+        "apikey": "",
+        "auth": {
+          "basic": false,
+          "prefix": ""
+        },
+        "base": "http://localhost:8000",
+        "clean": {
+          "keys": "key,token,id"
+        },
+        "entity": {
+          "`$CHILD`": {
+            "`$OPEN`": true,
+            "active": false,
+            "alias": {}
+          }
+        },
+        "extend": "`$ANY`",
+        "headers": {
+          "`$CHILD`": "`$STRING`"
+        },
+        "prefix": "",
+        "secret": "",
+        "server": {
+          "`$CHILD`": ""
+        },
+        "suffix": "",
+        "system": {
+          "fetch": "`$ANY`"
+        },
+        "test": {
+          "active": false,
+          "entity": {
+            "`$OPEN`": true
+          }
+        },
+        "utility": {}
+      },
       "repo": {
         "host": "github.com",
         "path": ""
@@ -1295,6 +1743,7 @@
           },
           "package": "@voxgig/sdkgen",
           "provides": {
+            "schema": true,
             "sekreto": true
           },
           "publish": {
@@ -1336,7 +1785,7 @@
         "live": {
           "app": false,
           "base": "",
-          "strict": false
+          "strict": true
         }
       }
     }
