@@ -131,12 +131,12 @@ class Config {
 
     entity: {
       
-      link: {
-      },
-
-      link_stat: {
-      },
-
+        link: {
+        },
+  
+        link_stat: {
+        },
+  
     }
   }
 

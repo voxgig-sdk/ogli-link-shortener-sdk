@@ -1,4 +1,4 @@
 # Entity Models
 
-@"link.aon"
-@"link_stat.aon"
+@"./link.aon"
+@"./link_stat.aon"

@@ -105,12 +105,12 @@ local results, err = client:Link():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/ogli-link-shortener-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
-| Python | `voxgig-sdk-ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
-| PHP | `voxgig-sdk/ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
+| TypeScript | `@voxgig-sdk/ogli-link-shortener-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/tags) |
+| Python | `voxgig-sdk-ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/tags) |
+| PHP | `voxgig-sdk/ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/ogli-link-shortener-sdk/go` | `go get github.com/voxgig-sdk/ogli-link-shortener-sdk/go@latest` |
-| Ruby | `voxgig-sdk-ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
-| Lua | `voxgig-sdk-ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/releases) |
+| Ruby | `voxgig-sdk-ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/tags) |
+| Lua | `voxgig-sdk-ogli-link-shortener` | publish pending — [install from git tag](https://github.com/voxgig-sdk/ogli-link-shortener-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/ogli-link-shortener-sdk/go-cli` | `go install github.com/voxgig-sdk/ogli-link-shortener-sdk/go-cli/cmd/ogli-link-shortener@latest` |
 | Go MCP server | `github.com/voxgig-sdk/ogli-link-shortener-sdk/go-mcp` | `go get github.com/voxgig-sdk/ogli-link-shortener-sdk/go-mcp@latest` |
 
