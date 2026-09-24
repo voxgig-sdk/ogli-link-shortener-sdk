@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LinkStatEntity = void 0;
 const OgliLinkShortenerEntityBase_1 = require("../OgliLinkShortenerEntityBase");
-// TODO: needs Entity superclass
 class LinkStatEntity extends OgliLinkShortenerEntityBase_1.OgliLinkShortenerEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

@@ -1,0 +1,140 @@
+# Entity: link_stat
+
+main: kit: entity: link_stat: {
+
+  alias: field: {}
+
+  fields: {
+    clicksByCountry: {
+      h: "Clicks By Country"
+      n: "clicksByCountry"
+      r: false
+      t: "`$ARRAY`"
+    }
+    clicksByDate: {
+      h: "Clicks By Date"
+      n: "clicksByDate"
+      r: false
+      t: "`$ARRAY`"
+    }
+    clicksByDevice: {
+      h: "Clicks By Device"
+      n: "clicksByDevice"
+      r: false
+      t: "`$ARRAY`"
+    }
+    clicksByReferrer: {
+      h: "Clicks By Referrer"
+      n: "clicksByReferrer"
+      r: false
+      t: "`$ARRAY`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      t: "`$STRING`"
+    }
+    linkId: {
+      h: "Link Id"
+      n: "linkId"
+      r: false
+      sh: "The link identifier"
+      t: "`$STRING`"
+    }
+    totalClicks: {
+      h: "Total Clicks"
+      n: "totalClicks"
+      r: false
+      sh: "Total number of clicks"
+      t: "`$INTEGER`"
+    }
+    uniqueClicks: {
+      h: "Unique Clicks"
+      n: "uniqueClicks"
+      r: false
+      sh: "Number of unique visitors"
+      t: "`$INTEGER`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "link_stat"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /links/{linkId}/stats"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "link_id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "end_date"
+                or: "end_date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "start_date"
+                or: "start_date"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/links/{linkId}/stats"
+          q: {
+            exist: [
+              "end_date"
+              "id"
+              "start_date"
+            ]
+          }
+          r: {
+            param: {
+              linkId: "id"
+            }
+          }
+          s: [
+            {
+              lit: "links"
+            }
+            {
+              var: "id"
+            }
+            {
+              lit: "stats"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

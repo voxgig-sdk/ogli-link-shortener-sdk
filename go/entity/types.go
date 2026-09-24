@@ -1,7 +1,7 @@
 // Typed models for the OgliLinkShortener SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,16 +14,6 @@ import (
 
 // Link is the typed data model for the link entity.
 type Link struct {
-	ClickCount *int `json:"clickCount,omitempty"`
-	CreatedAt *string `json:"createdAt,omitempty"`
-	Description *string `json:"description,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Image *string `json:"image,omitempty"`
-	ShortUrl *string `json:"shortUrl,omitempty"`
-	Slug *string `json:"slug,omitempty"`
-	Title *string `json:"title,omitempty"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	Url *string `json:"url,omitempty"`
 }
 
 // LinkLoadMatch is the typed request payload for Link.LoadTyped.
@@ -72,14 +62,6 @@ type LinkRemoveMatch struct {
 
 // LinkStat is the typed data model for the link_stat entity.
 type LinkStat struct {
-	ClicksByCountry *[]any `json:"clicksByCountry,omitempty"`
-	ClicksByDate *[]any `json:"clicksByDate,omitempty"`
-	ClicksByDevice *[]any `json:"clicksByDevice,omitempty"`
-	ClicksByReferrer *[]any `json:"clicksByReferrer,omitempty"`
-	Id *string `json:"id,omitempty"`
-	LinkId *string `json:"linkId,omitempty"`
-	TotalClicks *int `json:"totalClicks,omitempty"`
-	UniqueClicks *int `json:"uniqueClicks,omitempty"`
 }
 
 // LinkStatListMatch is the typed request payload for LinkStat.ListTyped.

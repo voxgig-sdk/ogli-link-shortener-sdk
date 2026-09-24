@@ -91,56 +91,66 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "clickCount",
-            ["short"] = "Total number of clicks on the link",
+            ["title"] = "Click Count",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Total number of clicks on the link",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "createdAt",
-            ["short"] = "Timestamp when the link was created",
+            ["title"] = "Created At",
             ["type"] = "`$STRING`",
+            ["short"] = "Timestamp when the link was created",
+            ["format"] = "date-time",
           },
           {
             ["name"] = "description",
-            ["short"] = "Open Graph description",
+            ["title"] = "Description",
             ["type"] = "`$STRING`",
+            ["short"] = "Open Graph description",
           },
           {
             ["name"] = "id",
+            ["title"] = "Id",
+            ["type"] = "`$STRING`",
             ["short"] = "Unique identifier for the link",
-            ["type"] = "`$STRING`",
           },
           {
-            ["format"] = "uri",
             ["name"] = "image",
-            ["short"] = "Open Graph image URL",
+            ["title"] = "Image",
             ["type"] = "`$STRING`",
+            ["short"] = "Open Graph image URL",
+            ["format"] = "uri",
           },
           {
-            ["format"] = "uri",
             ["name"] = "shortUrl",
-            ["short"] = "The shortened URL",
+            ["title"] = "Short Url",
             ["type"] = "`$STRING`",
+            ["short"] = "The shortened URL",
+            ["format"] = "uri",
           },
           {
             ["name"] = "slug",
-            ["short"] = "The short code used in the URL",
+            ["title"] = "Slug",
             ["type"] = "`$STRING`",
+            ["short"] = "The short code used in the URL",
           },
           {
             ["name"] = "title",
+            ["title"] = "Title",
+            ["type"] = "`$STRING`",
             ["short"] = "Open Graph title",
-            ["type"] = "`$STRING`",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "updatedAt",
-            ["short"] = "Timestamp when the link was last updated",
+            ["title"] = "Updated At",
             ["type"] = "`$STRING`",
+            ["short"] = "Timestamp when the link was last updated",
+            ["format"] = "date-time",
           },
           {
-            ["format"] = "uri",
             ["name"] = "url",
+            ["title"] = "Url",
+            ["type"] = "`$STRING`",
             ["op"] = {
               ["create"] = {
                 ["req"] = true,
@@ -148,7 +158,7 @@ local function make_config()
               },
             },
             ["short"] = "The destination URL",
-            ["type"] = "`$STRING`",
+            ["format"] = "uri",
           },
         },
         ["id"] = {
@@ -162,7 +172,6 @@ local function make_config()
             ["name"] = "create",
             ["points"] = {
               {
-                ["args"] = {},
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/links",
@@ -171,14 +180,16 @@ local function make_config()
                     ["lit"] = "links",
                   },
                 },
-                ["select"] = {},
+                ["parts"] = {
+                  "links",
+                },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "links",
-                },
+                ["args"] = {},
+                ["select"] = {},
               },
             },
           },
@@ -187,24 +198,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["example"] = 20,
-                      ["kind"] = "query",
-                      ["name"] = "limit",
-                      ["orig"] = "limit",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["example"] = 0,
-                      ["kind"] = "query",
-                      ["name"] = "offset",
-                      ["orig"] = "offset",
-                      ["type"] = "`$INTEGER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/links",
@@ -213,18 +206,37 @@ local function make_config()
                     ["lit"] = "links",
                   },
                 },
+                ["parts"] = {
+                  "links",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.links`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "limit",
+                      ["orig"] = "limit",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 20,
+                    },
+                    {
+                      ["name"] = "offset",
+                      ["orig"] = "offset",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 0,
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "limit",
                     "offset",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.links`",
-                },
-                ["parts"] = {
-                  "links",
                 },
               },
             },
@@ -234,25 +246,9 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "link_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/links/{linkId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["linkId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "links",
@@ -261,18 +257,34 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "links",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["linkId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "links",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "link_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -282,25 +294,9 @@ local function make_config()
             ["name"] = "remove",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "link_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "DELETE",
                 ["orig"] = "/links/{linkId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["linkId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "links",
@@ -309,18 +305,34 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "links",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["linkId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "links",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "link_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -330,25 +342,9 @@ local function make_config()
             ["name"] = "update",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "link_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "PUT",
                 ["orig"] = "/links/{linkId}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["linkId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "links",
@@ -357,18 +353,34 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "links",
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["linkId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "links",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "link_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -382,38 +394,46 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "clicksByCountry",
+            ["title"] = "Clicks By Country",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "clicksByDate",
+            ["title"] = "Clicks By Date",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "clicksByDevice",
+            ["title"] = "Clicks By Device",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "clicksByReferrer",
+            ["title"] = "Clicks By Referrer",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "id",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "linkId",
-            ["short"] = "The link identifier",
+            ["title"] = "Link Id",
             ["type"] = "`$STRING`",
+            ["short"] = "The link identifier",
           },
           {
             ["name"] = "totalClicks",
-            ["short"] = "Total number of clicks",
+            ["title"] = "Total Clicks",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Total number of clicks",
           },
           {
             ["name"] = "uniqueClicks",
-            ["short"] = "Number of unique visitors",
+            ["title"] = "Unique Clicks",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Number of unique visitors",
           },
         },
         ["id"] = {
@@ -427,39 +447,9 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "link_id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "end_date",
-                      ["orig"] = "end_date",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "start_date",
-                      ["orig"] = "start_date",
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/links/{linkId}/stats",
-                ["rename"] = {
-                  ["param"] = {
-                    ["linkId"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "links",
@@ -471,21 +461,51 @@ local function make_config()
                     ["lit"] = "stats",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "end_date",
-                    "id",
-                    "start_date",
+                ["parts"] = {
+                  "links",
+                  "{id}",
+                  "stats",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["linkId"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "links",
-                  "{id}",
-                  "stats",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "link_id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "end_date",
+                      ["orig"] = "end_date",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "start_date",
+                      ["orig"] = "start_date",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "end_date",
+                    "id",
+                    "start_date",
+                  },
                 },
               },
             },

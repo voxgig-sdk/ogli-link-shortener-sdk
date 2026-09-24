@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -146,56 +139,66 @@ class Config {
       "fields": [
         {
           "name": "clickCount",
-          "short": "Total number of clicks on the link",
-          "type": "`$INTEGER`"
+          "title": "Click Count",
+          "type": "`$INTEGER`",
+          "short": "Total number of clicks on the link"
         },
         {
-          "format": "date-time",
           "name": "createdAt",
+          "title": "Created At",
+          "type": "`$STRING`",
           "short": "Timestamp when the link was created",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
           "name": "description",
-          "short": "Open Graph description",
-          "type": "`$STRING`"
+          "title": "Description",
+          "type": "`$STRING`",
+          "short": "Open Graph description"
         },
         {
           "name": "id",
-          "short": "Unique identifier for the link",
-          "type": "`$STRING`"
+          "title": "Id",
+          "type": "`$STRING`",
+          "short": "Unique identifier for the link"
         },
         {
-          "format": "uri",
           "name": "image",
+          "title": "Image",
+          "type": "`$STRING`",
           "short": "Open Graph image URL",
-          "type": "`$STRING`"
+          "format": "uri"
         },
         {
-          "format": "uri",
           "name": "shortUrl",
+          "title": "Short Url",
+          "type": "`$STRING`",
           "short": "The shortened URL",
-          "type": "`$STRING`"
+          "format": "uri"
         },
         {
           "name": "slug",
-          "short": "The short code used in the URL",
-          "type": "`$STRING`"
+          "title": "Slug",
+          "type": "`$STRING`",
+          "short": "The short code used in the URL"
         },
         {
           "name": "title",
-          "short": "Open Graph title",
-          "type": "`$STRING`"
+          "title": "Title",
+          "type": "`$STRING`",
+          "short": "Open Graph title"
         },
         {
-          "format": "date-time",
           "name": "updatedAt",
+          "title": "Updated At",
+          "type": "`$STRING`",
           "short": "Timestamp when the link was last updated",
-          "type": "`$STRING`"
+          "format": "date-time"
         },
         {
-          "format": "uri",
           "name": "url",
+          "title": "Url",
+          "type": "`$STRING`",
           "op": {
             "create": {
               "req": true,
@@ -203,7 +206,7 @@ class Config {
             }
           },
           "short": "The destination URL",
-          "type": "`$STRING`"
+          "format": "uri"
         }
       ],
       "id": {
@@ -217,7 +220,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/links",
@@ -226,14 +228,16 @@ class Config {
                   "lit": "links"
                 }
               ],
-              "select": {},
+              "parts": [
+                "links"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "links"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         },
@@ -242,24 +246,6 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "query": [
-                  {
-                    "example": 20,
-                    "kind": "query",
-                    "name": "limit",
-                    "orig": "limit",
-                    "type": "`$INTEGER`"
-                  },
-                  {
-                    "example": 0,
-                    "kind": "query",
-                    "name": "offset",
-                    "orig": "offset",
-                    "type": "`$INTEGER`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/links",
@@ -268,19 +254,38 @@ class Config {
                   "lit": "links"
                 }
               ],
+              "parts": [
+                "links"
+              ],
+              "rename": {},
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body.links`"
+              },
+              "args": {
+                "query": [
+                  {
+                    "name": "limit",
+                    "orig": "limit",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 20
+                  },
+                  {
+                    "name": "offset",
+                    "orig": "offset",
+                    "type": "`$INTEGER`",
+                    "kind": "query",
+                    "example": 0
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "limit",
                   "offset"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.links`"
-              },
-              "parts": [
-                "links"
-              ]
+              }
             }
           ]
         },
@@ -289,25 +294,9 @@ class Config {
           "name": "load",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "link_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/links/{linkId}",
-              "rename": {
-                "param": {
-                  "linkId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "links"
@@ -316,19 +305,35 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "links",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "linkId": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "links",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "link_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         },
@@ -337,25 +342,9 @@ class Config {
           "name": "remove",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "link_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "DELETE",
               "orig": "/links/{linkId}",
-              "rename": {
-                "param": {
-                  "linkId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "links"
@@ -364,19 +353,35 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "links",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "linkId": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "links",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "link_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         },
@@ -385,25 +390,9 @@ class Config {
           "name": "update",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "link_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "PUT",
               "orig": "/links/{linkId}",
-              "rename": {
-                "param": {
-                  "linkId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "links"
@@ -412,19 +401,35 @@ class Config {
                   "var": "id"
                 }
               ],
-              "select": {
-                "exist": [
-                  "id"
-                ]
+              "parts": [
+                "links",
+                "{id}"
+              ],
+              "rename": {
+                "param": {
+                  "linkId": "id"
+                }
               },
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "links",
-                "{id}"
-              ]
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "link_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ]
+              },
+              "select": {
+                "exist": [
+                  "id"
+                ]
+              }
             }
           ]
         }
@@ -437,38 +442,46 @@ class Config {
       "fields": [
         {
           "name": "clicksByCountry",
+          "title": "Clicks By Country",
           "type": "`$ARRAY`"
         },
         {
           "name": "clicksByDate",
+          "title": "Clicks By Date",
           "type": "`$ARRAY`"
         },
         {
           "name": "clicksByDevice",
+          "title": "Clicks By Device",
           "type": "`$ARRAY`"
         },
         {
           "name": "clicksByReferrer",
+          "title": "Clicks By Referrer",
           "type": "`$ARRAY`"
         },
         {
           "name": "id",
+          "title": "Id",
           "type": "`$STRING`"
         },
         {
           "name": "linkId",
-          "short": "The link identifier",
-          "type": "`$STRING`"
+          "title": "Link Id",
+          "type": "`$STRING`",
+          "short": "The link identifier"
         },
         {
           "name": "totalClicks",
-          "short": "Total number of clicks",
-          "type": "`$INTEGER`"
+          "title": "Total Clicks",
+          "type": "`$INTEGER`",
+          "short": "Total number of clicks"
         },
         {
           "name": "uniqueClicks",
-          "short": "Number of unique visitors",
-          "type": "`$INTEGER`"
+          "title": "Unique Clicks",
+          "type": "`$INTEGER`",
+          "short": "Number of unique visitors"
         }
       ],
       "id": {
@@ -482,39 +495,9 @@ class Config {
           "name": "list",
           "points": [
             {
-              "args": {
-                "params": [
-                  {
-                    "kind": "param",
-                    "name": "id",
-                    "orig": "link_id",
-                    "reqd": true,
-                    "type": "`$STRING`"
-                  }
-                ],
-                "query": [
-                  {
-                    "kind": "query",
-                    "name": "end_date",
-                    "orig": "end_date",
-                    "type": "`$STRING`"
-                  },
-                  {
-                    "kind": "query",
-                    "name": "start_date",
-                    "orig": "start_date",
-                    "type": "`$STRING`"
-                  }
-                ]
-              },
               "kind": "http",
               "method": "GET",
               "orig": "/links/{linkId}/stats",
-              "rename": {
-                "param": {
-                  "linkId": "id"
-                }
-              },
               "segments": [
                 {
                   "lit": "links"
@@ -526,22 +509,52 @@ class Config {
                   "lit": "stats"
                 }
               ],
+              "parts": [
+                "links",
+                "{id}",
+                "stats"
+              ],
+              "rename": {
+                "param": {
+                  "linkId": "id"
+                }
+              },
+              "transform": {
+                "req": "`reqdata`",
+                "res": "`body`"
+              },
+              "args": {
+                "params": [
+                  {
+                    "name": "id",
+                    "orig": "link_id",
+                    "type": "`$STRING`",
+                    "kind": "param",
+                    "reqd": true
+                  }
+                ],
+                "query": [
+                  {
+                    "name": "end_date",
+                    "orig": "end_date",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  },
+                  {
+                    "name": "start_date",
+                    "orig": "start_date",
+                    "type": "`$STRING`",
+                    "kind": "query"
+                  }
+                ]
+              },
               "select": {
                 "exist": [
                   "end_date",
                   "id",
                   "start_date"
                 ]
-              },
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "parts": [
-                "links",
-                "{id}",
-                "stats"
-              ]
+              }
             }
           ]
         }

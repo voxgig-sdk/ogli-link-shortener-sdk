@@ -24,95 +24,171 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "link": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "clickCount",
-              "req": false,
-              "short": "Total number of clicks on the link",
-              "type": "`$INTEGER`"
+          "fields": {
+            "clickCount": {
+              "a": true,
+              "h": "Click Count",
+              "n": "clickCount",
+              "r": false,
+              "sh": "Total number of clicks on the link",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "format": "date-time",
-              "name": "createdAt",
-              "req": false,
-              "short": "Timestamp when the link was created",
-              "type": "`$STRING`"
+            "createdAt": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Created At",
+              "n": "createdAt",
+              "r": false,
+              "sh": "Timestamp when the link was created",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "short": "Open Graph description",
-              "type": "`$STRING`"
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "sh": "Open Graph description",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "short": "Unique identifier for the link",
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "sh": "Unique identifier for the link",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "image",
-              "req": false,
-              "short": "Open Graph image URL",
-              "type": "`$STRING`"
+            "image": {
+              "a": true,
+              "fo": "uri",
+              "h": "Image",
+              "n": "image",
+              "r": false,
+              "sh": "Open Graph image URL",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "shortUrl",
-              "req": false,
-              "short": "The shortened URL",
-              "type": "`$STRING`"
+            "shortUrl": {
+              "a": true,
+              "fo": "uri",
+              "h": "Short Url",
+              "n": "shortUrl",
+              "r": false,
+              "sh": "The shortened URL",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "slug",
-              "req": false,
-              "short": "The short code used in the URL",
-              "type": "`$STRING`"
+            "slug": {
+              "a": true,
+              "h": "Slug",
+              "n": "slug",
+              "r": false,
+              "sh": "The short code used in the URL",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "title",
-              "req": false,
-              "short": "Open Graph title",
-              "type": "`$STRING`"
+            "title": {
+              "a": true,
+              "h": "Title",
+              "n": "title",
+              "r": false,
+              "sh": "Open Graph title",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "date-time",
-              "name": "updatedAt",
-              "req": false,
-              "short": "Timestamp when the link was last updated",
-              "type": "`$STRING`"
+            "updatedAt": {
+              "a": true,
+              "fo": "date-time",
+              "h": "Updated At",
+              "n": "updatedAt",
+              "r": false,
+              "sh": "Timestamp when the link was last updated",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "format": "uri",
-              "name": "url",
+            "url": {
+              "a": true,
+              "fo": "uri",
+              "h": "Url",
+              "n": "url",
               "op": {
                 "create": {
                   "req": true,
                   "type": "`$STRING`"
                 }
               },
-              "req": false,
-              "short": "The destination URL",
-              "type": "`$STRING`"
+              "r": false,
+              "sh": "The destination URL",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -124,24 +200,24 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /links",
-                    "json": "{\"operationId\":\"createLink\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"description\":\"Open Graph description for social media previews\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL for social media previews\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"Custom short code for the link (optional, auto-generated if not provided)\",\"example\":\"my-custom-link\",\"pattern\":\"^[a-zA-Z0-9-_]+$\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title for social media previews\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL to shorten\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"required\":[\"url\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"201\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link created successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad request - Invalid input\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/links",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/links",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "links"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -153,50 +229,50 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /links",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": 20,
-                        "kind": "query",
-                        "name": "limit",
-                        "orig": "limit",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 20,
+                        "k": "query",
+                        "n": "limit",
+                        "or": "limit",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "offset",
-                        "orig": "offset",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "offset",
+                        "or": "offset",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /links",
-                    "json": "{\"operationId\":\"listLinks\",\"parameters\":[{\"description\":\"Maximum number of links to return\",\"in\":\"query\",\"name\":\"limit\",\"schema\":{\"default\":20,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Number of links to skip for pagination\",\"in\":\"query\",\"name\":\"offset\",\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"limit\":{\"description\":\"Maximum number of links returned\",\"example\":20,\"type\":\"integer\"},\"links\":{\"items\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"offset\":{\"description\":\"Number of links skipped\",\"example\":0,\"type\":\"integer\"},\"total\":{\"description\":\"Total number of links available\",\"example\":50,\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"List of links retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/links",
-                  "segments": [
-                    {
-                      "lit": "links"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/links",
+                  "q": {
                     "exist": [
                       "limit",
                       "offset"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "links"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.links`"
                   }
@@ -208,34 +284,38 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /links/{linkId}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "link_id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "link_id",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /links/{linkId}",
-                    "json": "{\"operationId\":\"getLink\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/links/{linkId}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/links/{linkId}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "linkId": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "links"
                     },
@@ -243,12 +323,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -260,34 +335,38 @@
               "name": "remove",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "DELETE /links/{linkId}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "link_id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "link_id",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "DELETE /links/{linkId}",
-                    "json": "{\"operationId\":\"deleteLink\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"204\":{\"description\":\"Link deleted successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "DELETE",
+                  "o": "/links/{linkId}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "DELETE",
-                  "orig": "/links/{linkId}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "linkId": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "links"
                     },
@@ -295,12 +374,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -312,34 +386,38 @@
               "name": "update",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "PUT /links/{linkId}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "link_id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "link_id",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "PUT /links/{linkId}",
-                    "json": "{\"operationId\":\"updateLink\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"description\":{\"description\":\"Open Graph description for social media previews\",\"example\":\"Updated description\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL for social media previews\",\"example\":\"https://example.com/new-image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title for social media previews\",\"example\":\"Updated Title\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/updated-url\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clickCount\":{\"description\":\"Total number of clicks on the link\",\"example\":125,\"type\":\"integer\"},\"createdAt\":{\"description\":\"Timestamp when the link was created\",\"example\":\"2023-10-15T10:30:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Open Graph description\",\"example\":\"Check out this amazing content\",\"type\":\"string\"},\"id\":{\"description\":\"Unique identifier for the link\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"image\":{\"description\":\"Open Graph image URL\",\"example\":\"https://example.com/image.jpg\",\"format\":\"uri\",\"type\":\"string\"},\"shortUrl\":{\"description\":\"The shortened URL\",\"example\":\"https://ogli.sh/abc123\",\"format\":\"uri\",\"type\":\"string\"},\"slug\":{\"description\":\"The short code used in the URL\",\"example\":\"abc123\",\"type\":\"string\"},\"title\":{\"description\":\"Open Graph title\",\"example\":\"My Amazing Page\",\"type\":\"string\"},\"updatedAt\":{\"description\":\"Timestamp when the link was last updated\",\"example\":\"2023-10-20T14:45:00Z\",\"format\":\"date-time\",\"type\":\"string\"},\"url\":{\"description\":\"The destination URL\",\"example\":\"https://example.com/long-url-path\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link updated successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Bad request - Invalid input\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "PUT",
+                  "o": "/links/{linkId}",
+                  "q": {
+                    "exist": [
+                      "id"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "PUT",
-                  "orig": "/links/{linkId}",
-                  "rename": {
+                  "r": {
                     "param": {
                       "linkId": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "links"
                     },
@@ -347,12 +425,7 @@
                       "var": "id"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -369,59 +442,67 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "clicksByCountry",
-              "req": false,
-              "type": "`$ARRAY`"
+          "fields": {
+            "clicksByCountry": {
+              "a": true,
+              "h": "Clicks By Country",
+              "n": "clicksByCountry",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "clicksByDate",
-              "req": false,
-              "type": "`$ARRAY`"
+            "clicksByDate": {
+              "a": true,
+              "h": "Clicks By Date",
+              "n": "clicksByDate",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "clicksByDevice",
-              "req": false,
-              "type": "`$ARRAY`"
+            "clicksByDevice": {
+              "a": true,
+              "h": "Clicks By Device",
+              "n": "clicksByDevice",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "clicksByReferrer",
-              "req": false,
-              "type": "`$ARRAY`"
+            "clicksByReferrer": {
+              "a": true,
+              "h": "Clicks By Referrer",
+              "n": "clicksByReferrer",
+              "r": false,
+              "t": "`$ARRAY`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "linkId",
-              "req": false,
-              "short": "The link identifier",
-              "type": "`$STRING`"
+            "linkId": {
+              "a": true,
+              "h": "Link Id",
+              "n": "linkId",
+              "r": false,
+              "sh": "The link identifier",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "totalClicks",
-              "req": false,
-              "short": "Total number of clicks",
-              "type": "`$INTEGER`"
+            "totalClicks": {
+              "a": true,
+              "h": "Total Clicks",
+              "n": "totalClicks",
+              "r": false,
+              "sh": "Total number of clicks",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "uniqueClicks",
-              "req": false,
-              "short": "Number of unique visitors",
-              "type": "`$INTEGER`"
+            "uniqueClicks": {
+              "a": true,
+              "h": "Unique Clicks",
+              "n": "uniqueClicks",
+              "r": false,
+              "sh": "Number of unique visitors",
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -433,52 +514,58 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /links/{linkId}/stats",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "link_id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "param",
+                        "n": "id",
+                        "or": "link_id",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ],
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "end_date",
-                        "orig": "end_date",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "end_date",
+                        "or": "end_date",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "start_date",
-                        "orig": "start_date",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "start_date",
+                        "or": "start_date",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /links/{linkId}/stats",
-                    "json": "{\"operationId\":\"getLinkStats\",\"parameters\":[{\"description\":\"The unique identifier of the link\",\"in\":\"path\",\"name\":\"linkId\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Start date for statistics (ISO 8601 format)\",\"in\":\"query\",\"name\":\"startDate\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}},{\"description\":\"End date for statistics (ISO 8601 format)\",\"in\":\"query\",\"name\":\"endDate\",\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"clicksByCountry\":{\"items\":{\"properties\":{\"clicks\":{\"example\":320,\"type\":\"integer\"},\"country\":{\"example\":\"US\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByDate\":{\"items\":{\"properties\":{\"clicks\":{\"example\":45,\"type\":\"integer\"},\"date\":{\"example\":\"2023-10-15\",\"format\":\"date\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByDevice\":{\"items\":{\"properties\":{\"clicks\":{\"example\":750,\"type\":\"integer\"},\"device\":{\"example\":\"mobile\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"clicksByReferrer\":{\"items\":{\"properties\":{\"clicks\":{\"example\":180,\"type\":\"integer\"},\"referrer\":{\"example\":\"twitter.com\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"linkId\":{\"description\":\"The link identifier\",\"example\":\"abc123xyz\",\"type\":\"string\"},\"totalClicks\":{\"description\":\"Total number of clicks\",\"example\":1250,\"type\":\"integer\"},\"uniqueClicks\":{\"description\":\"Number of unique visitors\",\"example\":890,\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Statistics retrieved successfully\"},\"401\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Unauthorized - Invalid or missing authentication\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"code\":{\"description\":\"Error code\",\"example\":\"INVALID_INPUT\",\"type\":\"string\"},\"details\":{\"additionalProperties\":true,\"description\":\"Additional error details\",\"type\":\"object\"},\"error\":{\"description\":\"Error message\",\"example\":\"Invalid request parameters\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Link not found\"}},\"security\":[{\"bearerAuth\":[]}],\"securitySchemes\":{\"bearerAuth\":{\"bearerFormat\":\"JWT\",\"description\":\"JWT token for API authentication\",\"scheme\":\"bearer\",\"type\":\"http\"}},\"securitySource\":\"definition\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/links/{linkId}/stats",
+                  "q": {
+                    "exist": [
+                      "end_date",
+                      "id",
+                      "start_date"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/links/{linkId}/stats",
-                  "rename": {
+                  "r": {
                     "param": {
                       "linkId": "id"
                     }
                   },
-                  "segments": [
+                  "s": [
                     {
                       "lit": "links"
                     },
@@ -489,14 +576,7 @@
                       "lit": "stats"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "end_date",
-                      "id",
-                      "start_date"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -925,24 +1005,24 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "link_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             },
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -952,17 +1032,17 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "link_ref01",
                 "srcdatavar": "link_ref01_data",
                 "suffix": "_up0",
                 "textfield": "createdAt"
               },
-              "match": {},
-              "op": "update",
-              "spec": [
+              "m": {},
+              "o": "update",
+              "s": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -970,22 +1050,22 @@
                   }
                 }
               ],
-              "valid": []
+              "v": []
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "link_ref01",
                 "srcdatavar": "link_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {
+              "m": {
                 "id": "link01"
               },
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -995,29 +1075,29 @@
               ]
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "link_ref01",
                 "suffix": "_rm0"
               },
-              "match": {
+              "m": {
                 "id": "link01"
               },
-              "op": "remove",
-              "spec": [],
-              "valid": []
+              "o": "remove",
+              "s": [],
+              "v": []
             },
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "suffix": "_rt0"
               },
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemNotExists",
                   "def": {
@@ -1037,15 +1117,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {
                 "link_id": "link01"
               },
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {

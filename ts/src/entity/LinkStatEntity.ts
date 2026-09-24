@@ -19,7 +19,6 @@ import type {
   LinkStatListMatch,
 } from '../OgliLinkShortenerTypes'
 
-// TODO: needs Entity superclass
 class LinkStatEntity extends OgliLinkShortenerEntityBase<LinkStat> {
 
   constructor(client: OgliLinkShortenerSDK, entopts: any) {

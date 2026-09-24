@@ -1,0 +1,26 @@
+# BasicLinkStatFlow
+
+main: kit: flow: BasicLinkStatFlow:
+{
+  entity: "link_stat",
+  kind: "basic",
+  name: "BasicLinkStatFlow",
+  step: [
+    {
+      m: {
+        link_id: "link01"
+      }
+
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "link_stat_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLinkStatFlow"
+}

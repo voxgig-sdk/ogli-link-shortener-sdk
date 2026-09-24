@@ -45,7 +45,7 @@ local links, err = client:Link():list()
 if err then error(err) end
 
 for _, item in ipairs(links) do
-  print(item["id"], item["createdAt"])
+  print(item["id"])
 end
 ```
 
